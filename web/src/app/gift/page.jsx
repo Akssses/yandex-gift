@@ -1,12 +1,13 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { MdContentCopy } from "react-icons/md";
 import styles from "./gift.module.scss";
 
-const GiftPage = () => {
+const GiftContent = () => {
   const searchParams = useSearchParams();
   const status = searchParams.get("status") || "new";
   const day = searchParams.get("day") || "09";
@@ -62,6 +63,22 @@ const GiftPage = () => {
         />
       </div>
     </div>
+  );
+};
+
+const GiftPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className={styles.giftPage}>
+          <div className={styles.giftPageContent}>
+            <div className={styles.giftPageTitle}>Загрузка...</div>
+          </div>
+        </div>
+      }
+    >
+      <GiftContent />
+    </Suspense>
   );
 };
 
