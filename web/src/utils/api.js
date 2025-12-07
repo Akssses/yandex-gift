@@ -4,21 +4,13 @@
 
 // API Base URL - можно переопределить через переменную окружения
 // Установите NEXT_PUBLIC_API_URL в .env.local для указания URL бэкенда
-// В production используем проксирование через Next.js (/api/proxy), в development - прямой URL
+// В production используем прямой URL к бэкенду (минуя Next.js rewrites для POST запросов)
 const getApiBaseUrl = () => {
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
 
-  // Если мы на Vercel (production), используем проксирование
-  if (
-    typeof window !== "undefined" &&
-    window.location.hostname.includes("vercel.app")
-  ) {
-    return ""; // Относительный путь - будет проксироваться через Next.js
-  }
-
-  // В development используем прямой URL
+  // Всегда используем прямой URL к бэкенду, чтобы избежать проблем с проксированием
   return "http://advent.muza.team";
 };
 
@@ -32,7 +24,7 @@ console.log("NEXT_PUBLIC_API_URL from env:", process.env.NEXT_PUBLIC_API_URL);
  */
 export const checkServerHealth = async () => {
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/health/`; // Используем trailing slash
+  const url = `${baseUrl}/api/health`; // Без trailing slash (APPEND_SLASH = False)
   console.log("Health check URL:", url);
 
   try {
@@ -84,7 +76,7 @@ export const checkUser = async (telegramId) => {
   }
 
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/check-user/?id=${telegramId}`; // Используем trailing slash
+  const url = `${baseUrl}/api/check-user?id=${telegramId}`; // Без trailing slash
   console.log("Checking user URL:", url);
 
   try {
@@ -143,7 +135,7 @@ export const getCalendarStatus = async (telegramId) => {
 
   // Используем относительный путь если API_BASE_URL пустой (проксирование)
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/calendar/status/?telegram_id=${telegramId}`; // Используем trailing slash
+  const url = `${baseUrl}/api/calendar/status?telegram_id=${telegramId}`; // Без trailing slash
   console.log("API Request URL:", url);
   console.log("API Base URL:", API_BASE_URL);
   console.log("Telegram ID:", telegramId);
@@ -289,7 +281,7 @@ export const getCalendarStatus = async (telegramId) => {
  */
 export const openGift = async (telegramId, day) => {
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/calendar/open/`; // Используем trailing slash для совместимости с Django
+  const url = `${baseUrl}/api/calendar/open`; // Без trailing slash (APPEND_SLASH = False)
   console.log("API Request URL (openGift):", url);
 
   try {

@@ -66,6 +66,10 @@ if DEBUG:
 
 ROOT_URLCONF = 'config.urls'
 
+# Отключаем автоматическое добавление слэша для предотвращения 301 редиректов
+# Это особенно важно для POST запросов через API
+APPEND_SLASH = False
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
