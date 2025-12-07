@@ -142,23 +142,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '8584303110:AAESr9bUQUHYKpfYPloLFzHECgaRmRHmzd8')
 
 # Mini App URL
-MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://removable-assumed-named-doctor.trycloudflare.com')
+MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://yandex-gift.vercel.app')
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "https://removable-assumed-named-doctor.trycloudflare.com",
+    "https://yandex-gift.vercel.app",
+    "https://vercel.app",
     "https://vercel.com",
-    "https://akssses-projects.vercel.app",
-    "https://crispily-justicelike-maryjane.ngrok-free.dev",
+    "http://advent.muza.team",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
 
-# Разрешаем все домены cloudflare и ngrok для разработки
+# Разрешаем все домены vercel для разработки
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://.*\.trycloudflare\.com$",
-    r"^https://.*\.ngrok-free\.dev$",
-    r"^https://.*\.ngrok\.io$",
+    r"^https://.*\.vercel\.app$",
+    r"^https://.*\.vercel\.com$",
 ]
 
 # В режиме DEBUG разрешаем все источники для упрощения разработки
@@ -183,10 +182,10 @@ CORS_ALLOW_HEADERS = [
 # CSRF trusted origins (для проверки Origin в CSRF)
 # Django не поддерживает wildcards, поэтому добавляем конкретные домены
 CSRF_TRUSTED_ORIGINS = [
-    "https://removable-assumed-named-doctor.trycloudflare.com",
+    "https://yandex-gift.vercel.app",
+    "https://vercel.app",
     "https://vercel.com",
-    "https://akssses-projects.vercel.app",
-    "https://crispily-justicelike-maryjane.ngrok-free.dev",
+    "http://advent.muza.team",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]

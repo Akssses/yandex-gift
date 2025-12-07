@@ -4,12 +4,8 @@
 
 // API Base URL - можно переопределить через переменную окружения
 // Установите NEXT_PUBLIC_API_URL в .env.local для указания URL бэкенда
-// В production используем IP сервера, в development - ngrok
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  (typeof window !== "undefined" && window.location.hostname === "89.111.153.5"
-    ? "http://89.111.153.5"
-    : "https://crispily-justicelike-maryjane.ngrok-free.dev");
+  process.env.NEXT_PUBLIC_API_URL || "http://advent.muza.team";
 
 console.log("API_BASE_URL configured as:", API_BASE_URL);
 console.log("NEXT_PUBLIC_API_URL from env:", process.env.NEXT_PUBLIC_API_URL);
