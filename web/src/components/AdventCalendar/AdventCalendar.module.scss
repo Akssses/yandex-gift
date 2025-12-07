@@ -93,11 +93,23 @@
 }
 
 .dateCardOpened {
-  background: #fff9b1;
+  background: #fff6d5;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 246, 213, 1) 0%,
+    rgba(255, 242, 191, 1) 50%,
+    rgba(254, 233, 149, 1) 100%
+  );
 }
 
 .dateCardAvailable {
-  background: #feb2a5;
+  background: #fc3f1d;
+  background: linear-gradient(
+    180deg,
+    rgba(252, 63, 29, 1) 0%,
+    rgba(253, 159, 142, 1) 50%,
+    rgba(254, 217, 210, 1) 100%
+  );
 }
 
 .dateCardDisabled {
