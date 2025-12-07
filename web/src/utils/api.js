@@ -4,14 +4,23 @@
 
 // API Base URL - можно переопределить через переменную окружения
 // Установите NEXT_PUBLIC_API_URL в .env.local для указания URL бэкенда
-// В production используем прямой URL к бэкенду (минуя Next.js rewrites для POST запросов)
+// В production используем проксирование через Next.js, в development - прямой URL
 const getApiBaseUrl = () => {
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
 
-  // Всегда используем прямой URL к бэкенду, чтобы избежать проблем с проксированием
-  return "http://advent.muza.team";
+  // Если мы на Vercel (production), используем проксирование через Next.js
+  // Это необходимо для обхода Mixed Content (HTTPS -> HTTP)
+  if (
+    typeof window !== "undefined" &&
+    window.location.hostname.includes("vercel.app")
+  ) {
+    return ""; // Относительный путь - будет проксироваться через Next.js
+  }
+
+  // В development используем прямой URL (HTTPS)
+  return "https://advent.muza.team";
 };
 
 const API_BASE_URL = getApiBaseUrl();

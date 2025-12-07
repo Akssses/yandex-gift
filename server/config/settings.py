@@ -154,10 +154,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://yandex-gift.vercel.app",
     "https://vercel.app",
     "https://vercel.com",
-    "http://advent.muza.team",
-    "https://advent.muza.team",  # На случай если будет HTTPS
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "https://advent.muza.team",  # HTTPS только
+    "http://localhost:3000",  # Для локальной разработки
+    "http://127.0.0.1:3000",  # Для локальной разработки
 ]
 
 # Разрешаем все домены vercel для разработки
@@ -190,13 +189,17 @@ CSRF_TRUSTED_ORIGINS = [
     "https://yandex-gift.vercel.app",
     "https://vercel.app",
     "https://vercel.com",
-    "http://advent.muza.team",
-    "https://advent.muza.team",  # На случай если будет HTTPS
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "https://advent.muza.team",  # HTTPS только
+    "http://localhost:3000",  # Для локальной разработки
+    "http://127.0.0.1:3000",  # Для локальной разработки
 ]
 
-# В режиме DEBUG отключаем проверку Origin для CSRF
+# Настройки безопасности для HTTPS
+SECURE_SSL_REDIRECT = not DEBUG  # Редирект HTTP -> HTTPS в production
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Для работы за прокси
+SESSION_COOKIE_SECURE = not DEBUG  # Cookies только по HTTPS в production
+CSRF_COOKIE_SECURE = not DEBUG  # CSRF cookies только по HTTPS в production
+
+# В режиме DEBUG отключаем некоторые проверки для разработки
 if DEBUG:
-    CSRF_COOKIE_SECURE = False
     CSRF_COOKIE_HTTPONLY = False

@@ -1,9 +1,9 @@
 """
 Кастомный middleware для отключения CSRF проверки для API endpoints
+и предотвращения 301 редиректов
 """
 from django.utils.deprecation import MiddlewareMixin
 from django.conf import settings
-from django.http import HttpResponsePermanentRedirect
 
 
 class DisableCSRFForAPI(MiddlewareMixin):
@@ -18,6 +18,18 @@ class DisableCSRFForAPI(MiddlewareMixin):
             # Устанавливаем флаг, чтобы CommonMiddleware не делал редирект
             setattr(request, '_should_append_slash', False)
         return None
+    
+    def process_response(self, request, response):
+        # Перехватываем 301 редирект для API endpoints
+        if request.path.startswith('/api/') and response.status_code == 301:
+            # Если это редирект для API, возвращаем 404 вместо редиректа
+            # Это предотвратит потерю тела POST запроса
+            from django.http import JsonResponse
+            return JsonResponse({
+                'error': 'API endpoint not found',
+                'path': request.path
+            }, status=404)
+        return response
     
     def process_view(self, request, view_func, view_args, view_kwargs):
         # Дополнительно отключаем CSRF для API
