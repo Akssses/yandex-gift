@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class TelegramUser(models.Model):
@@ -57,3 +58,57 @@ class TelegramUser(models.Model):
     def __str__(self):
         username_str = f"@{self.username}" if self.username else "без username"
         return f"{self.first_name} {self.last_name} ({username_str})"
+
+
+class CalendarSettings(models.Model):
+    """Настройки календаря - текущая дата для определения доступности подарков"""
+    current_date = models.DateField(
+        verbose_name='Текущая дата',
+        help_text='Установите текущую дату для определения доступности подарков'
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name='Дата обновления'
+    )
+
+    class Meta:
+        verbose_name = 'Настройка календаря'
+        verbose_name_plural = 'Настройки календаря'
+
+    def __str__(self):
+        return f"Текущая дата: {self.current_date}"
+
+    @classmethod
+    def get_current_date(cls):
+        """Получить текущую дату из настроек или сегодняшнюю дату"""
+        settings = cls.objects.first()
+        if settings:
+            return settings.current_date
+        return timezone.now().date()
+
+
+class GiftOpening(models.Model):
+    """Отслеживание открытых подарков пользователями"""
+    user = models.ForeignKey(
+        TelegramUser,
+        on_delete=models.CASCADE,
+        related_name='gift_openings',
+        verbose_name='Пользователь'
+    )
+    day = models.IntegerField(
+        verbose_name='День',
+        help_text='День декабря (8-19)'
+    )
+    opened_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата открытия'
+    )
+
+    class Meta:
+        verbose_name = 'Открытый подарок'
+        verbose_name_plural = 'Открытые подарки'
+        unique_together = ['user', 'day']
+        ordering = ['-opened_at']
+
+    def __str__(self):
+        return f"{self.user} - день {self.day} ({self.opened_at.date()})"

@@ -34,10 +34,13 @@ const AdventCalendar = () => {
   const currentDayData = days[currentDay];
 
   const handleOpenGiftClick = () => {
-    if (currentDayData.status === "available") {
-      router.push(`/gift?day=${currentDayData.day}&status=new`);
-    } else if (currentDayData.status === "opened") {
-      router.push(`/gift?day=${currentDayData.day}&status=opened`);
+    if (
+      currentDayData.status === "available" ||
+      currentDayData.status === "opened"
+    ) {
+      // Перенаправляем на страницу с конкретной датой (убираем ведущий ноль)
+      const dayNumber = parseInt(currentDayData.day, 10);
+      router.push(`/gift/${dayNumber}`);
     }
   };
 
@@ -85,6 +88,11 @@ const AdventCalendar = () => {
             } ${
               currentDayData.status === "locked" ? styles.dateCardDisabled : ""
             }`}
+            onClick={handleOpenGiftClick}
+            style={{
+              cursor:
+                currentDayData.status === "locked" ? "default" : "pointer",
+            }}
           >
             <div className={styles.dateHeader}>
               <span className={styles.day}>{currentDayData.day}</span>

@@ -1,9 +1,7 @@
 .giftPage {
   background: #ffffff;
-  padding: 32px 16px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 24px;
   min-height: 100vh;
 }
@@ -11,7 +9,8 @@
 .giftPageBanner {
   position: relative;
   width: 100%;
-  max-width: 358px;
+  max-width: 248px;
+  margin-top: 50px;
 }
 
 .giftPageBanner img {
@@ -24,7 +23,6 @@
   position: absolute;
   top: 35%;
   left: 50%;
-  transform: translate(-50%, -50%);
   font-size: 24px;
   font-weight: 400;
   color: #ffffff;
@@ -33,11 +31,10 @@
 
 .giftPageContent {
   width: 100%;
-  max-width: 358px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 16px;
+  padding: 0 20px;
 }
 
 .giftPageImagePlaceholder {
@@ -49,18 +46,14 @@
 
 .giftPageTitle {
   margin-top: 8px;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 500;
   color: #ff3b21;
-  text-align: center;
 }
 
 .giftPageSubtitle {
   font-size: 18px;
   color: #333333;
-  text-align: center;
 }
 
 .giftPageSubtitle span {
@@ -76,14 +69,24 @@
   background: transparent;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+  transition: background 0.2s ease, color 0.2s ease;
+  background: #ff3b21;
+
+  &:hover {
+    background: #ffffff;
+    color: #ff3b21;
+  }
 }
 
 .promoCodeText {
   font-size: 18px;
   font-weight: 500;
   letter-spacing: 0.08em;
+  color: inherit;
 }
 
 .promoCodeIcon {
@@ -94,21 +97,21 @@
 }
 
 .homeButton {
-  margin-top: 8px;
   width: 100%;
   padding: 20px;
   border-radius: 12px;
-  background: #ff3b21;
-  color: #ffffff;
+  background: #ffffff;
+  color: #ff3b21;
   font-size: 20px;
   font-weight: 400;
   text-align: center;
   text-decoration: none;
   transition: background 0.2s ease;
   cursor: pointer;
+  border: 2px solid #ff3b21;
 
   &:hover {
-    background: #e03419;
+    background: #ffffff;
   }
 }
 
