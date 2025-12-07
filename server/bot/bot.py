@@ -176,6 +176,69 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await start(update, context)
 
 
+async def startapp(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обработчик команды /startapp для запуска мини-апп"""
+    user = update.effective_user
+    
+    logger.info(f"User {user.id} (@{user.username}) requested startapp")
+    
+    try:
+        # Проверяем, что пользователь есть в базе и имеет доступ
+        telegram_user = await get_user_by_telegram_id(user.id)
+        
+        if not telegram_user:
+            # Пробуем найти по username
+            if user.username:
+                telegram_user = await get_user_by_username(user.username)
+                if telegram_user:
+                    telegram_user.telegram_id = user.id
+                    await save_user(telegram_user)
+        
+        if not telegram_user:
+            await update.message.reply_text(
+                "К сожалению, вам недоступен этот бот. "
+                "Обратитесь к администратору для получения доступа."
+            )
+            return
+        
+        # Проверяем, что пользователь из РФ
+        if not telegram_user.is_from_rf:
+            await update.message.reply_text(
+                "К сожалению, доступ к адвент-календарю "
+                "доступен только для пользователей, работающих с территории РФ."
+            )
+            return
+        
+        # Создаем кнопку для открытия мини-аппки
+        # Используем start_parameter для передачи telegram_id в мини-апп
+        keyboard = [
+            [
+                InlineKeyboardButton(
+                    "Открыть адвент-календарь",
+                    web_app=WebAppInfo(
+                        url=settings.MINI_APP_URL,
+                        # start_parameter можно использовать для передачи данных
+                        # но telegram_id уже доступен через initDataUnsafe
+                    )
+                )
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.message.reply_text(
+            "Нажмите кнопку ниже, чтобы открыть адвент-календарь. "
+            "Заходите в него каждый день с 8 по 19 декабря и получайте подарки от Яндекса. "
+            "В случае пропуска дня забрать подарок за этот день не получится :(",
+            reply_markup=reply_markup
+        )
+        
+    except Exception as e:
+        logger.error(f"Error in startapp handler: {e}", exc_info=True)
+        await update.message.reply_text(
+            "Произошла ошибка. Попробуйте позже."
+        )
+
+
 async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Обработчик callback кнопок"""
     query = update.callback_query
@@ -243,6 +306,7 @@ def setup_bot():
     
     # Регистрируем обработчики
     application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("startapp", startapp))  # Обработчик для /startapp
     application.add_handler(CallbackQueryHandler(handle_callback))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     

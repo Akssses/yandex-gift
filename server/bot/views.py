@@ -9,6 +9,16 @@ from .models import TelegramUser, CalendarSettings, GiftOpening
 logger = logging.getLogger(__name__)
 
 
+@csrf_exempt
+@require_http_methods(["GET"])
+def health_check(request):
+    """Простая проверка доступности сервера"""
+    return JsonResponse({
+        'status': 'ok',
+        'message': 'Server is running'
+    })
+
+
 def get_current_calendar_day():
     """Получить текущий день календаря (8-19 декабря) из настроек"""
     settings = CalendarSettings.objects.first()
@@ -53,12 +63,15 @@ def get_calendar_status(request):
     # Формируем статус для каждого дня (8-19 декабря)
     days_status = []
     for day in range(8, 20):
-        if day < current_day:
-            # Прошедшие дни - проверяем, открыл ли пользователь
-            status = "opened" if day in opened_days else "missed"
+        if day in opened_days:
+            # Если подарок открыт - всегда показываем как открытый
+            status = "opened"
+        elif day < current_day:
+            # Прошедшие дни - если не открыт, значит пропущен
+            status = "missed"
         elif day == current_day:
-            # Текущий день - можно открыть
-            status = "opened" if day in opened_days else "available"
+            # Текущий день - можно открыть (если еще не открыт)
+            status = "available"
         else:
             # Будущие дни - заблокированы
             status = "locked"
@@ -75,6 +88,7 @@ def get_calendar_status(request):
     }
     
     logger.info(f"Calendar status for user {user.telegram_id}: current_day={current_day}, opened_days={opened_days}")
+    logger.info(f"Days status details: {[(d['day'], d['status'], d['is_opened']) for d in days_status]}")
     
     return JsonResponse(response_data)
 

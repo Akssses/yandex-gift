@@ -5,13 +5,14 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./AdventCalendar.module.scss";
 import { getTelegramUserId } from "@/utils/telegram";
-import { getCalendarStatus, openGift } from "@/utils/api";
+import { getCalendarStatus, openGift, checkServerHealth } from "@/utils/api";
 
 const AdventCalendar = () => {
   const [currentDay, setCurrentDay] = useState(0);
   const [days, setDays] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [serverCurrentDay, setServerCurrentDay] = useState(null); // Текущий день с сервера
   const router = useRouter();
 
   // Загружаем статус календаря при монтировании компонента
@@ -55,19 +56,58 @@ const AdventCalendar = () => {
             console.warn(
               "To test with API, set test_telegram_id in localStorage: localStorage.setItem('test_telegram_id', 'YOUR_TELEGRAM_ID')"
             );
-            const mockDays = Array.from({ length: 12 }, (_, i) => ({
-              day: String(i + 8).padStart(2, "0"),
-              month: "декабря",
-              status: i === 0 ? "opened" : i === 1 ? "available" : "locked",
-              giftImage:
-                i === 0
-                  ? "/assets/images/gift.svg"
-                  : "/assets/images/gift2.svg",
-            }));
+            // Моковые данные для разработки (имитируем 10 декабря)
+            const mockCurrentDay = 10;
+            setServerCurrentDay(mockCurrentDay);
+            const mockDays = Array.from({ length: 12 }, (_, i) => {
+              const dayNumber = i + 8;
+              const dayString = String(dayNumber).padStart(2, "0");
+              let status;
+              if (dayNumber < mockCurrentDay) {
+                status = i === 0 ? "opened" : "missed"; // Первый день открыт, остальные пропущены
+              } else if (dayNumber === mockCurrentDay) {
+                status = "available"; // Текущий день доступен
+              } else {
+                status = "locked"; // Будущие дни заблокированы
+              }
+
+              return {
+                day: dayString,
+                dayNumber: dayNumber,
+                month: "декабря",
+                status: status,
+                isOpened: i === 0, // Только первый день открыт
+                giftImage:
+                  i === 0
+                    ? "/assets/images/gift.svg"
+                    : "/assets/images/gift2.svg",
+              };
+            });
             setDays(mockDays);
             setLoading(false);
             return;
           }
+        }
+
+        // Сначала проверяем доступность сервера
+        console.log("Checking server health...");
+        try {
+          const isServerHealthy = await checkServerHealth();
+          if (!isServerHealthy) {
+            console.warn(
+              "Health check returned false, but continuing anyway..."
+            );
+            // Не бросаем ошибку, продолжаем попытку запроса календаря
+            // Возможно, health check не работает из-за CORS, но основной запрос может пройти
+          } else {
+            console.log("Server is healthy, fetching calendar status...");
+          }
+        } catch (healthError) {
+          console.warn(
+            "Health check failed, but continuing with calendar request:",
+            healthError
+          );
+          // Продолжаем попытку запроса календаря
         }
 
         console.log(
@@ -78,14 +118,23 @@ const AdventCalendar = () => {
 
         console.log("Calendar status from API:", data);
         console.log("Current day from API:", data.current_day);
+        console.log("Days from API:", data.days);
+
+        // Сохраняем текущий день с сервера
+        setServerCurrentDay(data.current_day);
 
         // Преобразуем данные из API в формат компонента
         const formattedDays = data.days.map((dayData) => {
           const dayNumber = dayData.day;
           const dayString = String(dayNumber).padStart(2, "0");
 
+          console.log(
+            `Day ${dayNumber}: status=${dayData.status}, is_opened=${dayData.is_opened}`
+          );
+
           return {
             day: dayString,
+            dayNumber: dayNumber, // Сохраняем числовое значение для проверок
             month: "декабря",
             status: dayData.status,
             isOpened: dayData.is_opened,
@@ -95,20 +144,22 @@ const AdventCalendar = () => {
           };
         });
 
+        console.log("Formatted days:", formattedDays);
         setDays(formattedDays);
         setError(null);
       } catch (err) {
         console.error("Failed to load calendar status:", err);
-        setError("Не удалось загрузить календарь");
-        // Используем моковые данные при ошибке
-        const mockDays = Array.from({ length: 12 }, (_, i) => ({
-          day: String(i + 8).padStart(2, "0"),
-          month: "декабря",
-          status: i === 0 ? "opened" : i === 1 ? "available" : "locked",
-          giftImage:
-            i === 0 ? "/assets/images/gift.svg" : "/assets/images/gift2.svg",
-        }));
-        setDays(mockDays);
+        console.error("Error type:", err?.constructor?.name);
+        console.error("Error message:", err?.message);
+        console.error("Error stack:", err?.stack);
+        console.error("Full error:", err);
+
+        const errorMessage = err?.message || "Неизвестная ошибка";
+        setError(
+          `Не удалось загрузить календарь: ${errorMessage}. Проверьте подключение к серверу.`
+        );
+        // НЕ используем моковые данные при ошибке - показываем ошибку
+        setDays([]);
       } finally {
         setLoading(false);
       }
@@ -137,7 +188,8 @@ const AdventCalendar = () => {
     }
 
     const telegramId = getTelegramUserId();
-    const dayNumber = parseInt(currentDayData.day, 10);
+    const dayNumber =
+      currentDayData.dayNumber || parseInt(currentDayData.day, 10);
 
     // Если подарок уже открыт, просто переходим на страницу
     if (currentDayData.status === "opened") {
@@ -145,7 +197,15 @@ const AdventCalendar = () => {
       return;
     }
 
-    // Если подарок доступен, открываем его через API
+    // Проверяем, что это текущий день с сервера (можно открыть только текущий день)
+    if (serverCurrentDay !== null && dayNumber !== serverCurrentDay) {
+      alert(
+        `Вы можете открыть подарок только за ${serverCurrentDay} декабря. Этот день недоступен.`
+      );
+      return;
+    }
+
+    // Если подарок доступен и это текущий день, открываем его через API
     if (currentDayData.status === "available" && telegramId) {
       try {
         await openGift(telegramId, dayNumber);
@@ -164,11 +224,45 @@ const AdventCalendar = () => {
         router.push(`/gift/${dayNumber}`);
       } catch (error) {
         console.error("Failed to open gift:", error);
-        alert(error.message || "Не удалось открыть подарок");
+        const errorMessage = error.message || "Не удалось открыть подарок";
+
+        // Показываем понятное сообщение об ошибке
+        if (
+          errorMessage.includes("missed") ||
+          errorMessage.includes("пропущен")
+        ) {
+          alert("Этот день был пропущен. Подарок недоступен.");
+        } else if (
+          errorMessage.includes("not available") ||
+          errorMessage.includes("недоступен")
+        ) {
+          alert("Этот день еще недоступен.");
+        } else if (
+          errorMessage.includes("current day") ||
+          errorMessage.includes("текущий день")
+        ) {
+          alert(
+            `Вы можете открыть подарок только за ${serverCurrentDay} декабря.`
+          );
+        } else {
+          alert(errorMessage);
+        }
       }
     } else if (!telegramId) {
       // Если нет telegram_id, просто переходим на страницу (для разработки)
-      router.push(`/gift/${dayNumber}`);
+      // Но только если это текущий день или открытый
+      if (
+        serverCurrentDay === null ||
+        dayNumber === serverCurrentDay ||
+        currentDayData.status === "opened"
+      ) {
+        router.push(`/gift/${dayNumber}`);
+      } else {
+        alert("Для открытия подарка нужен telegram_id");
+      }
+    } else if (currentDayData.status !== "available") {
+      // Если статус не available, не позволяем открывать
+      alert("Этот подарок недоступен для открытия.");
     }
   };
 

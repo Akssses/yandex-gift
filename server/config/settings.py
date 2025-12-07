@@ -137,11 +137,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '8584303110:AAESr9bUQUHYKpfYPloLFzHECgaRmRHmzd8')
 
 # Mini App URL
-MINI_APP_URL = 'https://brochure-files-arguments-extended.trycloudflare.com'
+MINI_APP_URL = 'https://removable-assumed-named-doctor.trycloudflare.com'
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "https://brochure-files-arguments-extended.trycloudflare.com",
+    "https://removable-assumed-named-doctor.trycloudflare.com",
     "https://vercel.com",
     "https://akssses-projects.vercel.app",
     "https://crispily-justicelike-maryjane.ngrok-free.dev",
@@ -149,7 +149,18 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+# Разрешаем все домены cloudflare и ngrok для разработки
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.trycloudflare\.com$",
+    r"^https://.*\.ngrok-free\.dev$",
+    r"^https://.*\.ngrok\.io$",
+]
+
+# В режиме DEBUG разрешаем все источники для упрощения разработки
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -161,11 +172,13 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+    'ngrok-skip-browser-warning',  # Для пропуска предупреждения ngrok
 ]
 
 # CSRF trusted origins (для проверки Origin в CSRF)
+# Django не поддерживает wildcards, поэтому добавляем конкретные домены
 CSRF_TRUSTED_ORIGINS = [
-    "https://brochure-files-arguments-extended.trycloudflare.com",
+    "https://removable-assumed-named-doctor.trycloudflare.com",
     "https://vercel.com",
     "https://akssses-projects.vercel.app",
     "https://crispily-justicelike-maryjane.ngrok-free.dev",

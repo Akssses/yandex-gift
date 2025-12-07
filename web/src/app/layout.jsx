@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.scss";
+import TelegramWebAppInit from "@/components/TelegramWebAppInit";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
           src="https://telegram.org/js/telegram-web-app.js"
           strategy="afterInteractive"
         />
+        <TelegramWebAppInit />
         {children}
       </body>
     </html>

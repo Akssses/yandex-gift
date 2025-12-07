@@ -39,3 +39,38 @@ export const getTelegramUserId = () => {
   const user = getTelegramUser();
   return user?.id || null;
 };
+
+/**
+ * Инициализировать Telegram WebApp и развернуть на полный экран
+ */
+export const initTelegramWebApp = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  // Проверяем, что мы в Telegram WebApp
+  if (window.Telegram?.WebApp) {
+    const webApp = window.Telegram.WebApp;
+
+    // Говорим Telegram, что приложение готово
+    webApp.ready();
+
+    // Разворачиваем на полный экран
+    webApp.expand();
+
+    // Настраиваем цвета (опционально)
+    // webApp.setHeaderColor("#1a1a1a"); // Цвет заголовка
+    // webApp.setBackgroundColor("#ffffff"); // Цвет фона
+
+    // Отключаем кнопку "Назад" (опционально)
+    // webApp.BackButton.hide();
+
+    console.log("Telegram WebApp initialized and expanded to fullscreen");
+
+    return webApp;
+  } else {
+    console.warn("Telegram WebApp not found");
+  }
+
+  return null;
+};
