@@ -22,7 +22,7 @@ SECRET_KEY = 'django-insecure-change-this-in-production'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'advent.muza.team,localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -150,6 +150,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://vercel.app",
     "https://vercel.com",
     "http://advent.muza.team",
+    "https://advent.muza.team",  # На случай если будет HTTPS
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
@@ -176,16 +177,16 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
-    'ngrok-skip-browser-warning',  # Для пропуска предупреждения ngrok
 ]
 
 # CSRF trusted origins (для проверки Origin в CSRF)
 # Django не поддерживает wildcards, поэтому добавляем конкретные домены
 CSRF_TRUSTED_ORIGINS = [
-    "https://removable-assumed-named-doctor.trycloudflare.com",
+    "https://yandex-gift.vercel.app",
+    "https://vercel.app",
     "https://vercel.com",
-    "https://akssses-projects.vercel.app",
-    "https://crispily-justicelike-maryjane.ngrok-free.dev",
+    "http://advent.muza.team",
+    "https://advent.muza.team",  # На случай если будет HTTPS
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]

@@ -4,8 +4,25 @@
 
 // API Base URL - можно переопределить через переменную окружения
 // Установите NEXT_PUBLIC_API_URL в .env.local для указания URL бэкенда
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://advent.muza.team";
+// В production используем проксирование через Next.js (/api/proxy), в development - прямой URL
+const getApiBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+
+  // Если мы на Vercel (production), используем проксирование
+  if (
+    typeof window !== "undefined" &&
+    window.location.hostname.includes("vercel.app")
+  ) {
+    return ""; // Относительный путь - будет проксироваться через Next.js
+  }
+
+  // В development используем прямой URL
+  return "http://advent.muza.team";
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 console.log("API_BASE_URL configured as:", API_BASE_URL);
 console.log("NEXT_PUBLIC_API_URL from env:", process.env.NEXT_PUBLIC_API_URL);
@@ -14,7 +31,8 @@ console.log("NEXT_PUBLIC_API_URL from env:", process.env.NEXT_PUBLIC_API_URL);
  * Проверить доступность сервера
  */
 export const checkServerHealth = async () => {
-  const url = `${API_BASE_URL}/api/health/`;
+  const baseUrl = API_BASE_URL || "";
+  const url = `${baseUrl}/api/health/`;
   console.log("Health check URL:", url);
 
   try {
@@ -22,8 +40,8 @@ export const checkServerHealth = async () => {
       method: "GET",
       mode: "cors",
       cache: "no-cache",
+      credentials: "omit",
       headers: {
-        "ngrok-skip-browser-warning": "true",
         Accept: "application/json",
       },
     });
@@ -65,7 +83,8 @@ export const checkUser = async (telegramId) => {
     throw new Error("telegram_id is required");
   }
 
-  const url = `${API_BASE_URL}/api/check-user/?id=${telegramId}`;
+  const baseUrl = API_BASE_URL || "";
+  const url = `${baseUrl}/api/check-user/?id=${telegramId}`;
   console.log("Checking user URL:", url);
 
   try {
@@ -75,7 +94,6 @@ export const checkUser = async (telegramId) => {
       cache: "no-cache",
       headers: {
         "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "true",
         Accept: "application/json",
       },
     });
@@ -123,7 +141,9 @@ export const getCalendarStatus = async (telegramId) => {
     throw new Error("telegram_id is required");
   }
 
-  const url = `${API_BASE_URL}/api/calendar/status/?telegram_id=${telegramId}`;
+  // Используем относительный путь если API_BASE_URL пустой (проксирование)
+  const baseUrl = API_BASE_URL || "";
+  const url = `${baseUrl}/api/calendar/status/?telegram_id=${telegramId}`;
   console.log("API Request URL:", url);
   console.log("API Base URL:", API_BASE_URL);
   console.log("Telegram ID:", telegramId);
@@ -140,7 +160,6 @@ export const getCalendarStatus = async (telegramId) => {
       credentials: "omit", // Не отправляем cookies
       headers: {
         "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "true", // Пропускаем предупреждение ngrok
         Accept: "application/json",
       },
     });
@@ -209,33 +228,49 @@ export const getCalendarStatus = async (telegramId) => {
       error?.message?.includes("Load failed") ||
       error?.message?.includes("NetworkError") ||
       error?.name === "TypeError" ||
-      error?.message?.includes("Network request failed")
+      error?.message?.includes("Network request failed") ||
+      error?.message?.includes("Mixed Content")
     ) {
-      // Проверяем, может быть это CORS ошибка
-      const isCorsError =
-        error?.message?.includes("CORS") ||
-        error?.message?.includes("cross-origin") ||
-        error?.message?.includes("Access-Control");
+      // Проверяем, может быть это Mixed Content ошибка (HTTPS -> HTTP)
+      const isMixedContent =
+        typeof window !== "undefined" &&
+        window.location.protocol === "https:" &&
+        API_BASE_URL.startsWith("http://");
 
-      if (isCorsError) {
-        errorMessage = `Ошибка CORS: Запрос заблокирован из-за политики CORS. 
+      if (isMixedContent) {
+        errorMessage = `Ошибка Mixed Content: HTTPS сайт не может обращаться к HTTP серверу. 
         
+Решение:
+1. Настройте HTTPS для бэкенда (advent.muza.team)
+2. Или используйте проксирование через Vercel
+3. Текущий API URL: ${API_BASE_URL}`;
+      } else {
+        // Проверяем, может быть это CORS ошибка
+        const isCorsError =
+          error?.message?.includes("CORS") ||
+          error?.message?.includes("cross-origin") ||
+          error?.message?.includes("Access-Control");
+
+        if (isCorsError) {
+          errorMessage = `Ошибка CORS: Запрос заблокирован из-за политики CORS. 
+          
 Проверьте:
 1. Что бэкенд настроен на разрешение запросов с вашего домена
 2. Что CORS middleware правильно настроен
 3. Текущий origin: ${
-          typeof window !== "undefined" ? window.location.origin : "unknown"
-        }`;
-      } else {
-        errorMessage = `Не удалось подключиться к серверу. 
-        
+            typeof window !== "undefined" ? window.location.origin : "unknown"
+          }`;
+        } else {
+          errorMessage = `Не удалось подключиться к серверу. 
+          
 Возможные причины:
 1. Бэкенд не запущен - проверьте, что Django сервер работает
-2. Ngrok туннель не активен - проверьте, что ngrok запущен и туннель работает
-3. Неправильный URL бэкенда - текущий URL: ${API_BASE_URL}
-4. Проблема с сетью - проверьте интернет соединение
+2. Неправильный URL бэкенда - текущий URL: ${API_BASE_URL}
+3. Проблема с сетью - проверьте интернет соединение
+4. Mixed Content - HTTPS сайт не может обращаться к HTTP
 
 Попробуйте открыть в браузере: ${API_BASE_URL}/api/health/`;
+        }
       }
     }
 
@@ -253,7 +288,8 @@ export const getCalendarStatus = async (telegramId) => {
  * Открыть подарок за определенный день
  */
 export const openGift = async (telegramId, day) => {
-  const url = `${API_BASE_URL}/api/calendar/open/`;
+  const baseUrl = API_BASE_URL || "";
+  const url = `${baseUrl}/api/calendar/open/`;
   console.log("API Request URL (openGift):", url);
 
   try {
