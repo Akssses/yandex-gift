@@ -5,21 +5,28 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./AdventCalendar.module.scss";
 import { getTelegramUserId } from "@/utils/telegram";
-import { getCalendarStatus, openGift, checkServerHealth } from "@/utils/api";
+import {
+  getCalendarStatus,
+  openGift,
+  checkServerHealth,
+  checkUser,
+} from "@/utils/api";
 
 const AdventCalendar = () => {
   const [currentDay, setCurrentDay] = useState(0);
   const [days, setDays] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [accessDenied, setAccessDenied] = useState(false); // Доступ запрещен
   const [serverCurrentDay, setServerCurrentDay] = useState(null); // Текущий день с сервера
   const router = useRouter();
 
-  // Загружаем статус календаря при монтировании компонента
+  // Проверяем доступ пользователя и загружаем статус календаря
   useEffect(() => {
     const loadCalendarStatus = async () => {
       try {
         setLoading(true);
+        setAccessDenied(false);
 
         // Ждем инициализации Telegram WebApp
         let telegramId = getTelegramUserId();
@@ -46,48 +53,27 @@ const AdventCalendar = () => {
             );
             telegramId = parseInt(testTelegramId, 10);
           } else {
-            // Если нет telegram_id, используем моковые данные для разработки
-            console.warn(
-              "Telegram user ID not found after attempts, using mock data"
-            );
-            console.warn(
-              "This means the app is not running in Telegram WebApp or user data is not available"
-            );
-            console.warn(
-              "To test with API, set test_telegram_id in localStorage: localStorage.setItem('test_telegram_id', 'YOUR_TELEGRAM_ID')"
-            );
-            // Моковые данные для разработки (имитируем 10 декабря)
-            const mockCurrentDay = 10;
-            setServerCurrentDay(mockCurrentDay);
-            const mockDays = Array.from({ length: 12 }, (_, i) => {
-              const dayNumber = i + 8;
-              const dayString = String(dayNumber).padStart(2, "0");
-              let status;
-              if (dayNumber < mockCurrentDay) {
-                status = i === 0 ? "opened" : "missed"; // Первый день открыт, остальные пропущены
-              } else if (dayNumber === mockCurrentDay) {
-                status = "available"; // Текущий день доступен
-              } else {
-                status = "locked"; // Будущие дни заблокированы
-              }
-
-              return {
-                day: dayString,
-                dayNumber: dayNumber,
-                month: "декабря",
-                status: status,
-                isOpened: i === 0, // Только первый день открыт
-                giftImage:
-                  i === 0
-                    ? "/assets/images/gift.svg"
-                    : "/assets/images/gift2.svg",
-              };
-            });
-            setDays(mockDays);
+            // Если нет telegram_id, показываем ошибку доступа
+            console.warn("Telegram user ID not found");
+            setAccessDenied(true);
             setLoading(false);
             return;
           }
         }
+
+        // Проверяем, есть ли пользователь в базе данных
+        console.log("Checking user access for telegram_id:", telegramId);
+        const userCheck = await checkUser(telegramId);
+
+        if (!userCheck.exists) {
+          // Пользователь не найден в базе
+          console.warn("User not found in database");
+          setAccessDenied(true);
+          setLoading(false);
+          return;
+        }
+
+        console.log("User found in database, loading calendar...");
 
         // Сначала проверяем доступность сервера
         console.log("Checking server health...");
@@ -279,6 +265,43 @@ const AdventCalendar = () => {
           }}
         >
           Загрузка...
+        </div>
+      </div>
+    );
+  }
+
+  if (accessDenied) {
+    return (
+      <div className={styles.adventCalendar}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            padding: "20px",
+            textAlign: "center",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "24px",
+              marginBottom: "20px",
+              color: "#333",
+            }}
+          >
+            Доступ закрыт
+          </h1>
+          <p
+            style={{
+              fontSize: "18px",
+              color: "#666",
+              lineHeight: "1.6",
+            }}
+          >
+            Зарегистрируйся в боте
+          </p>
         </div>
       </div>
     );

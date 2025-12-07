@@ -60,6 +60,64 @@ export const checkServerHealth = async () => {
 };
 
 /**
+ * Проверить, есть ли пользователь в базе данных
+ */
+export const checkUser = async (telegramId) => {
+  if (!telegramId) {
+    throw new Error("telegram_id is required");
+  }
+
+  const url = `${API_BASE_URL}/api/check-user/?id=${telegramId}`;
+  console.log("Checking user URL:", url);
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true",
+        Accept: "application/json",
+      },
+    });
+
+    console.log("Check user response status:", response.status);
+
+    const responseText = await response.text();
+    console.log("Check user response text:", responseText);
+
+    if (!response.ok) {
+      let errorMessage = responseText;
+      try {
+        const errorData = JSON.parse(responseText);
+        errorMessage = errorData.error || errorData.message || responseText;
+      } catch (e) {}
+
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorMessage}`
+      );
+    }
+
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (e) {
+      console.error("Failed to parse JSON:", e);
+      throw new Error(
+        `Invalid JSON response: ${responseText.substring(0, 100)}`
+      );
+    }
+
+    console.log("Check user response data:", data);
+    return data;
+  } catch (error) {
+    console.error("Error checking user:", error);
+    throw error;
+  }
+};
+
+/**
  * Получить статус календаря для пользователя
  */
 export const getCalendarStatus = async (telegramId) => {

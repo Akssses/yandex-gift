@@ -11,6 +11,36 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 @require_http_methods(["GET"])
+def check_user(request):
+    """Проверить, есть ли пользователь в базе данных"""
+    telegram_id = request.GET.get('id')
+    
+    if not telegram_id:
+        return JsonResponse({'error': 'id parameter is required'}, status=400)
+    
+    try:
+        telegram_id_int = int(telegram_id)
+        user = TelegramUser.objects.get(telegram_id=telegram_id_int)
+        
+        logger.info(f"User {telegram_id_int} found in database")
+        return JsonResponse({
+            'exists': True,
+            'user_id': user.id,
+            'telegram_id': user.telegram_id,
+            'is_from_rf': user.is_from_rf,
+        })
+    except (ValueError, TypeError):
+        return JsonResponse({'error': 'Invalid id parameter'}, status=400)
+    except TelegramUser.DoesNotExist:
+        logger.warning(f"User {telegram_id} not found in database")
+        return JsonResponse({
+            'exists': False,
+            'message': 'User not found'
+        })
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
 def health_check(request):
     """Простая проверка доступности сервера"""
     return JsonResponse({
