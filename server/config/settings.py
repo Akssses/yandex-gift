@@ -139,7 +139,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Директория для collectsta
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Telegram Bot Token
-TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '8584303110:AAESr9bUQUHYKpfYPloLFzHECgaRmRHmzd8')
+# TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '8584303110:AAESr9bUQUHYKpfYPloLFzHECgaRmRHmzd8')
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '8574069116:AAGnLh3QmovtnosjfP9ud1A_inxpdlKmQYs')
 
 # Mini App URL
 MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://yandex-gift.vercel.app')
