@@ -90,6 +90,9 @@
   width: 290px;
   transition: transform 0.3s ease;
   padding: 20px;
+  overflow: hidden; // Предотвращаем выход изображений за границы
+  display: flex;
+  flex-direction: column;
 }
 
 .dateCardOpened {
@@ -100,6 +103,11 @@
     rgba(255, 242, 191, 1) 50%,
     rgba(254, 233, 149, 1) 100%
   );
+
+  .day,
+  .month {
+    color: #1a1a1a; // Черный текст для открытых карточек
+  }
 }
 
 .dateCardAvailable {
@@ -110,10 +118,20 @@
     rgba(253, 159, 142, 1) 50%,
     rgba(254, 217, 210, 1) 100%
   );
+
+  .day,
+  .month {
+    color: #ffffff; // Белый текст для доступных карточек
+  }
 }
 
 .dateCardDisabled {
   background: #ececec;
+
+  .day,
+  .month {
+    color: #1a1a1a; // Черный текст для отключенных карточек
+  }
 }
 
 .dateHeader {
@@ -146,16 +164,22 @@
   align-items: center;
   margin-bottom: 1.5rem;
   min-height: 220px;
+  max-height: 220px; // Ограничиваем высоту
   position: relative;
+  overflow: hidden; // Предотвращаем выход изображений
 
   @media (max-width: 768px) {
     min-height: 180px;
+    max-height: 180px;
   }
 }
 
 .giftImage {
   width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; // Сохраняем пропорции и не выходим за границы
 }
 
 .giftImageDisabled {
