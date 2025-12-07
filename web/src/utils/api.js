@@ -23,15 +23,37 @@ export const getCalendarStatus = async (telegramId) => {
     console.log("API Response status:", response.status);
     console.log("API Response ok:", response.ok);
 
+    // Получаем текст ответа для проверки
+    const responseText = await response.text();
+    console.log("API Response text:", responseText);
+
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("API Error response:", errorText);
+      console.error("API Error response:", responseText);
+      // Пытаемся распарсить как JSON, если не получается - используем текст
+      let errorMessage = responseText;
+      try {
+        const errorData = JSON.parse(responseText);
+        errorMessage = errorData.error || errorData.message || responseText;
+      } catch (e) {
+        // Если не JSON, используем текст как есть
+      }
       throw new Error(
-        `HTTP error! status: ${response.status}, message: ${errorText}`
+        `HTTP error! status: ${response.status}, message: ${errorMessage}`
       );
     }
 
-    const data = await response.json();
+    // Пытаемся распарсить JSON
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (e) {
+      console.error("Failed to parse JSON:", e);
+      console.error("Response text:", responseText);
+      throw new Error(
+        `Invalid JSON response: ${responseText.substring(0, 100)}`
+      );
+    }
+
     console.log("API Response data:", data);
     return data;
   } catch (error) {
@@ -48,8 +70,11 @@ export const getCalendarStatus = async (telegramId) => {
  * Открыть подарок за определенный день
  */
 export const openGift = async (telegramId, day) => {
+  const url = `${API_BASE_URL}/api/calendar/open/`;
+  console.log("API Request URL (openGift):", url);
+
   try {
-    const response = await fetch(`${API_BASE_URL}/api/calendar/open/`, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,14 +85,41 @@ export const openGift = async (telegramId, day) => {
       }),
     });
 
+    console.log("API Response status (openGift):", response.status);
+    console.log("API Response ok (openGift):", response.ok);
+
+    // Получаем текст ответа для проверки
+    const responseText = await response.text();
+    console.log("API Response text (openGift):", responseText);
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+      console.error("API Error response (openGift):", responseText);
+      // Пытаемся распарсить как JSON, если не получается - используем текст
+      let errorMessage = responseText;
+      try {
+        const errorData = JSON.parse(responseText);
+        errorMessage = errorData.error || errorData.message || responseText;
+      } catch (e) {
+        // Если не JSON, используем текст как есть
+      }
       throw new Error(
-        errorData.error || `HTTP error! status: ${response.status}`
+        `HTTP error! status: ${response.status}, message: ${errorMessage}`
       );
     }
 
-    const data = await response.json();
+    // Пытаемся распарсить JSON
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (e) {
+      console.error("Failed to parse JSON (openGift):", e);
+      console.error("Response text:", responseText);
+      throw new Error(
+        `Invalid JSON response: ${responseText.substring(0, 100)}`
+      );
+    }
+
+    console.log("API Response data (openGift):", data);
     return data;
   } catch (error) {
     console.error("Error opening gift:", error);

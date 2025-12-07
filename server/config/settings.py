@@ -137,11 +137,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '8584303110:AAESr9bUQUHYKpfYPloLFzHECgaRmRHmzd8')
 
 # Mini App URL
-MINI_APP_URL = 'https://yandex-gift.vercel.app'
+MINI_APP_URL = 'https://brochure-files-arguments-extended.trycloudflare.com'
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "https://yandex-gift.vercel.app",
+    "https://brochure-files-arguments-extended.trycloudflare.com",
     "https://vercel.com",
     "https://akssses-projects.vercel.app",
     "https://crispily-justicelike-maryjane.ngrok-free.dev",
@@ -165,7 +165,7 @@ CORS_ALLOW_HEADERS = [
 
 # CSRF trusted origins (для проверки Origin в CSRF)
 CSRF_TRUSTED_ORIGINS = [
-    "https://yandex-gift.vercel.app",
+    "https://brochure-files-arguments-extended.trycloudflare.com",
     "https://vercel.com",
     "https://akssses-projects.vercel.app",
     "https://crispily-justicelike-maryjane.ngrok-free.dev",
