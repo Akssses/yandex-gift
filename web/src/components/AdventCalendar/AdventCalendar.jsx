@@ -1,27 +1,121 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./AdventCalendar.module.scss";
+import { getTelegramUserId } from "@/utils/telegram";
+import { getCalendarStatus, openGift } from "@/utils/api";
 
 const AdventCalendar = () => {
   const [currentDay, setCurrentDay] = useState(0);
+  const [days, setDays] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const router = useRouter();
 
-  // Mock data for calendar days (December 8-19)
-  const days = Array.from({ length: 12 }, (_, i) => ({
-    day: String(i + 8).padStart(2, "0"), // Start from day 8
-    month: "декабря",
-    // 08 – подарок уже открыт
-    // 09 – можно открыть подарок
-    // 10–19 – нельзя открыть подарок (кнопка серая, не кликабельная)
-    status: i === 0 ? "opened" : i === 1 ? "available" : "locked",
-    // Картинка:
-    // - только открытые карточки – цветной gift.svg
-    // - карточки открытия (available/locked) – gift2.svg
-    giftImage: i === 0 ? "/assets/images/gift.svg" : "/assets/images/gift2.svg",
-  }));
+  // Загружаем статус календаря при монтировании компонента
+  useEffect(() => {
+    const loadCalendarStatus = async () => {
+      try {
+        setLoading(true);
+
+        // Ждем инициализации Telegram WebApp
+        let telegramId = getTelegramUserId();
+        let attempts = 0;
+        const maxAttempts = 10;
+
+        // Пытаемся получить telegram_id с задержкой (на случай если скрипт еще не загрузился)
+        while (!telegramId && attempts < maxAttempts) {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          telegramId = getTelegramUserId();
+          attempts++;
+        }
+
+        console.log("Telegram ID:", telegramId);
+        console.log("Attempts:", attempts);
+
+        if (!telegramId) {
+          // Если нет telegram_id, пробуем использовать тестовый ID из localStorage для разработки
+          const testTelegramId = localStorage.getItem("test_telegram_id");
+          if (testTelegramId) {
+            console.log(
+              "Using test telegram_id from localStorage:",
+              testTelegramId
+            );
+            telegramId = parseInt(testTelegramId, 10);
+          } else {
+            // Если нет telegram_id, используем моковые данные для разработки
+            console.warn(
+              "Telegram user ID not found after attempts, using mock data"
+            );
+            console.warn(
+              "This means the app is not running in Telegram WebApp or user data is not available"
+            );
+            console.warn(
+              "To test with API, set test_telegram_id in localStorage: localStorage.setItem('test_telegram_id', 'YOUR_TELEGRAM_ID')"
+            );
+            const mockDays = Array.from({ length: 12 }, (_, i) => ({
+              day: String(i + 8).padStart(2, "0"),
+              month: "декабря",
+              status: i === 0 ? "opened" : i === 1 ? "available" : "locked",
+              giftImage:
+                i === 0
+                  ? "/assets/images/gift.svg"
+                  : "/assets/images/gift2.svg",
+            }));
+            setDays(mockDays);
+            setLoading(false);
+            return;
+          }
+        }
+
+        console.log(
+          "Fetching calendar status from API for telegram_id:",
+          telegramId
+        );
+        const data = await getCalendarStatus(telegramId);
+
+        console.log("Calendar status from API:", data);
+        console.log("Current day from API:", data.current_day);
+
+        // Преобразуем данные из API в формат компонента
+        const formattedDays = data.days.map((dayData) => {
+          const dayNumber = dayData.day;
+          const dayString = String(dayNumber).padStart(2, "0");
+
+          return {
+            day: dayString,
+            month: "декабря",
+            status: dayData.status,
+            isOpened: dayData.is_opened,
+            giftImage: dayData.is_opened
+              ? "/assets/images/gift.svg"
+              : "/assets/images/gift2.svg",
+          };
+        });
+
+        setDays(formattedDays);
+        setError(null);
+      } catch (err) {
+        console.error("Failed to load calendar status:", err);
+        setError("Не удалось загрузить календарь");
+        // Используем моковые данные при ошибке
+        const mockDays = Array.from({ length: 12 }, (_, i) => ({
+          day: String(i + 8).padStart(2, "0"),
+          month: "декабря",
+          status: i === 0 ? "opened" : i === 1 ? "available" : "locked",
+          giftImage:
+            i === 0 ? "/assets/images/gift.svg" : "/assets/images/gift2.svg",
+        }));
+        setDays(mockDays);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCalendarStatus();
+  }, []);
 
   const handleNext = () => {
     setCurrentDay((prev) => (prev + 1) % days.length);
@@ -31,18 +125,89 @@ const AdventCalendar = () => {
     setCurrentDay((prev) => (prev - 1 + days.length) % days.length);
   };
 
-  const currentDayData = days[currentDay];
+  const currentDayData = days[currentDay] || {};
 
-  const handleOpenGiftClick = () => {
+  const handleOpenGiftClick = async () => {
     if (
-      currentDayData.status === "available" ||
-      currentDayData.status === "opened"
+      !currentDayData ||
+      currentDayData.status === "locked" ||
+      currentDayData.status === "missed"
     ) {
-      // Перенаправляем на страницу с конкретной датой (убираем ведущий ноль)
-      const dayNumber = parseInt(currentDayData.day, 10);
+      return;
+    }
+
+    const telegramId = getTelegramUserId();
+    const dayNumber = parseInt(currentDayData.day, 10);
+
+    // Если подарок уже открыт, просто переходим на страницу
+    if (currentDayData.status === "opened") {
+      router.push(`/gift/${dayNumber}`);
+      return;
+    }
+
+    // Если подарок доступен, открываем его через API
+    if (currentDayData.status === "available" && telegramId) {
+      try {
+        await openGift(telegramId, dayNumber);
+
+        // Обновляем статус локально
+        const updatedDays = [...days];
+        updatedDays[currentDay] = {
+          ...updatedDays[currentDay],
+          status: "opened",
+          isOpened: true,
+          giftImage: "/assets/images/gift.svg",
+        };
+        setDays(updatedDays);
+
+        // Переходим на страницу подарка
+        router.push(`/gift/${dayNumber}`);
+      } catch (error) {
+        console.error("Failed to open gift:", error);
+        alert(error.message || "Не удалось открыть подарок");
+      }
+    } else if (!telegramId) {
+      // Если нет telegram_id, просто переходим на страницу (для разработки)
       router.push(`/gift/${dayNumber}`);
     }
   };
+
+  if (loading) {
+    return (
+      <div className={styles.adventCalendar}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            fontSize: "18px",
+          }}
+        >
+          Загрузка...
+        </div>
+      </div>
+    );
+  }
+
+  if (error && days.length === 0) {
+    return (
+      <div className={styles.adventCalendar}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            fontSize: "18px",
+            color: "red",
+          }}
+        >
+          {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.adventCalendar}>
@@ -86,12 +251,18 @@ const AdventCalendar = () => {
                 ? styles.dateCardAvailable
                 : ""
             } ${
-              currentDayData.status === "locked" ? styles.dateCardDisabled : ""
+              currentDayData.status === "locked" ||
+              currentDayData.status === "missed"
+                ? styles.dateCardDisabled
+                : ""
             }`}
             onClick={handleOpenGiftClick}
             style={{
               cursor:
-                currentDayData.status === "locked" ? "default" : "pointer",
+                currentDayData.status === "locked" ||
+                currentDayData.status === "missed"
+                  ? "default"
+                  : "pointer",
             }}
           >
             <div className={styles.dateHeader}>
@@ -106,7 +277,8 @@ const AdventCalendar = () => {
                 width={300}
                 height={200}
                 className={`${styles.giftImage} ${
-                  currentDayData.status === "locked"
+                  currentDayData.status === "locked" ||
+                  currentDayData.status === "missed"
                     ? styles.giftImageDisabled
                     : ""
                 }`}
@@ -137,13 +309,21 @@ const AdventCalendar = () => {
           className={`${styles.openButton} ${
             currentDayData.status === "available" ? styles.openButtonActive : ""
           } ${
-            currentDayData.status === "locked" ? styles.openButtonDisabled : ""
+            currentDayData.status === "locked" ||
+            currentDayData.status === "missed"
+              ? styles.openButtonDisabled
+              : ""
           }`}
-          disabled={currentDayData.status === "locked"}
+          disabled={
+            currentDayData.status === "locked" ||
+            currentDayData.status === "missed"
+          }
           onClick={handleOpenGiftClick}
         >
           {currentDayData.status === "opened"
             ? "Подарок открыт"
+            : currentDayData.status === "missed"
+            ? "Подарок пропущен"
             : "Открыть подарок"}
         </button>
 

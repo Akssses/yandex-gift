@@ -3,7 +3,30 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.utils import timezone
 import json
+import logging
 from .models import TelegramUser, CalendarSettings, GiftOpening
+
+logger = logging.getLogger(__name__)
+
+
+def get_current_calendar_day():
+    """Получить текущий день календаря (8-19 декабря) из настроек"""
+    settings = CalendarSettings.objects.first()
+    if settings:
+        # Берем день из даты, установленной в админке
+        day = settings.current_date.day
+        logger.info(f"Using calendar day from settings: {day} (date: {settings.current_date})")
+        return day
+    else:
+        # Если настроек нет, проверяем текущую дату
+        today = timezone.now().date()
+        if today.month == 12 and 8 <= today.day <= 19:
+            logger.warning(f"No calendar settings found, using today's day: {today.day}")
+            return today.day
+        else:
+            # По умолчанию день 8
+            logger.warning(f"No calendar settings found and today is not in December 8-19, using default: 8")
+            return 8
 
 
 @csrf_exempt
@@ -20,9 +43,8 @@ def get_calendar_status(request):
     except TelegramUser.DoesNotExist:
         return JsonResponse({'error': 'User not found'}, status=404)
     
-    # Получаем текущую дату из настроек
-    current_date = CalendarSettings.get_current_date()
-    current_day = current_date.day
+    # Получаем текущий день календаря из настроек
+    current_day = get_current_calendar_day()
     
     # Получаем открытые подарки пользователя
     opened_gifts = GiftOpening.objects.filter(user=user).values_list('day', flat=True)
@@ -47,10 +69,14 @@ def get_calendar_status(request):
             'is_opened': day in opened_days
         })
     
-    return JsonResponse({
+    response_data = {
         'current_day': current_day,
         'days': days_status
-    })
+    }
+    
+    logger.info(f"Calendar status for user {user.telegram_id}: current_day={current_day}, opened_days={opened_days}")
+    
+    return JsonResponse(response_data)
 
 
 @csrf_exempt
@@ -76,9 +102,8 @@ def open_gift(request):
     except TelegramUser.DoesNotExist:
         return JsonResponse({'error': 'User not found'}, status=404)
     
-    # Получаем текущую дату из настроек
-    current_date = CalendarSettings.get_current_date()
-    current_day = current_date.day
+    # Получаем текущий день календаря из настроек
+    current_day = get_current_calendar_day()
     
     # Проверяем доступность дня
     if day > current_day:
@@ -105,3 +130,4 @@ def open_gift(request):
         'day': day,
         'opened_at': timezone.now().isoformat()
     })
+
