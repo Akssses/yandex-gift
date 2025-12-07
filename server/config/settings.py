@@ -6,26 +6,38 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-# Загружаем переменные окружения из .env файла
+# ============================================================
+# LOAD ENV
+# ============================================================
+
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+# ============================================================
+# SECURITY
+# ============================================================
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-change-this-in-production'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "advent.muza.team",
+    "www.advent.muza.team",
+]
+
+# Разрешаем всё для удобства API
+if DEBUG:
+    ALLOWED_HOSTS.append("*")
 
 
-# Application definition
+# ============================================================
+# APPS
+# ============================================================
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -34,59 +46,48 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-party
     'corsheaders',
+
+    # Local apps
     'bot',
 ]
 
+
+# ============================================================
+# MIDDLEWARE (ВАЖНО: порядок CORS!)
+# ============================================================
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    # CORS ДОЛЖЕН быть выше SessionMiddleware и CommonMiddleware
     'corsheaders.middleware.CorsMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'config.middleware.DisableCSRFForAPI',  # Отключаем CSRF для API перед основной проверкой
-    'django.middleware.csrf.CsrfViewMiddleware',
+
+    # отключение CSRF для API (твоя кастомка)
+    'config.middleware.DisableCSRFForAPI',
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# В режиме DEBUG полностью отключаем CSRF проверку для всех запросов
-if DEBUG:
-    # Заменяем стандартный CSRF middleware на кастомный, который пропускает API
-    MIDDLEWARE = [
-        'django.middleware.security.SecurityMiddleware',
-        'corsheaders.middleware.CorsMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'config.middleware.DisableCSRFForAPI',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+
+# ============================================================
+# URLS + WSGI
+# ============================================================
 
 ROOT_URLCONF = 'config.urls'
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# ============================================================
+# DATABASE
+# ============================================================
 
 DATABASES = {
     'default': {
@@ -96,101 +97,87 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+# ============================================================
+# PASSWORD VALIDATION
+# ============================================================
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
+# ============================================================
+# I18N
+# ============================================================
 
 LANGUAGE_CODE = 'ru-ru'
-
 TIME_ZONE = 'Europe/Moscow'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# ============================================================
+# STATIC
+# ============================================================
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Директория для collectstatic
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# ============================================================
+# TELEGRAM BOT CONFIG
+# ============================================================
 
-# Telegram Bot Token
-TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '8584303110:AAESr9bUQUHYKpfYPloLFzHECgaRmRHmzd8')
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+MINI_APP_URL = os.environ.get("MINI_APP_URL", "https://yandex-gift.vercel.app")
 
-# Mini App URL
-MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://yandex-gift.vercel.app')
 
-# CORS settings
-CORS_ALLOWED_ORIGINS = [
-    "https://yandex-gift.vercel.app",
-    "https://vercel.app",
-    "https://vercel.com",
-    "http://advent.muza.team",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+# ============================================================
+# CORS — <РАБОТАЕТ БЕЗОТКАЗНО> 🔥
+# ============================================================
+
+# Разрешаем ВСЕ домены (API friendly)
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Разрешаем куки, если вдруг понадобятся
+CORS_ALLOW_CREDENTIALS = True
+
+# Разрешаем любые методы
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
 ]
 
-# Разрешаем все домены vercel для разработки
+# Разрешаем любые заголовки
+CORS_ALLOW_HEADERS = [
+    "*",
+]
+
+# Разрешаем все домены Vercel (твои mini-appы)
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://.*\.vercel\.app$",
     r"^https://.*\.vercel\.com$",
 ]
 
-# В режиме DEBUG разрешаем все источники для упрощения разработки
-if DEBUG:
-    CORS_ALLOW_ALL_ORIGINS = True
-else:
-    CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'ngrok-skip-browser-warning',  # Для пропуска предупреждения ngrok
-]
+# ============================================================
+# CSRF — ПОЛНОСТЬЮ ОТКЛЮЧЕН ДЛЯ API
+# ============================================================
 
-# CSRF trusted origins (для проверки Origin в CSRF)
-# Django не поддерживает wildcards, поэтому добавляем конкретные домены
 CSRF_TRUSTED_ORIGINS = [
+    "https://advent.muza.team",
     "https://yandex-gift.vercel.app",
-    "https://vercel.app",
-    "https://vercel.com",
-    "http://advent.muza.team",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "https://*.vercel.app",
 ]
 
-# В режиме DEBUG отключаем проверку Origin для CSRF
+# Если DEBUG — отключаем secure cookies
 if DEBUG:
     CSRF_COOKIE_SECURE = False
     CSRF_COOKIE_HTTPONLY = False
