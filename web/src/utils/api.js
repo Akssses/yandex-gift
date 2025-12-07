@@ -32,7 +32,7 @@ console.log("NEXT_PUBLIC_API_URL from env:", process.env.NEXT_PUBLIC_API_URL);
  */
 export const checkServerHealth = async () => {
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/health/`;
+  const url = `${baseUrl}/api/health`; // Убираем trailing slash
   console.log("Health check URL:", url);
 
   try {
@@ -84,7 +84,7 @@ export const checkUser = async (telegramId) => {
   }
 
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/check-user/?id=${telegramId}`;
+  const url = `${baseUrl}/api/check-user?id=${telegramId}`; // Убираем trailing slash
   console.log("Checking user URL:", url);
 
   try {
@@ -143,7 +143,7 @@ export const getCalendarStatus = async (telegramId) => {
 
   // Используем относительный путь если API_BASE_URL пустой (проксирование)
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/calendar/status/?telegram_id=${telegramId}`;
+  const url = `${baseUrl}/api/calendar/status?telegram_id=${telegramId}`; // Убираем trailing slash
   console.log("API Request URL:", url);
   console.log("API Base URL:", API_BASE_URL);
   console.log("Telegram ID:", telegramId);
@@ -289,7 +289,7 @@ export const getCalendarStatus = async (telegramId) => {
  */
 export const openGift = async (telegramId, day) => {
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/calendar/open/`;
+  const url = `${baseUrl}/api/calendar/open`; // Убираем trailing slash чтобы избежать 301 редиректа
   console.log("API Request URL (openGift):", url);
 
   try {
