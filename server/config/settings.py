@@ -39,11 +39,26 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'config.middleware.DisableCSRFForAPI',  # Отключаем CSRF для API перед основной проверкой
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# В режиме DEBUG полностью отключаем CSRF проверку для всех запросов
+if DEBUG:
+    # Заменяем стандартный CSRF middleware на кастомный, который пропускает API
+    MIDDLEWARE = [
+        'django.middleware.security.SecurityMiddleware',
+        'corsheaders.middleware.CorsMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'config.middleware.DisableCSRFForAPI',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ]
 
 ROOT_URLCONF = 'config.urls'
 
@@ -129,6 +144,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://yandex-gift.vercel.app",
     "https://vercel.com",
     "https://akssses-projects.vercel.app",
+    "https://crispily-justicelike-maryjane.ngrok-free.dev",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
@@ -146,3 +162,18 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# CSRF trusted origins (для проверки Origin в CSRF)
+CSRF_TRUSTED_ORIGINS = [
+    "https://yandex-gift.vercel.app",
+    "https://vercel.com",
+    "https://akssses-projects.vercel.app",
+    "https://crispily-justicelike-maryjane.ngrok-free.dev",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+# В режиме DEBUG отключаем проверку Origin для CSRF
+if DEBUG:
+    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_HTTPONLY = False

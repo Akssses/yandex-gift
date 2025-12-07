@@ -2,7 +2,7 @@
  * API клиент для работы с бэкендом
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const API_BASE_URL = "https://crispily-justicelike-maryjane.ngrok-free.dev";
 
 /**
  * Получить статус календаря для пользователя
