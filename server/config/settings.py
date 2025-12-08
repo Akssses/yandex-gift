@@ -195,11 +195,15 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # Настройки безопасности для HTTPS
-SECURE_SSL_REDIRECT = not DEBUG  # Редирект HTTP -> HTTPS в production
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Для работы за прокси
+# Важно: Django работает за nginx прокси, который уже обработал HTTPS
+# Поэтому Django должен доверять заголовкам от nginx, а не делать редирект сам
+SECURE_SSL_REDIRECT = True  # Редирект HTTP -> HTTPS в production
+USE_X_FORWARDED_HOST = True  # Использовать заголовок X-Forwarded-Host от прокси
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Доверять заголовку от nginx
 SESSION_COOKIE_SECURE = not DEBUG  # Cookies только по HTTPS в production
 CSRF_COOKIE_SECURE = not DEBUG  # CSRF cookies только по HTTPS в production
 
 # В режиме DEBUG отключаем некоторые проверки для разработки
 if DEBUG:
+    SECURE_SSL_REDIRECT = False  # В DEBUG не делаем редирект
     CSRF_COOKIE_HTTPONLY = False
