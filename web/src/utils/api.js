@@ -10,16 +10,8 @@ const getApiBaseUrl = () => {
     return process.env.NEXT_PUBLIC_API_URL;
   }
 
-  // Если мы на Vercel (production), используем проксирование через Next.js
-  // Это необходимо для обхода Mixed Content (HTTPS -> HTTP)
-  if (
-    typeof window !== "undefined" &&
-    window.location.hostname.includes("vercel.app")
-  ) {
-    return ""; // Относительный путь - будет проксироваться через Next.js
-  }
-
-  // В development используем прямой URL (HTTPS)
+  // ВСЕГДА используем прямой HTTPS URL к бэкенду
+  // Проксирование Next.js может терять query параметры
   return "https://advent.muza.team";
 };
 

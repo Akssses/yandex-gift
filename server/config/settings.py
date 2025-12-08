@@ -24,6 +24,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
 ]
+# Убедитесь, что нет wildcards (*) в production
 
 # ------------------------------------------------------------------------------
 # Apps
@@ -48,36 +49,34 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
-    
-    # КРИТИЧНО: наш middleware ДО CommonMiddleware, чтобы перехватить редиректы
-    'config.middleware.DisableCSRFForAPI',
-    
     'django.middleware.common.CommonMiddleware',
 
+    'config.middleware.DisableCSRFForAPI',  # должно быть ЗДЕСЬ
+
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 # В режиме DEBUG — используем упрощённый middleware
 if DEBUG:
     MIDDLEWARE = [
-        'django.middleware.security.SecurityMiddleware',
-        'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
 
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        
-        # КРИТИЧНО: наш middleware ДО CommonMiddleware
-        'config.middleware.DisableCSRFForAPI',
-        
-        'django.middleware.common.CommonMiddleware',
+    'config.middleware.DisableCSRFForAPI',  # должно быть ЗДЕСЬ
 
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -159,8 +158,8 @@ MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://yandex-gift.vercel.app')
 # ------------------------------------------------------------------------------
 
 CORS_ALLOWED_ORIGINS = [
-    "https://yandex-gift.vercel.app",
     "https://advent.muza.team",
+    "https://yandex-gift.vercel.app",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
@@ -172,6 +171,9 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
 
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
+else:
+    # В production указываем конкретные домены
+    CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOW_HEADERS = [
     "accept",
