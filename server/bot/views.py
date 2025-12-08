@@ -76,18 +76,26 @@ def get_calendar_status(request):
     import logging
     logger = logging.getLogger(__name__)
     
-    # Логируем все GET параметры для отладки
-    logger.info(f"GET parameters: {dict(request.GET)}")
-    logger.info(f"Request path: {request.path}")
-    logger.info(f"Request META: {dict(request.META.get('QUERY_STRING', ''))}")
+    # ДЕТАЛЬНОЕ ЛОГИРОВАНИЕ для диагностики 400 ошибки
+    logger.error(f"=== GET CALENDAR STATUS REQUEST ===")
+    logger.error(f"Request path: {request.path}")
+    logger.error(f"Request method: {request.method}")
+    logger.error(f"Request GET: {dict(request.GET)}")
+    logger.error(f"Request META HTTP_HOST: {request.META.get('HTTP_HOST', 'NOT SET')}")
+    logger.error(f"Request META SERVER_NAME: {request.META.get('SERVER_NAME', 'NOT SET')}")
+    logger.error(f"Request META QUERY_STRING: {request.META.get('QUERY_STRING', 'NOT SET')}")
+    logger.error(f"Request META PATH_INFO: {request.META.get('PATH_INFO', 'NOT SET')}")
+    logger.error(f"Request META REQUEST_URI: {request.META.get('REQUEST_URI', 'NOT SET')}")
     
     telegram_id = request.GET.get('telegram_id')
     
     if not telegram_id:
-        logger.warning(f"telegram_id not provided. GET params: {dict(request.GET)}")
+        logger.error(f"telegram_id not provided. GET params: {dict(request.GET)}")
         return JsonResponse({
             'error': 'telegram_id is required',
-            'received_params': dict(request.GET)
+            'received_params': dict(request.GET),
+            'request_path': request.path,
+            'request_method': request.method
         }, status=400)
     
     try:

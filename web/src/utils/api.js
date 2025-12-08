@@ -25,7 +25,7 @@ console.log("NEXT_PUBLIC_API_URL from env:", process.env.NEXT_PUBLIC_API_URL);
  */
 export const checkServerHealth = async () => {
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/health`; // Без trailing slash (APPEND_SLASH = False)
+  const url = `${baseUrl}/api/health`; // БЕЗ trailing slash
   console.log("Health check URL:", url);
 
   try {
@@ -142,7 +142,7 @@ export const getCalendarStatus = async (telegramId) => {
   const baseUrl = API_BASE_URL || "";
   // Используем URLSearchParams для правильного формирования query строки
   const params = new URLSearchParams({ telegram_id: String(telegramId) });
-  const url = `${baseUrl}/api/calendar/status?${params.toString()}`;
+  const url = `${baseUrl}/api/calendar/status?${params.toString()}`; // БЕЗ trailing slash
   console.log("API Request URL:", url);
   console.log("API Base URL:", API_BASE_URL);
   console.log("Telegram ID:", telegramId);
@@ -270,7 +270,7 @@ export const getCalendarStatus = async (telegramId) => {
 3. Проблема с сетью - проверьте интернет соединение
 4. Mixed Content - HTTPS сайт не может обращаться к HTTP
 
-Попробуйте открыть в браузере: ${API_BASE_URL}/api/health/`;
+Попробуйте открыть в браузере: ${API_BASE_URL}/api/health`;
         }
       }
     }
@@ -290,7 +290,7 @@ export const getCalendarStatus = async (telegramId) => {
  */
 export const openGift = async (telegramId, day) => {
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/calendar/open`; // Без trailing slash (APPEND_SLASH = False)
+  const url = `${baseUrl}/api/calendar/open`; // БЕЗ trailing slash
   console.log("API Request URL (openGift):", url);
 
   try {
