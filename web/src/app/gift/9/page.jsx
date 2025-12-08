@@ -48,7 +48,7 @@ const GiftContent9 = () => {
 
       <div className={styles.giftPageSuccessImage}>
         <Image
-          src="/assets/images/KV.svg"
+          src="/assets/images/KV.png"
           alt="Подарок"
           width={358}
           height={280}
