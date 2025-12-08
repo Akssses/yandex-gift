@@ -4,6 +4,7 @@
 """
 from django.utils.deprecation import MiddlewareMixin
 from django.conf import settings
+from django.http import JsonResponse
 
 
 class DisableCSRFForAPI(MiddlewareMixin):
@@ -14,20 +15,25 @@ class DisableCSRFForAPI(MiddlewareMixin):
         # Отключаем CSRF для всех API endpoints
         if request.path.startswith('/api/'):
             setattr(request, '_dont_enforce_csrf_checks', True)
-            # Предотвращаем редирект для API endpoints
-            # Устанавливаем флаг, чтобы CommonMiddleware не делал редирект
+            # КРИТИЧНО: отключаем APPEND_SLASH для API endpoints
+            # Это предотвратит редирект от CommonMiddleware
             setattr(request, '_should_append_slash', False)
         return None
     
     def process_response(self, request, response):
-        # Перехватываем 301 редирект для API endpoints
+        # Перехватываем ВСЕ 301 редиректы для API endpoints
         if request.path.startswith('/api/') and response.status_code == 301:
-            # Если это редирект для API, возвращаем 404 вместо редиректа
-            # Это предотвратит потерю тела POST запроса
-            from django.http import JsonResponse
+            # Логируем для отладки
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.warning(
+                f"301 redirect intercepted for API: {request.path} -> {response.get('Location', 'unknown')}"
+            )
+            # Возвращаем 404 вместо редиректа, чтобы не терять тело POST запроса
             return JsonResponse({
                 'error': 'API endpoint not found',
-                'path': request.path
+                'path': request.path,
+                'message': '301 redirect was intercepted - endpoint may not exist'
             }, status=404)
         return response
     
