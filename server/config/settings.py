@@ -160,6 +160,7 @@ MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://yandex-gift.vercel.app')
 CORS_ALLOWED_ORIGINS = [
     "https://advent.muza.team",
     "https://yandex-gift.vercel.app",
+    "https://adventfront.muza.team",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
@@ -189,6 +190,7 @@ CORS_ALLOW_HEADERS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://advent.muza.team",
     "https://yandex-gift.vercel.app",
+    "https://adventfront.muza.team",
 ]
 
 # ------------------------------------------------------------------------------
