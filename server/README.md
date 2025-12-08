@@ -112,7 +112,7 @@ GET /api/calendar/status/?telegram_id={telegram_id}
 #### Открыть подарок
 
 ```
-POST /api/calendar/open
+POST /api/calendar/open/
 Content-Type: application/json
 
 {

@@ -289,22 +289,35 @@ export const getCalendarStatus = async (telegramId) => {
  * Открыть подарок за определенный день
  */
 export const openGift = async (telegramId, day) => {
+  if (!telegramId) {
+    console.error("openGift: telegram_id is required, received:", telegramId);
+    throw new Error("telegram_id is required to open gift");
+  }
+
   const baseUrl = API_BASE_URL || "";
   const url = `${baseUrl}/api/calendar/open`; // БЕЗ trailing slash
   console.log("API Request URL (openGift):", url);
+  console.log("openGift - telegramId:", telegramId, "type:", typeof telegramId);
+  console.log("openGift - day:", day, "type:", typeof day);
+
+  const requestBody = {
+    telegram_id: Number(telegramId), // Убеждаемся, что это число
+    day: Number(day), // Убеждаемся, что это число
+  };
+
+  console.log("openGift - request body:", requestBody);
 
   try {
     const response = await fetch(url, {
       method: "POST",
       mode: "cors", // Явно указываем режим CORS
+      cache: "no-cache",
+      credentials: "omit",
       headers: {
         "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "true", // Пропускаем предупреждение ngrok
+        Accept: "application/json",
       },
-      body: JSON.stringify({
-        telegram_id: telegramId,
-        day: day,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     console.log("API Response status (openGift):", response.status);

@@ -19,6 +19,7 @@ const AdventCalendar = () => {
   const [error, setError] = useState(null);
   const [accessDenied, setAccessDenied] = useState(false); // Доступ запрещен
   const [serverCurrentDay, setServerCurrentDay] = useState(null); // Текущий день с сервера
+  const [telegramId, setTelegramId] = useState(null); // Сохраняем telegram_id в state
   const router = useRouter();
 
   // Проверяем доступ пользователя и загружаем статус календаря
@@ -60,6 +61,9 @@ const AdventCalendar = () => {
             return;
           }
         }
+
+        // Сохраняем telegram_id в state для использования при открытии подарка
+        setTelegramId(telegramId);
 
         // Проверяем, есть ли пользователь в базе данных
         console.log("Checking user access for telegram_id:", telegramId);
@@ -177,14 +181,25 @@ const AdventCalendar = () => {
       return;
     }
 
-    const telegramId = getTelegramUserId();
+    // Используем сохраненный telegram_id из state, если нет - пытаемся получить заново
+    let currentTelegramId = telegramId || getTelegramUserId();
+
+    // Если все еще нет, проверяем localStorage
+    if (!currentTelegramId) {
+      const testTelegramId = localStorage.getItem("test_telegram_id");
+      if (testTelegramId) {
+        currentTelegramId = parseInt(testTelegramId, 10);
+      }
+    }
+
     const dayNumber =
       currentDayData.dayNumber || parseInt(currentDayData.day, 10);
 
     console.log("Day number:", dayNumber);
     console.log("Status:", currentDayData.status);
     console.log("Server current day:", serverCurrentDay);
-    console.log("Telegram ID:", telegramId);
+    console.log("Telegram ID from state:", telegramId);
+    console.log("Telegram ID current:", currentTelegramId);
 
     // Если подарок уже открыт, просто переходим на страницу
     if (currentDayData.status === "opened") {
@@ -210,10 +225,13 @@ const AdventCalendar = () => {
       }
 
       // Если есть telegram_id, открываем через API
-      if (telegramId) {
+      if (currentTelegramId) {
         try {
-          console.log("Opening gift via API", { telegramId, dayNumber });
-          await openGift(telegramId, dayNumber);
+          console.log("Opening gift via API", {
+            telegramId: currentTelegramId,
+            dayNumber,
+          });
+          await openGift(currentTelegramId, dayNumber);
 
           // Обновляем статус локально
           const updatedDays = [...days];
@@ -256,7 +274,9 @@ const AdventCalendar = () => {
         }
       } else {
         // Если нет telegram_id, просто переходим на страницу (для разработки)
-        console.log("No telegram_id, navigating directly (dev mode)");
+        console.log("No telegram_id, navigating directly (dev mode)", {
+          currentTelegramId,
+        });
         router.push(`/gift/${dayNumber}`);
       }
     } else {
