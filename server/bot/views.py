@@ -151,20 +151,27 @@ def open_gift(request):
     """Открыть подарок за определенный день"""
     try:
         data = json.loads(request.body)
-        telegram_id = data.get('telegram_id')
-        day = data.get('day')
+        telegram_id_raw = data.get('telegram_id')
+        day_raw = data.get('day')
     except (json.JSONDecodeError, KeyError):
         return JsonResponse({'error': 'Invalid request data'}, status=400)
     
-    if not telegram_id or not day:
+    if telegram_id_raw is None or day_raw is None:
         return JsonResponse({'error': 'telegram_id and day are required'}, status=400)
+
+    # Приводим к int, чтобы сравнения не падали
+    try:
+        telegram_id = int(telegram_id_raw)
+        day = int(day_raw)
+    except (ValueError, TypeError):
+        return JsonResponse({'error': 'telegram_id and day must be integers'}, status=400)
     
     # Проверяем, что день в допустимом диапазоне
     if day < 8 or day > 19:
         return JsonResponse({'error': 'Day must be between 8 and 19'}, status=400)
     
     try:
-        user = TelegramUser.objects.get(telegram_id=int(telegram_id))
+        user = TelegramUser.objects.get(telegram_id=telegram_id)
     except TelegramUser.DoesNotExist:
         return JsonResponse({'error': 'User not found'}, status=404)
     

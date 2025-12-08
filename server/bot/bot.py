@@ -101,8 +101,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # Пользователь не найден в базе
             logger.warning(f"User {user.id} (@{user.username}) not found in database")
             await update.message.reply_text(
-                "К сожалению, вам недоступен этот бот. "
-                "Обратитесь к администратору для получения доступа."
+                "Привет!\n\n"
+                "В этот раз ты не попал в список участников DevRel Thanks Advent.\n\n"
+                "Принять участие могут все, кто набрал 5 и более баллов за DevRel-активности по Общему делу "
+                "за период с 1 июля по 5 декабря 2025 года, а также если ты являешься членом программного "
+                "комитета любого стека.\n\n"
+                "Если произошла ошибка, напиши: @kristinabuyko\n\n"
+                "Присоединяйся к нашим проектам и следи за новостями команды (https://t.me/+3umGjAT6M6xkY2Qy) ❤️"
             )
             return
         
