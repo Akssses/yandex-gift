@@ -148,8 +148,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 TELEGRAM_BOT_TOKEN = os.environ.get(
     'TELEGRAM_BOT_TOKEN',
-    # '8574069116:AAGnLh3QmovtnosjfP9ud1A_inxpdlKmQYs'
-    '8584303110:AAESr9bUQUHYKpfYPloLFzHECgaRmRHmzd8'
+    '8574069116:AAGnLh3QmovtnosjfP9ud1A_inxpdlKmQYs'
+    # '8584303110:AAESr9bUQUHYKpfYPloLFzHECgaRmRHmzd8'
 )
 
 MINI_APP_URL = os.environ.get('MINI_APP_URL', 'https://yandex-gift.vercel.app')
