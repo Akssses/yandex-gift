@@ -139,15 +139,23 @@ export const checkUser = async (telegramId) => {
  */
 export const getCalendarStatus = async (telegramId) => {
   if (!telegramId) {
+    console.error(
+      "getCalendarStatus: telegram_id is required, received:",
+      telegramId
+    );
     throw new Error("telegram_id is required");
   }
 
   // Используем относительный путь если API_BASE_URL пустой (проксирование)
   const baseUrl = API_BASE_URL || "";
-  const url = `${baseUrl}/api/calendar/status?telegram_id=${telegramId}`; // Без trailing slash
+  // Используем URLSearchParams для правильного формирования query строки
+  const params = new URLSearchParams({ telegram_id: String(telegramId) });
+  const url = `${baseUrl}/api/calendar/status?${params.toString()}`;
   console.log("API Request URL:", url);
   console.log("API Base URL:", API_BASE_URL);
   console.log("Telegram ID:", telegramId);
+  console.log("Telegram ID type:", typeof telegramId);
+  console.log("Query params:", params.toString());
 
   try {
     // Проверяем доступность сервера перед запросом

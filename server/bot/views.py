@@ -73,10 +73,22 @@ def get_current_calendar_day():
 @require_http_methods(["GET"])
 def get_calendar_status(request):
     """Получить статус календаря для пользователя"""
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    # Логируем все GET параметры для отладки
+    logger.info(f"GET parameters: {dict(request.GET)}")
+    logger.info(f"Request path: {request.path}")
+    logger.info(f"Request META: {dict(request.META.get('QUERY_STRING', ''))}")
+    
     telegram_id = request.GET.get('telegram_id')
     
     if not telegram_id:
-        return JsonResponse({'error': 'telegram_id is required'}, status=400)
+        logger.warning(f"telegram_id not provided. GET params: {dict(request.GET)}")
+        return JsonResponse({
+            'error': 'telegram_id is required',
+            'received_params': dict(request.GET)
+        }, status=400)
     
     try:
         user = TelegramUser.objects.get(telegram_id=int(telegram_id))
