@@ -1,96 +1,3790 @@
 [
-  { "fullname": "Эрик Бурыгин", "nickname": "d08r0" },
-  { "fullname": "Андрей Кулешов", "nickname": "akuleshov7" },
-  { "fullname": "Евгений Рейх", "nickname": "evreykh" },
-  { "fullname": "Антон Черноусов", "nickname": "golodnyj" },
-  { "fullname": "Сергей Бережной", "nickname": "veged" },
-  { "fullname": "Никита Сидоров", "nickname": "nickshevr" },
-  { "fullname": "Максим Сазонов", "nickname": "mv_sazonov" },
-  { "fullname": "Руслан Муфтиев", "nickname": "muftiev" },
-  { "fullname": "Александр Семелит", "nickname": "bashnesnos" },
-  { "fullname": "Павел Беляев", "nickname": "wannalytics" },
-  { "fullname": "Дмитрий Иванов", "nickname": "korifey_ad" },
-  { "fullname": "Александр Елизаров", "nickname": "elizaaarov" },
-  { "fullname": "Иван Смирнов", "nickname": "iesmirnov_yndx" },
-  { "fullname": "Алексей Мерсон", "nickname": "mersonad" },
-  { "fullname": "Иван Пузыревский", "nickname": "sandello" },
-  { "fullname": "Алексей Быков", "nickname": "devcrab" },
-  { "fullname": "Марат Сибгатулин", "nickname": null },
-  { "fullname": "Арсений Нестюк", "nickname": "DeramerC" },
-  { "fullname": "Илья Царев", "nickname": "iltsarev" },
-  { "fullname": "Валерий Ильин", "nickname": "ilinvalery" },
-  { "fullname": "Антон Полухин", "nickname": "antoshkka" },
-  { "fullname": "Александр Зевайкин", "nickname": "azevaykin" },
-  { "fullname": "Александр Демиденко", "nickname": "hurd54" },
-  { "fullname": "Олег Табота", "nickname": "o_tabota" },
-  { "fullname": "Иван Москвин", "nickname": "imoskvin" },
-  { "fullname": "Александр Токарев", "nickname": "alextokarew" },
-  { "fullname": "Андрей Глазков", "nickname": "glazgoo" },
-  { "fullname": "Фаузат Галимарданов", "nickname": "fgalimardanov" },
-  { "fullname": "Павел Сухов", "nickname": "pasukhov" },
-  { "fullname": "Иван Елаев", "nickname": "demestrass" },
-  { "fullname": "Кирилл Ершов", "nickname": "jvmrules" },
-  { "fullname": "Степан Трифонов", "nickname": "stephan106" },
-  { "fullname": "Михаил Костин", "nickname": "mishik" },
-  { "fullname": "Наталья Которева", "nickname": "natalie_vt" },
-  { "fullname": "Всеволод Орлов", "nickname": "vorloff" },
-  { "fullname": "Екатерина Шибанова", "nickname": "shibanova_kate" },
-  { "fullname": "Денис Кузнеделев", "nickname": "Sp1r1donSunR0tAtor" },
-  { "fullname": "Владислав Миронов", "nickname": "vladmiron" },
-  { "fullname": "Кирилл Глушенков", "nickname": null },
-  { "fullname": "Дмитрий Ильин", "nickname": "neytrin00" },
-  { "fullname": "Александр Хвастунов", "nickname": "hvost239" },
-  { "fullname": "Александр Азимов", "nickname": null },
-  { "fullname": "Алексей Лещанкин", "nickname": "Alozarian" },
-  { "fullname": "Иван Артамонов", "nickname": "dregenor" },
-  { "fullname": "Андрей Лунёв", "nickname": "forxam" },
-  { "fullname": "Алексей Чубуков", "nickname": "alchubukov" },
-  { "fullname": "Сергей Мишуков", "nickname": "donttextmetoday" },
-  { "fullname": "Тимофей Кулин", "nickname": "bobsmit" },
-  { "fullname": "Михаил Дариенко", "nickname": "mydarienko" },
-  { "fullname": "Максим Уруков", "nickname": "m_urukov" },
-  { "fullname": "Георгий Морозов", "nickname": "goshamorq_yandex" },
-  { "fullname": "Павел Федотовский", "nickname": "pfedotovsky" },
-  { "fullname": "Максим Слюсаренко", "nickname": "maximslyusarenko" },
-  { "fullname": "Даниил Липаткин", "nickname": "nt4f04und" },
-  { "fullname": "Илья Сомов", "nickname": null },
-  { "fullname": "Геннадий Круглов", "nickname": "Laurelindo" },
-  { "fullname": "Григорий Ожегов", "nickname": null },
-  { "fullname": "Григорий Соловьев", "nickname": null },
-  { "fullname": "Евгений Антонов", "nickname": "eantonov" },
-  { "fullname": "Антон Клыгин", "nickname": "aklygin" },
-  { "fullname": "Александр Шилкин", "nickname": null },
-  { "fullname": "Денис Яковлев", "nickname": "DenisHonig" },
-  { "fullname": "Максим Федянин", "nickname": "MaksimFedyanin" },
-  { "fullname": "Евгений Колесников", "nickname": "eugeon" },
-  { "fullname": "Екатерина Нешатаева", "nickname": "kate_neshataeva" },
-  { "fullname": "Денис Макрушин", "nickname": "makrushind" },
-  { "fullname": "Дарья Шатько", "nickname": "DariaSatco" },
-  { "fullname": "Макс Стаценко", "nickname": "Apxumar" },
-  { "fullname": "Сергей Синягин", "nickname": "dronbonpon" },
-  { "fullname": "Николай Красько", "nickname": "ocherednoy_n" },
-  { "fullname": "Роман Глебов", "nickname": null },
-  { "fullname": "Гульдар Ахунзянова", "nickname": "telle_quelle_dara" },
-  { "fullname": "Артур Василов", "nickname": "ArturVasilov" },
-  { "fullname": "Алексей Гусаков", "nickname": "agusakov" },
-  { "fullname": "Борис Лыточкин", "nickname": null },
-  { "fullname": "Валерий Баранов", "nickname": "baranovxyz" },
-  { "fullname": "Валерий Кондаков", "nickname": "valera_kondakov" },
-  { "fullname": "Александр Минаков", "nickname": "elshiko" },
-  { "fullname": "Анастасия Кириллова", "nickname": "AnastasiaFluff" },
-  { "fullname": "Алена Лукина", "nickname": "ellen_la" },
-  { "fullname": "Федор Брагин", "nickname": "Fedechka" },
-  { "fullname": "Михаил Фролов", "nickname": null },
-  { "fullname": "Илья Климко", "nickname": null },
-  { "fullname": "Владимир Скругин", "nickname": "fmobster" },
-  { "fullname": "Александр Душеин", "nickname": "Dushein" },
-  { "fullname": "Владимир Аксёнов", "nickname": "AksyonovV" },
-  { "fullname": "Аркадий Капустинский", "nickname": null },
-  { "fullname": "Виктор Калинин", "nickname": null },
-  { "fullname": "Андрей Попов", "nickname": "noxandry" },
-  { "fullname": "Станислав Лебедев", "nickname": "stasiche" },
-  { "fullname": "Фёдор Асташкин", "nickname": "FflashkingF" },
-  { "fullname": "Марк Дубков", "nickname": "kramlex" },
-  { "fullname": "Рушат Кадыров", "nickname": null },
-  { "fullname": "София Масленникова", "nickname": "So_haku" }
+  {
+    "fullname": "Эрик Бурыгин",
+    "nickname": "d08r0"
+  },
+  {
+    "fullname": "Андрей Кулешов",
+    "nickname": "akuleshov7"
+  },
+  {
+    "fullname": "Евгений Рейх",
+    "nickname": "evreykh"
+  },
+  {
+    "fullname": "Антон Черноусов",
+    "nickname": "golodnyj"
+  },
+  {
+    "fullname": "Сергей Бережной",
+    "nickname": "veged"
+  },
+  {
+    "fullname": "Никита Сидоров",
+    "nickname": "nickshevr"
+  },
+  {
+    "fullname": "Максим Сазонов",
+    "nickname": "mv_sazonov"
+  },
+  {
+    "fullname": "Руслан Муфтиев",
+    "nickname": "muftiev"
+  },
+  {
+    "fullname": "Александр Семелит",
+    "nickname": "bashnesnos"
+  },
+  {
+    "fullname": "Павел Беляев",
+    "nickname": "wannalytics"
+  },
+  {
+    "fullname": "Дмитрий Иванов",
+    "nickname": "korifey_ad"
+  },
+  {
+    "fullname": "Александр Елизаров",
+    "nickname": "elizaaarov"
+  },
+  {
+    "fullname": "Иван Смирнов",
+    "nickname": "iesmirnov_yndx"
+  },
+  {
+    "fullname": "Алексей Мерсон",
+    "nickname": "mersonad"
+  },
+  {
+    "fullname": "Иван Пузыревский",
+    "nickname": "sandello"
+  },
+  {
+    "fullname": "Алексей Быков",
+    "nickname": "devcrab"
+  },
+  {
+    "fullname": "Марат Сибгатулин",
+    "nickname": "eucariot"
+  },
+  {
+    "fullname": "Арсений Нестюк",
+    "nickname": "DeramerC"
+  },
+  {
+    "fullname": "Илья Царев",
+    "nickname": "iltsarev"
+  },
+  {
+    "fullname": "Валерий Ильин",
+    "nickname": "ilinvalery"
+  },
+  {
+    "fullname": "Антон Полухин",
+    "nickname": "antoshkka"
+  },
+  {
+    "fullname": "Александр Зевайкин",
+    "nickname": "azevaykin"
+  },
+  {
+    "fullname": "Александр Демиденко",
+    "nickname": "hurd54"
+  },
+  {
+    "fullname": "Олег Табота",
+    "nickname": "o_tabota"
+  },
+  {
+    "fullname": "Иван Москвин",
+    "nickname": "imoskvin"
+  },
+  {
+    "fullname": "Александр Токарев",
+    "nickname": "alextokarew"
+  },
+  {
+    "fullname": "Андрей Глазков",
+    "nickname": "glazgoo"
+  },
+  {
+    "fullname": "Фаузат Галимарданов",
+    "nickname": "fgalimardanov"
+  },
+  {
+    "fullname": "Павел Сухов",
+    "nickname": "pasukhov"
+  },
+  {
+    "fullname": "Иван Елаев",
+    "nickname": "demestrass"
+  },
+  {
+    "fullname": "Кирилл Ершов",
+    "nickname": "jvmrules"
+  },
+  {
+    "fullname": "Степан Трифонов",
+    "nickname": "stephan106"
+  },
+  {
+    "fullname": "Михаил Костин",
+    "nickname": "mishik"
+  },
+  {
+    "fullname": "Наталья Которева",
+    "nickname": "natalie_vt"
+  },
+  {
+    "fullname": "Всеволод Орлов",
+    "nickname": "vorloff"
+  },
+  {
+    "fullname": "Екатерина Шибанова",
+    "nickname": "shibanova_kate"
+  },
+  {
+    "fullname": "Денис Кузнеделев",
+    "nickname": "Sp1r1donSunR0tAtor"
+  },
+  {
+    "fullname": "Владислав Миронов",
+    "nickname": "vladmiron"
+  },
+  {
+    "fullname": "Кирилл Глушенков",
+    "nickname": "kglsn"
+  },
+  {
+    "fullname": "Дмитрий Ильин",
+    "nickname": "neytrin00"
+  },
+  {
+    "fullname": "Александр Хвастунов",
+    "nickname": "hvost239"
+  },
+  {
+    "fullname": "Александр Азимов",
+    "nickname": "mitradir"
+  },
+  {
+    "fullname": "Алексей Лещанкин",
+    "nickname": "Alozarian"
+  },
+  {
+    "fullname": "Иван Артамонов",
+    "nickname": "dregenor"
+  },
+  {
+    "fullname": "Андрей Лунёв",
+    "nickname": "forxam"
+  },
+  {
+    "fullname": "Алексей Чубуков",
+    "nickname": "alchubukov"
+  },
+  {
+    "fullname": "Сергей Мишуков",
+    "nickname": "donttextmetoday"
+  },
+  {
+    "fullname": "Тимофей Кулин",
+    "nickname": "bobsmit"
+  },
+  {
+    "fullname": "Михаил Дариенко",
+    "nickname": "mydarienko"
+  },
+  {
+    "fullname": "Максим Уруков",
+    "nickname": "m_urukov"
+  },
+  {
+    "fullname": "Георгий Морозов",
+    "nickname": "goshamorq_yandex"
+  },
+  {
+    "fullname": "Павел Федотовский",
+    "nickname": "pfedotovsky"
+  },
+  {
+    "fullname": "Максим Слюсаренко",
+    "nickname": "maximslyusarenko"
+  },
+  {
+    "fullname": "Даниил Липаткин",
+    "nickname": "nt4f04und"
+  },
+  {
+    "fullname": "Илья Сомов",
+    "nickname": "somovis"
+  },
+  {
+    "fullname": "Геннадий Круглов",
+    "nickname": "Laurelindo"
+  },
+  {
+    "fullname": "Григорий Ожегов",
+    "nickname": "grigory51"
+  },
+  {
+    "fullname": "Григорий Соловьев",
+    "nickname": "gs1571"
+  },
+  {
+    "fullname": "Евгений Антонов",
+    "nickname": "eantonov"
+  },
+  {
+    "fullname": "Антон Клыгин",
+    "nickname": "aklygin"
+  },
+  {
+    "fullname": "Александр Шилкин",
+    "nickname": "al_shi"
+  },
+  {
+    "fullname": "Денис Яковлев",
+    "nickname": "DenisHonig"
+  },
+  {
+    "fullname": "Максим Федянин",
+    "nickname": "MaksimFedyanin"
+  },
+  {
+    "fullname": "Евгений Колесников",
+    "nickname": "eugeon"
+  },
+  {
+    "fullname": "Екатерина Нешатаева",
+    "nickname": "kate_neshataeva"
+  },
+  {
+    "fullname": "Денис Макрушин",
+    "nickname": "makrushind"
+  },
+  {
+    "fullname": "Дарья Шатько",
+    "nickname": "DariaSatco"
+  },
+  {
+    "fullname": "Макс Стаценко",
+    "nickname": "Apxumar"
+  },
+  {
+    "fullname": "Сергей Синягин",
+    "nickname": "dronbonpon"
+  },
+  {
+    "fullname": "Николай Красько",
+    "nickname": "ocherednoy_n"
+  },
+  {
+    "fullname": "Роман Глебов",
+    "nickname": "ki1aro"
+  },
+  {
+    "fullname": "Гульдар Ахунзянова",
+    "nickname": "telle_quelle_dara"
+  },
+  {
+    "fullname": "Артур Василов",
+    "nickname": "ArturVasilov"
+  },
+  {
+    "fullname": "Алексей Гусаков",
+    "nickname": "agusakov"
+  },
+  {
+    "fullname": "Борис Лыточкин",
+    "nickname": "lytboris"
+  },
+  {
+    "fullname": "Валерий Баранов",
+    "nickname": "baranovxyz"
+  },
+  {
+    "fullname": "Валерий Кондаков",
+    "nickname": "valera_kondakov"
+  },
+  {
+    "fullname": "Александр Минаков",
+    "nickname": "elshiko"
+  },
+  {
+    "fullname": "Анастасия Кириллова",
+    "nickname": "AnastasiaFluff"
+  },
+  {
+    "fullname": "Алена Лукина",
+    "nickname": "ellen_la"
+  },
+  {
+    "fullname": "Федор Брагин",
+    "nickname": "Fedechka"
+  },
+  {
+    "fullname": "Михаил Фролов",
+    "nickname": "miafrolov"
+  },
+  {
+    "fullname": "Илья Климко",
+    "nickname": "klinchuh"
+  },
+  {
+    "fullname": "Владимир Скругин",
+    "nickname": "fmobster"
+  },
+  {
+    "fullname": "Александр Душеин",
+    "nickname": "Dushein"
+  },
+  {
+    "fullname": "Владимир Аксёнов",
+    "nickname": "AksyonovV"
+  },
+  {
+    "fullname": "Аркадий Капустинский",
+    "nickname": "kapustinskiy"
+  },
+  {
+    "fullname": "Виктор Калинин",
+    "nickname": "WhyWeStillHereWork"
+  },
+  {
+    "fullname": "Андрей Попов",
+    "nickname": "noxandry"
+  },
+  {
+    "fullname": "Станислав Лебедев",
+    "nickname": "stasiche"
+  },
+  {
+    "fullname": "Фёдор Асташкин",
+    "nickname": "FflashkingF"
+  },
+  {
+    "fullname": "Марк Дубков",
+    "nickname": "kramlex"
+  },
+  {
+    "fullname": "Рушат Кадыров",
+    "nickname": "kadirov_vp"
+  },
+  {
+    "fullname": "София Масленникова",
+    "nickname": "So_haku"
+  },
+  {
+    "fullname": "Федор Матанцев",
+    "nickname": "fr_mv"
+  },
+  {
+    "fullname": "Сергей Анищенко",
+    "nickname": "serge_glum"
+  },
+  {
+    "fullname": "Таймураз Тибилов",
+    "nickname": "timtibilati"
+  },
+  {
+    "fullname": "Петр Вытовтов",
+    "nickname": "osanwe"
+  },
+  {
+    "fullname": "Дмитрий Вашурин",
+    "nickname": "kapkekes"
+  },
+  {
+    "fullname": "Илья Пряхин",
+    "nickname": "Menado"
+  },
+  {
+    "fullname": "Зуфар Ризаев",
+    "nickname": "zoufar"
+  },
+  {
+    "fullname": "Иван Романов",
+    "nickname": "irrmnv"
+  },
+  {
+    "fullname": "Владислав Горностаев",
+    "nickname": "VladislavGornostaev"
+  },
+  {
+    "fullname": "Геннадий Денисов",
+    "nickname": "geaden"
+  },
+  {
+    "fullname": "Евгений Кулемзин",
+    "nickname": "kuj_en"
+  },
+  {
+    "fullname": "Игорь Зверев",
+    "nickname": "memkek"
+  },
+  {
+    "fullname": "Елена Корнилина",
+    "nickname": "ekornilina"
+  },
+  {
+    "fullname": "Дмитрий Шеин",
+    "nickname": "sheinid"
+  },
+  {
+    "fullname": "Андрей Годин",
+    "nickname": "AndreyGodin"
+  },
+  {
+    "fullname": "Антон Кортунов",
+    "nickname": "toshic_toshic"
+  },
+  {
+    "fullname": "Анна Крючкова",
+    "nickname": "anna_kru"
+  },
+  {
+    "fullname": "Алексей Белоусов",
+    "nickname": "i4got10"
+  },
+  {
+    "fullname": "Алена Плотникова",
+    "nickname": "alenaaplotnikova"
+  },
+  {
+    "fullname": "Анна Бучнева",
+    "nickname": "annabuchneva_work"
+  },
+  {
+    "fullname": "Соня Волынская",
+    "nickname": "shesofya"
+  },
+  {
+    "fullname": "Павел Алчанов",
+    "nickname": "wwwhttpsru"
+  },
+  {
+    "fullname": "Олег Белянков",
+    "nickname": "KuberPort"
+  },
+  {
+    "fullname": "Никита Звонарев",
+    "nickname": "furiousbean"
+  },
+  {
+    "fullname": "Юлия Рубцова",
+    "nickname": "yuliya_rubtsova"
+  },
+  {
+    "fullname": "Руслан Дюсаев",
+    "nickname": "rdjusaev"
+  },
+  {
+    "fullname": "Олег Безушко",
+    "nickname": "Bezushk0leg"
+  },
+  {
+    "fullname": "Никита Мурзов",
+    "nickname": "Murzov_Nikita"
+  },
+  {
+    "fullname": "Олег Смоляков",
+    "nickname": "yasaint"
+  },
+  {
+    "fullname": "Руслан Савченко",
+    "nickname": "savrus"
+  },
+  {
+    "fullname": "Миша Иглицкий",
+    "nickname": "telega_cc"
+  },
+  {
+    "fullname": "Люзия Алфёрова",
+    "nickname": "Piychik"
+  },
+  {
+    "fullname": "Юрий Печатнов",
+    "nickname": "pechatnov_work"
+  },
+  {
+    "fullname": "Саша Мальцев",
+    "nickname": "maltsevy"
+  },
+  {
+    "fullname": "Николай Смирнов",
+    "nickname": "ngsmirnov"
+  },
+  {
+    "fullname": "Никита Шаповалов",
+    "nickname": "nshapovalov01"
+  },
+  {
+    "fullname": "Станислав Макеев",
+    "nickname": "stasmakeev"
+  },
+  {
+    "fullname": "Лев Орехов",
+    "nickname": "lorekhov"
+  },
+  {
+    "fullname": "Олег Доронин",
+    "nickname": "dorooleg"
+  },
+  {
+    "fullname": "Сергей Буткин",
+    "nickname": "sergei_butkin"
+  },
+  {
+    "fullname": "Михаил Черников",
+    "nickname": "exoberfox"
+  },
+  {
+    "fullname": "Сергей Кляус",
+    "nickname": "myaut12"
+  },
+  {
+    "fullname": "Юрий Ширяев",
+    "nickname": "yuriysteam"
+  },
+  {
+    "fullname": "Сергей Крупин",
+    "nickname": "krupinss"
+  },
+  {
+    "fullname": "Михаил Польгун",
+    "nickname": "mpolgun"
+  },
+  {
+    "fullname": "Михаил Демин",
+    "nickname": "demp86"
+  },
+  {
+    "fullname": "Юрий Наместников",
+    "nickname": "yury_nam"
+  },
+  {
+    "fullname": "Николай Олигеров",
+    "nickname": "oligerov"
+  },
+  {
+    "fullname": "Никита Василенко",
+    "nickname": "NikeVas"
+  },
+  {
+    "fullname": "Сергей Сычёв",
+    "nickname": "athene_grey"
+  },
+  {
+    "fullname": "Павел Капля",
+    "nickname": "pazus"
+  },
+  {
+    "fullname": "Владислав Буйвал",
+    "nickname": "buyval01"
+  },
+  {
+    "fullname": "Илья Кара́псин",
+    "nickname": "IlyaVir"
+  },
+  {
+    "fullname": "Иван Лузин",
+    "nickname": "i_luzin"
+  },
+  {
+    "fullname": "Даниил Шлапак",
+    "nickname": "daniilshlapa"
+  },
+  {
+    "fullname": "Егор Губанов",
+    "nickname": "gubanovv"
+  },
+  {
+    "fullname": "Дарья Каверина",
+    "nickname": "dkxoxo"
+  },
+  {
+    "fullname": "Иван Дёгтев",
+    "nickname": "degtevis"
+  },
+  {
+    "fullname": "Владимир Быстрицкий",
+    "nickname": "vbystricky"
+  },
+  {
+    "fullname": "Геннадий Евстратов",
+    "nickname": "jewpacabra"
+  },
+  {
+    "fullname": "Дмитрий Алдунин",
+    "nickname": "RedricShuhart"
+  },
+  {
+    "fullname": "Исмагил Сайфутдинов",
+    "nickname": "ismagils"
+  },
+  {
+    "fullname": "Владислав Коноркин",
+    "nickname": "vkonorkin"
+  },
+  {
+    "fullname": "Екатерина Серажим",
+    "nickname": "bermud3"
+  },
+  {
+    "fullname": "Владимир Гордийчук",
+    "nickname": "gordiychuk"
+  },
+  {
+    "fullname": "Елизавета Горелова",
+    "nickname": "PchelkaLiza"
+  },
+  {
+    "fullname": "Владислав Назаров",
+    "nickname": "Nazarov_Vlad"
+  },
+  {
+    "fullname": "Иван Кузнецов",
+    "nickname": "ivan00001"
+  },
+  {
+    "fullname": "Дмитрий Мясников",
+    "nickname": "msnkvd"
+  },
+  {
+    "fullname": "Иван Михайлюков",
+    "nickname": "aim110"
+  },
+  {
+    "fullname": "Дмитрий Стефеев",
+    "nickname": "dmitrystefeev"
+  },
+  {
+    "fullname": "Игорь Шеко (Булдин)",
+    "nickname": "isheko_yndx"
+  },
+  {
+    "fullname": "Дмитрий Торилов",
+    "nickname": "dtorilov"
+  },
+  {
+    "fullname": "Евгений Алаев",
+    "nickname": "korvin_89"
+  },
+  {
+    "fullname": "Кирилл Решке",
+    "nickname": "reshke"
+  },
+  {
+    "fullname": "Константин Крамлих",
+    "nickname": "kramlih_k"
+  },
+  {
+    "fullname": "Все́волод Вели́чко",
+    "nickname": "the_ook"
+  },
+  {
+    "fullname": "Борис Литвиненко",
+    "nickname": "borislitv"
+  },
+  {
+    "fullname": "Александр Снопов",
+    "nickname": "asnopov"
+  },
+  {
+    "fullname": "Александр Батин",
+    "nickname": "Batin_Alexander"
+  },
+  {
+    "fullname": "Алексей Охрименко",
+    "nickname": "obenjiro"
+  },
+  {
+    "fullname": "Александр Суворов",
+    "nickname": "AlexSde"
+  },
+  {
+    "fullname": "Александр Плахин",
+    "nickname": "ipomeya31"
+  },
+  {
+    "fullname": "Валентин Бирюков",
+    "nickname": "biryuk_v"
+  },
+  {
+    "fullname": "Абдурахмон Ишмуродов",
+    "nickname": "helloitsmego"
+  },
+  {
+    "fullname": "Антон Рыбьянов",
+    "nickname": "apollo1321"
+  },
+  {
+    "fullname": "Андрей Щетинин",
+    "nickname": "draedful"
+  },
+  {
+    "fullname": "Алексей Разин",
+    "nickname": "Ralexval"
+  },
+  {
+    "fullname": "Алексей Спасёнов",
+    "nickname": "AlekseySpasenov"
+  },
+  {
+    "fullname": "Артем Орловский",
+    "nickname": "nnovichOK"
+  },
+  {
+    "fullname": "Анна Зинчук",
+    "nickname": "Irm1n"
+  },
+  {
+    "fullname": "Вадим Шилов",
+    "nickname": "vadimshilov"
+  },
+  {
+    "fullname": "Алексей Кременьков",
+    "nickname": "kremenkov"
+  },
+  {
+    "fullname": "Алексей Фоменко",
+    "nickname": "strannii_ya"
+  },
+  {
+    "fullname": "Александр Прохоров",
+    "nickname": "alexprokhorov"
+  },
+  {
+    "fullname": "Андрей Колнооченко",
+    "nickname": "KoppeKT"
+  },
+  {
+    "fullname": "Андрей Бородин",
+    "nickname": "x4mmm"
+  },
+  {
+    "fullname": "Лера Вырва",
+    "nickname": "leravyrva"
+  },
+  {
+    "fullname": "Сергей Лебедев",
+    "nickname": "serzh52"
+  },
+  {
+    "fullname": "Алена Зайцева",
+    "nickname": "alena_zayts"
+  },
+  {
+    "fullname": "Николай Субоч",
+    "nickname": "ya_suboch"
+  },
+  {
+    "fullname": "Александр Иванов",
+    "nickname": "apelcun"
+  },
+  {
+    "fullname": "Кира Матвеева",
+    "nickname": "kira_matveeva"
+  },
+  {
+    "fullname": "Kirill Ignatkov",
+    "nickname": "kignatkov"
+  },
+  {
+    "fullname": "Андрей Еременко",
+    "nickname": "aeremenko"
+  },
+  {
+    "fullname": "Максим Мавлютов",
+    "nickname": "maxmavv"
+  },
+  {
+    "fullname": "Алина Ваниева",
+    "nickname": "AlivanderV"
+  },
+  {
+    "fullname": "Рамиль Габдрахманов",
+    "nickname": "ramgab"
+  },
+  {
+    "fullname": "Денис Токарев",
+    "nickname": "denis_enero"
+  },
+  {
+    "fullname": "Кирилл Дмитриев",
+    "nickname": "KirillDmitriev"
+  },
+  {
+    "fullname": "Евгений Зайцев",
+    "nickname": "Eightn"
+  },
+  {
+    "fullname": "Владислав Гоцуляк",
+    "nickname": "gotsulyaak"
+  },
+  {
+    "fullname": "Андрей Захрямин",
+    "nickname": "AZakhriamin"
+  },
+  {
+    "fullname": "Никита Донцов",
+    "nickname": "NADontsov_ya"
+  },
+  {
+    "fullname": "Дмитрий Александров",
+    "nickname": "jkennedy"
+  },
+  {
+    "fullname": "Вадим Пацев",
+    "nickname": "basvasilich_work"
+  },
+  {
+    "fullname": "Лена Щеплова",
+    "nickname": "shcheplik"
+  },
+  {
+    "fullname": "Левон Гекчян",
+    "nickname": "lgekchyan"
+  },
+  {
+    "fullname": "Михаил Левченко",
+    "nickname": "themishkun"
+  },
+  {
+    "fullname": "Давид Авагян",
+    "nickname": "VonNeumann"
+  },
+  {
+    "fullname": "Александр Алексеев",
+    "nickname": "aalekseevx"
+  },
+  {
+    "fullname": "Влада Колесникова",
+    "nickname": "vladaklsn"
+  },
+  {
+    "fullname": "Тамара Уленкова",
+    "nickname": "uletom"
+  },
+  {
+    "fullname": "Милена Подлевских",
+    "nickname": "WeirdDark"
+  },
+  {
+    "fullname": "Роман Елизаров",
+    "nickname": "relizarov"
+  },
+  {
+    "fullname": "Сергей Яхницкий",
+    "nickname": "ya_serjflint"
+  },
+  {
+    "fullname": "Николай Кованев",
+    "nickname": "tr0y_ntwrk"
+  },
+  {
+    "fullname": "Ярослав Атрошенко",
+    "nickname": "toxyduck"
+  },
+  {
+    "fullname": "Сергей Грошев",
+    "nickname": "Project_Logic"
+  },
+  {
+    "fullname": "Игорь Чумаков",
+    "nickname": "ichumakov"
+  },
+  {
+    "fullname": "Константин Довнар",
+    "nickname": "Vorky"
+  },
+  {
+    "fullname": "Катарина Брун",
+    "nickname": "katarinabrn"
+  },
+  {
+    "fullname": "Дмитрий Медведев",
+    "nickname": "med_dmitr"
+  },
+  {
+    "fullname": "Игнат Полежаев",
+    "nickname": "IgnatPolezhaev"
+  },
+  {
+    "fullname": "Евгений Горинов",
+    "nickname": "gorinovevgen"
+  },
+  {
+    "fullname": "Данил Киселев",
+    "nickname": "PressX2Win"
+  },
+  {
+    "fullname": "Владислав Савинов",
+    "nickname": "ac_for_vs"
+  },
+  {
+    "fullname": "Игорь Рубанов",
+    "nickname": "igorrubanov"
+  },
+  {
+    "fullname": "Дмитрий Харламов",
+    "nickname": "citripio"
+  },
+  {
+    "fullname": "Егор Горбунов",
+    "nickname": "godofflipping"
+  },
+  {
+    "fullname": "Александр Козлов",
+    "nickname": "m1kys"
+  },
+  {
+    "fullname": "Александр Ульянов",
+    "nickname": "aleks-ulyanov"
+  },
+  {
+    "fullname": "Александр Деев",
+    "nickname": "alexander_deev"
+  },
+  {
+    "fullname": "Александра Латышева",
+    "nickname": "alexelex"
+  },
+  {
+    "fullname": "Андрей Шабаров",
+    "nickname": "ShabAndreyKa"
+  },
+  {
+    "fullname": "Андрей Латышев",
+    "nickname": "Shariker"
+  },
+  {
+    "fullname": "Андрей Бич",
+    "nickname": "dronimal"
+  },
+  {
+    "fullname": "Александр Лопинцев",
+    "nickname": "cldlss"
+  },
+  {
+    "fullname": "Алексей Лукьянчиков",
+    "nickname": "onionalex"
+  },
+  {
+    "fullname": "Андрей Мелихов",
+    "nickname": "melikhov_work"
+  },
+  {
+    "fullname": "Михаил Балицкий",
+    "nickname": "mikstime"
+  },
+  {
+    "fullname": "Ксения Колесникова",
+    "nickname": "ksuabr"
+  },
+  {
+    "fullname": "Сергей Ляшенко",
+    "nickname": "sergeylyashenko"
+  },
+  {
+    "fullname": "Ринат Байгильдин",
+    "nickname": "bayrinat"
+  },
+  {
+    "fullname": "Роман Жиганов",
+    "nickname": "zhiganoff"
+  },
+  {
+    "fullname": "Кирилл Власов",
+    "nickname": "vlasovk"
+  },
+  {
+    "fullname": "Алексей Мясников",
+    "nickname": "asmyasnikov"
+  },
+  {
+    "fullname": "Антон Полднев",
+    "nickname": "poldnev"
+  },
+  {
+    "fullname": "Георгий Осипов",
+    "nickname": "SuperEnlight"
+  },
+  {
+    "fullname": "Никита Шумский",
+    "nickname": "nshumskii"
+  },
+  {
+    "fullname": "Никита Васильченко",
+    "nickname": "Neronse"
+  },
+  {
+    "fullname": "Никита Лычагин",
+    "nickname": "Lychagin_design"
+  },
+  {
+    "fullname": "Олеся Старостина",
+    "nickname": "olesyastar0stina"
+  },
+  {
+    "fullname": "Максим Левшин",
+    "nickname": "qeecky"
+  },
+  {
+    "fullname": "Сергей Скородумов",
+    "nickname": "Skorodumov_s"
+  },
+  {
+    "fullname": "Филипп Козьмин",
+    "nickname": "philippkozmin"
+  },
+  {
+    "fullname": "Сергей Кобяков",
+    "nickname": "Sergeykobyakov"
+  },
+  {
+    "fullname": "Руслан Калдинский",
+    "nickname": "rus_173"
+  },
+  {
+    "fullname": "Дмитрий Ефимов",
+    "nickname": "dmefimov"
+  },
+  {
+    "fullname": "Ксения Аникеева",
+    "nickname": "formilesaway"
+  },
+  {
+    "fullname": "Дмитрий Антонов",
+    "nickname": "polaskun"
+  },
+  {
+    "fullname": "Евгений Назаров",
+    "nickname": "evgna_y"
+  },
+  {
+    "fullname": "Илья Рубин",
+    "nickname": "rubisonn"
+  },
+  {
+    "fullname": "Евгений Малахов",
+    "nickname": "EvgeniyMalakhov"
+  },
+  {
+    "fullname": "Джавид Фаталиев",
+    "nickname": "dzhavvid"
+  },
+  {
+    "fullname": "Кирилл Звонков",
+    "nickname": "KirillZvonkov"
+  },
+  {
+    "fullname": "Егор Быховцев",
+    "nickname": "re_gor"
+  },
+  {
+    "fullname": "Кирилл Яценко",
+    "nickname": "kirillyat"
+  },
+  {
+    "fullname": "Константин Ларгин",
+    "nickname": "klargin"
+  },
+  {
+    "fullname": "Евгений Комаров",
+    "nickname": "voramoke"
+  },
+  {
+    "fullname": "Илья Ирхин",
+    "nickname": "Tylorn"
+  },
+  {
+    "fullname": "Владислав Альчиков",
+    "nickname": "avve_al"
+  },
+  {
+    "fullname": "Всеволод Парамонов",
+    "nickname": "pparamonovv"
+  },
+  {
+    "fullname": "Алексей Приходько",
+    "nickname": "prikhodkoav57"
+  },
+  {
+    "fullname": "Андрей Шалунов",
+    "nickname": "yashalunov, ShallTgm"
+  },
+  {
+    "fullname": "Андрей Абакумов",
+    "nickname": "andrewaeva"
+  },
+  {
+    "fullname": "Александр Пипинов",
+    "nickname": "alexpipinov"
+  },
+  {
+    "fullname": "Алексей Колесов",
+    "nickname": "kolesov93_yandex"
+  },
+  {
+    "fullname": "Алексей Гожев",
+    "nickname": "allix"
+  },
+  {
+    "fullname": "Алексей Решетников",
+    "nickname": "lelikvladimirovich"
+  },
+  {
+    "fullname": "Анастасия Вишневская",
+    "nickname": "myvishnevskaya"
+  },
+  {
+    "fullname": "Артём Мурашко",
+    "nickname": "art22m_dev"
+  },
+  {
+    "fullname": "Александр Купцов",
+    "nickname": "akuptsov_ydx"
+  },
+  {
+    "fullname": "Александра Шинкевич",
+    "nickname": "neesawork"
+  },
+  {
+    "fullname": "Александр Швец",
+    "nickname": "ashwets"
+  },
+  {
+    "fullname": "Александр Воронянский",
+    "nickname": "BelirafoN"
+  },
+  {
+    "fullname": "Василий Куликов",
+    "nickname": "segoon"
+  },
+  {
+    "fullname": "Борис Иванчиков",
+    "nickname": "ivanchikovboris"
+  },
+  {
+    "fullname": "Андрей Аникин",
+    "nickname": "anikin1989"
+  },
+  {
+    "fullname": "Анастасия Алонцева",
+    "nickname": "alonastasia"
+  },
+  {
+    "fullname": "Сергей Науменко",
+    "nickname": "SaNaum"
+  },
+  {
+    "fullname": "Леонид Борчук",
+    "nickname": "leborchuk"
+  },
+  {
+    "fullname": "Иван Калинин",
+    "nickname": "pupssman"
+  },
+  {
+    "fullname": "Александр Топтунов",
+    "nickname": "AlexToptunov"
+  },
+  {
+    "fullname": "Виталий Московкин",
+    "nickname": "moskovkin"
+  },
+  {
+    "fullname": "Анвар Умаров",
+    "nickname": "onlyalonery"
+  },
+  {
+    "fullname": "Мердан Агаев",
+    "nickname": "Merdancho"
+  },
+  {
+    "fullname": "Тигран Варданян",
+    "nickname": "v_t1gran"
+  },
+  {
+    "fullname": "Роман Васильев",
+    "nickname": "RAVasiliev"
+  },
+  {
+    "fullname": "Максим Дубакин",
+    "nickname": "mdubakin"
+  },
+  {
+    "fullname": "Артур Самигуллин",
+    "nickname": "neurodeus"
+  },
+  {
+    "fullname": "Анатолий Панов",
+    "nickname": "anatolyp"
+  },
+  {
+    "fullname": "Антон Волков",
+    "nickname": "volkovai"
+  },
+  {
+    "fullname": "Arsen Minasian",
+    "nickname": "Arsenmin"
+  },
+  {
+    "fullname": "Михаил Луцив",
+    "nickname": "nicetomeetor"
+  },
+  {
+    "fullname": "Никита Дубко",
+    "nickname": "dark_mefody"
+  },
+  {
+    "fullname": "Михаил Горбушин",
+    "nickname": ""
+  },
+  {
+    "fullname": "Солтан Текеев",
+    "nickname": "yasoltn"
+  },
+  {
+    "fullname": "Никита Семаев",
+    "nickname": "s6a16ec"
+  },
+  {
+    "fullname": "Максим Мизеров",
+    "nickname": "maksimmizerov"
+  },
+  {
+    "fullname": "Олег Хомюк",
+    "nickname": "khomyuk"
+  },
+  {
+    "fullname": "Семен Левенсон",
+    "nickname": "sem_eleven"
+  },
+  {
+    "fullname": "Петр Ермаков",
+    "nickname": "ermakovpetr_work"
+  },
+  {
+    "fullname": "Наталия Селюто",
+    "nickname": "natsnats"
+  },
+  {
+    "fullname": "Улугбек Бахтиёров",
+    "nickname": "ulgbk29"
+  },
+  {
+    "fullname": "Павел Осташкин",
+    "nickname": "ostashkin"
+  },
+  {
+    "fullname": "Павел Селиванов",
+    "nickname": "pjamm"
+  },
+  {
+    "fullname": "Николай Марков",
+    "nickname": "shadowusr"
+  },
+  {
+    "fullname": "Илья Буданов",
+    "nickname": "illbu"
+  },
+  {
+    "fullname": "Игорь Панасюк",
+    "nickname": "IgorWalther"
+  },
+  {
+    "fullname": "Дмитрий Коптуро́в",
+    "nickname": "DmitryKopturov"
+  },
+  {
+    "fullname": "Вячеслав Гончарук",
+    "nickname": "viacheslav_goncharuk"
+  },
+  {
+    "fullname": "Дмитрий Плещеев",
+    "nickname": "dpleshcheev"
+  },
+  {
+    "fullname": "Владимир Дмитриев",
+    "nickname": "vldmrdmtrv"
+  },
+  {
+    "fullname": "Денис Загаевский",
+    "nickname": "zagayevskiy"
+  },
+  {
+    "fullname": "Григорий Орлов",
+    "nickname": "grigoriy_orlov_work"
+  },
+  {
+    "fullname": "Дмитрий Нестеров",
+    "nickname": "Keyd0"
+  },
+  {
+    "fullname": "Антон Проценко",
+    "nickname": "tonyprots"
+  },
+  {
+    "fullname": "Виктор Юрченко",
+    "nickname": "simflin"
+  },
+  {
+    "fullname": "Вадим Белотицкий",
+    "nickname": "vadim_vb"
+  },
+  {
+    "fullname": "Алексей Терентьев",
+    "nickname": "abterentev"
+  },
+  {
+    "fullname": "Андрей Молотов",
+    "nickname": "dar3dvl"
+  },
+  {
+    "fullname": "Алексей Щекалев",
+    "nickname": "AShchekalev"
+  },
+  {
+    "fullname": "Алёна Васильева",
+    "nickname": "wakeupbabyyy"
+  },
+  {
+    "fullname": "Ваня Ходор",
+    "nickname": "vanyakhodor"
+  },
+  {
+    "fullname": "Анастасия Котова",
+    "nickname": "startpoint_forl"
+  },
+  {
+    "fullname": "Андрей Дегтярев",
+    "nickname": "fake_it_all"
+  },
+  {
+    "fullname": "Александр Иванков",
+    "nickname": "MoonW1nd"
+  },
+  {
+    "fullname": "Роман Халкечев",
+    "nickname": "mrromario"
+  },
+  {
+    "fullname": "Сергей Виноградов",
+    "nickname": "iSergeyVinogradov"
+  },
+  {
+    "fullname": "Полина Бабайлова",
+    "nickname": "pollet95"
+  },
+  {
+    "fullname": "Сергей Воронцов",
+    "nickname": "ksmorodinsky"
+  },
+  {
+    "fullname": "Степан Клычков",
+    "nickname": "klstepan67"
+  },
+  {
+    "fullname": "Сергей Голованов",
+    "nickname": "sergey_golovanov"
+  },
+  {
+    "fullname": "Роман Юрасов",
+    "nickname": "byromul"
+  },
+  {
+    "fullname": "Олег Секачев",
+    "nickname": "oleg_c_a_t"
+  },
+  {
+    "fullname": "Юлия Евдокимова",
+    "nickname": "Yulchok"
+  },
+  {
+    "fullname": "Павел Колодкин",
+    "nickname": ""
+  },
+  {
+    "fullname": "Людмила Хромова",
+    "nickname": "Ludmilaa_h"
+  },
+  {
+    "fullname": "Ольга Строкова",
+    "nickname": "strokovaok"
+  },
+  {
+    "fullname": "Светлана Ивахненко",
+    "nickname": "ivakhnenkos"
+  },
+  {
+    "fullname": "Ярослав Смирнов",
+    "nickname": ""
+  },
+  {
+    "fullname": "Никита Сикалов",
+    "nickname": "sikalov"
+  },
+  {
+    "fullname": "Михаил Апахов",
+    "nickname": "Apakhov"
+  },
+  {
+    "fullname": "Никита Цыбров",
+    "nickname": "Nikitoka"
+  },
+  {
+    "fullname": "Павел Пушкарев",
+    "nickname": ""
+  },
+  {
+    "fullname": "Эльвира Морозова",
+    "nickname": "berkheeva"
+  },
+  {
+    "fullname": "Никита Деревянко",
+    "nickname": "moon_l1ght_nd"
+  },
+  {
+    "fullname": "Юлия Рублёва",
+    "nickname": "cyberborean"
+  },
+  {
+    "fullname": "Ольга Титова",
+    "nickname": "odtitova"
+  },
+  {
+    "fullname": "Олег Найдин",
+    "nickname": ""
+  },
+  {
+    "fullname": "Сергей Овчаренко",
+    "nickname": "dudevil"
+  },
+  {
+    "fullname": "Степан Каргальцев",
+    "nickname": "thefacetakt"
+  },
+  {
+    "fullname": "Сергей Парамошкин",
+    "nickname": "sergeyparamoshkin"
+  },
+  {
+    "fullname": "Степан Пестерников",
+    "nickname": "spesternikov"
+  },
+  {
+    "fullname": "Сергей Паршуков",
+    "nickname": "sparshukov"
+  },
+  {
+    "fullname": "Марат Сацкевич",
+    "nickname": "maljunaplanedo"
+  },
+  {
+    "fullname": "Юрий Журихин",
+    "nickname": "yury_zh"
+  },
+  {
+    "fullname": "Максим Пшибло",
+    "nickname": "Makunikaa"
+  },
+  {
+    "fullname": "Мария Акопян",
+    "nickname": "akopyanm"
+  },
+  {
+    "fullname": "Тимофей Струнков",
+    "nickname": "TimStrunkov"
+  },
+  {
+    "fullname": "Ольга Жильцова",
+    "nickname": "OlgaJi"
+  },
+  {
+    "fullname": "Никита Симаков",
+    "nickname": "nikita_romanich_work"
+  },
+  {
+    "fullname": "Сергей Стриженок",
+    "nickname": "sstrizhenok"
+  },
+  {
+    "fullname": "Пётр Кокошко",
+    "nickname": "pkokoshko"
+  },
+  {
+    "fullname": "Михаил Петров",
+    "nickname": "azalio"
+  },
+  {
+    "fullname": "Полина Скалунова",
+    "nickname": "pskalunova"
+  },
+  {
+    "fullname": "Павел Гуськов",
+    "nickname": "pashaguskov"
+  },
+  {
+    "fullname": "Мария Журавлева",
+    "nickname": "mzhuravleva18"
+  },
+  {
+    "fullname": "Максим Марашан",
+    "nickname": "mrmxm"
+  },
+  {
+    "fullname": "Юлия Литвиненко",
+    "nickname": "Ulechka_dobro"
+  },
+  {
+    "fullname": "Лера Терова",
+    "nickname": "terovaleriya"
+  },
+  {
+    "fullname": "Марина Нестерук",
+    "nickname": "redfloweret"
+  },
+  {
+    "fullname": "Никита Зубков",
+    "nickname": "dedeye"
+  },
+  {
+    "fullname": "Станислав Васильев",
+    "nickname": "Stas_V"
+  },
+  {
+    "fullname": "Павел Ситников",
+    "nickname": "pavelsitnikov"
+  },
+  {
+    "fullname": "Николай Пономаренко",
+    "nickname": "nickpon"
+  },
+  {
+    "fullname": "Михаил Афанасьев",
+    "nickname": "mafanasev"
+  },
+  {
+    "fullname": "Сергей Стариков",
+    "nickname": "greenovich"
+  },
+  {
+    "fullname": "Павел Пересторонин",
+    "nickname": "Justarone"
+  },
+  {
+    "fullname": "Илья Могилин",
+    "nickname": "ch1lld0z3r"
+  },
+  {
+    "fullname": "Кирилл Курдюков",
+    "nickname": "ForeverTired"
+  },
+  {
+    "fullname": "Камиль Габидуллин",
+    "nickname": "gab1k_work"
+  },
+  {
+    "fullname": "Ибрагим Калдаров",
+    "nickname": "kaldarov_ibra"
+  },
+  {
+    "fullname": "Дмитрий Веремеенко",
+    "nickname": "CoJIomoH555"
+  },
+  {
+    "fullname": "Иван Александров",
+    "nickname": "mercuryballs"
+  },
+  {
+    "fullname": "Илья Харламов",
+    "nickname": "ilya_kharlamov"
+  },
+  {
+    "fullname": "Кирилл Беляев",
+    "nickname": ""
+  },
+  {
+    "fullname": "Иван Демидов",
+    "nickname": "ISDemidoff"
+  },
+  {
+    "fullname": "Евгений Козев",
+    "nickname": "imirrori"
+  },
+  {
+    "fullname": "Егор Машарский",
+    "nickname": "egormasharskii"
+  },
+  {
+    "fullname": "Дмитрий Потапов",
+    "nickname": "hirthwork"
+  },
+  {
+    "fullname": "Екатерина Семакова",
+    "nickname": "lukovkawin1"
+  },
+  {
+    "fullname": "Илья Скопин",
+    "nickname": "supersk0"
+  },
+  {
+    "fullname": "Иван Калинов",
+    "nickname": "kalinov"
+  },
+  {
+    "fullname": "Ислам Умаров",
+    "nickname": "Umarov_i"
+  },
+  {
+    "fullname": "Денис Клюкин",
+    "nickname": "scalaris"
+  },
+  {
+    "fullname": "Катерина Емельянова",
+    "nickname": "em_katrin_work"
+  },
+  {
+    "fullname": "Иван Лаптев",
+    "nickname": ""
+  },
+  {
+    "fullname": "Владислав Немиро",
+    "nickname": "etot_tot"
+  },
+  {
+    "fullname": "Дмитрий Ли",
+    "nickname": "dmitry_lee"
+  },
+  {
+    "fullname": "Денис Волков",
+    "nickname": "duty_denchick, denchickkk"
+  },
+  {
+    "fullname": "Иван Максимов",
+    "nickname": ""
+  },
+  {
+    "fullname": "Вячеслав Еремеев",
+    "nickname": ""
+  },
+  {
+    "fullname": "Владислав Завольсков",
+    "nickname": "Zavolskov_Vladislav"
+  },
+  {
+    "fullname": "Дмитрий Попов",
+    "nickname": "psydvl_work"
+  },
+  {
+    "fullname": "Владимир Зель",
+    "nickname": ""
+  },
+  {
+    "fullname": "Владимир Соколовский",
+    "nickname": "mrvsokolovsky"
+  },
+  {
+    "fullname": "Владимир Быков",
+    "nickname": "BykovVK"
+  },
+  {
+    "fullname": "Дмитрий Кара",
+    "nickname": "dmitrykara"
+  },
+  {
+    "fullname": "Дмитрий Мовчан",
+    "nickname": "dmakl"
+  },
+  {
+    "fullname": "Григорий Сафьянов",
+    "nickname": "gasafyanov"
+  },
+  {
+    "fullname": "Иван Стефанюк",
+    "nickname": ""
+  },
+  {
+    "fullname": "Ирина Сытова",
+    "nickname": ""
+  },
+  {
+    "fullname": "Денис Терехов",
+    "nickname": ""
+  },
+  {
+    "fullname": "Дарья Редникина",
+    "nickname": "dasharedd"
+  },
+  {
+    "fullname": "Игорь Березняк",
+    "nickname": "bznk0"
+  },
+  {
+    "fullname": "Денис Харыбин",
+    "nickname": ""
+  },
+  {
+    "fullname": "Глеб Скалацкий",
+    "nickname": ""
+  },
+  {
+    "fullname": "Дмитрий Трифонов",
+    "nickname": "dmitriytrifonov"
+  },
+  {
+    "fullname": "Данил Сабиров",
+    "nickname": "DanilSabirov"
+  },
+  {
+    "fullname": "Владислав Клюев",
+    "nickname": "vlad11631"
+  },
+  {
+    "fullname": "Дмитрий Анисимов",
+    "nickname": "Doanisimov"
+  },
+  {
+    "fullname": "Кирилл Копов",
+    "nickname": "kopovzbs"
+  },
+  {
+    "fullname": "Денис Гринягин",
+    "nickname": "be_grin"
+  },
+  {
+    "fullname": "Денис Брюханов",
+    "nickname": "official_ktoeto"
+  },
+  {
+    "fullname": "Елена Гранд",
+    "nickname": ""
+  },
+  {
+    "fullname": "Константин Бабалян",
+    "nickname": ""
+  },
+  {
+    "fullname": "Иззат Шукуров",
+    "nickname": "izzat"
+  },
+  {
+    "fullname": "Константин Захматов",
+    "nickname": ""
+  },
+  {
+    "fullname": "ИИван Сплит (Ершов)",
+    "nickname": "tutugarin"
+  },
+  {
+    "fullname": "ИИлья Григорьев",
+    "nickname": "ilyhryh"
+  },
+  {
+    "fullname": "Владислав Харитонов",
+    "nickname": "kharitonov"
+  },
+  {
+    "fullname": "Алексей Вишняков",
+    "nickname": "SweetVishnya"
+  },
+  {
+    "fullname": "Александр Голубев",
+    "nickname": "algol83"
+  },
+  {
+    "fullname": "Алексей Опалев",
+    "nickname": "chexex"
+  },
+  {
+    "fullname": "Альберт Бариев",
+    "nickname": "albertbariev"
+  },
+  {
+    "fullname": "Алексей Афанасьев",
+    "nickname": "aafa_work"
+  },
+  {
+    "fullname": "Альберт Бикбулатов",
+    "nickname": "imp_alobert"
+  },
+  {
+    "fullname": "Валерий Горбачев",
+    "nickname": ""
+  },
+  {
+    "fullname": "Александр Нечаев",
+    "nickname": ""
+  },
+  {
+    "fullname": "Алина Шенкаренко",
+    "nickname": "alinaulogova"
+  },
+  {
+    "fullname": "Александр Никитин",
+    "nickname": "RkMsk"
+  },
+  {
+    "fullname": "Антон Юхневич",
+    "nickname": "ayukhn"
+  },
+  {
+    "fullname": "Александр Куваев",
+    "nickname": "Vinatorul"
+  },
+  {
+    "fullname": "Алексей Халилов",
+    "nickname": "alekskhalilov"
+  },
+  {
+    "fullname": "Александр Орел",
+    "nickname": "orel_alexandr"
+  },
+  {
+    "fullname": "Вадим Зотеев",
+    "nickname": "vdzoteev_work"
+  },
+  {
+    "fullname": "Анастасия Ушакова",
+    "nickname": "An_Reigar"
+  },
+  {
+    "fullname": "Валерия Ангарова",
+    "nickname": "vaakaaa"
+  },
+  {
+    "fullname": "Александр Парамонов",
+    "nickname": "alexparam"
+  },
+  {
+    "fullname": "Алексей Королев",
+    "nickname": "korolevdigital"
+  },
+  {
+    "fullname": "Айрат Азбуханов",
+    "nickname": "airazb"
+  },
+  {
+    "fullname": "Анна Рузина",
+    "nickname": "anizurann"
+  },
+  {
+    "fullname": "Андрей Будилов",
+    "nickname": "abudilov"
+  },
+  {
+    "fullname": "Азат Шарипов",
+    "nickname": "azatsharipov"
+  },
+  {
+    "fullname": "Александр Родионов",
+    "nickname": ""
+  },
+  {
+    "fullname": "Арина Якимушкина",
+    "nickname": "arinayarina"
+  },
+  {
+    "fullname": "Азат Курбанов",
+    "nickname": ""
+  },
+  {
+    "fullname": "Арсений Соболев",
+    "nickname": "fortrest"
+  },
+  {
+    "fullname": "Андрей Дикарев",
+    "nickname": "gretzkiy"
+  },
+  {
+    "fullname": "Борис Галочкин",
+    "nickname": ""
+  },
+  {
+    "fullname": "Андрей Кочеров",
+    "nickname": ""
+  },
+  {
+    "fullname": "Александр Ильин",
+    "nickname": ""
+  },
+  {
+    "fullname": "Виктория Родович",
+    "nickname": ""
+  },
+  {
+    "fullname": "Алексей Дацковский",
+    "nickname": "alex_datskovskiy"
+  },
+  {
+    "fullname": "Виталий Харисов",
+    "nickname": "vithar"
+  },
+  {
+    "fullname": "Алексей Захаров",
+    "nickname": "alexey-za"
+  },
+  {
+    "fullname": "Kamilla Djuldibaeva",
+    "nickname": "kamilla_dj"
+  },
+  {
+    "fullname": "Валерия Константинова",
+    "nickname": "lerashaa"
+  },
+  {
+    "fullname": "Андрей Митрофанов",
+    "nickname": "mitandrew"
+  },
+  {
+    "fullname": "Василий Борисов",
+    "nickname": "borisov_vasiliy"
+  },
+  {
+    "fullname": "Алексей Ландихов",
+    "nickname": ""
+  },
+  {
+    "fullname": "Алина Романовская",
+    "nickname": "armnvskaya"
+  },
+  {
+    "fullname": "Андрей Смирнов",
+    "nickname": "dushes_at_work"
+  },
+  {
+    "fullname": "Андрей Шукшов",
+    "nickname": "B1tway"
+  },
+  {
+    "fullname": "Александр Смуров",
+    "nickname": ""
+  },
+  {
+    "fullname": "Андрей Куталев",
+    "nickname": "ankutalev"
+  },
+  {
+    "fullname": "Александр Фишер",
+    "nickname": "alexanderfischer"
+  },
+  {
+    "fullname": "Роман Барлос",
+    "nickname": "darkgenius"
+  },
+  {
+    "fullname": "Елмурат Темиргалиев",
+    "nickname": "yelmuratt"
+  },
+  {
+    "fullname": "Дима Суханов",
+    "nickname": "typical_dmitriy"
+  },
+  {
+    "fullname": "Элина Карапетян",
+    "nickname": "elinakarapetyan"
+  },
+  {
+    "fullname": "Сергей Нарбут",
+    "nickname": "serjnarbut"
+  },
+  {
+    "fullname": "Никита Грищенко",
+    "nickname": "nik_corn"
+  },
+  {
+    "fullname": "Николай Хечумов",
+    "nickname": "ntoskrnl"
+  },
+  {
+    "fullname": "Роман Кузнецов",
+    "nickname": "SomeUser512"
+  },
+  {
+    "fullname": "Степан Мороз",
+    "nickname": "morozstepan"
+  },
+  {
+    "fullname": "Никита Строганов",
+    "nickname": "mmvpm_ya"
+  },
+  {
+    "fullname": "Юлия Недоливко",
+    "nickname": "konedzumi"
+  },
+  {
+    "fullname": "Марина Кантер",
+    "nickname": "FluffyBlueBird"
+  },
+  {
+    "fullname": "Михаил Лежнев",
+    "nickname": "m1khau"
+  },
+  {
+    "fullname": "Павел Юркин",
+    "nickname": "pavel_yurkin"
+  },
+  {
+    "fullname": "Владимир Тимофеев",
+    "nickname": "TimofeevVladimir"
+  },
+  {
+    "fullname": "Дмитрий Новиков",
+    "nickname": "DVNov"
+  },
+  {
+    "fullname": "Дмитрий Рыбалко",
+    "nickname": "drybalko"
+  },
+  {
+    "fullname": "Дмитрий Демидов",
+    "nickname": "termith"
+  },
+  {
+    "fullname": "Кирилл Ширма",
+    "nickname": "ya_bruh"
+  },
+  {
+    "fullname": "Вячеслав Шелковников",
+    "nickname": "slavashel"
+  },
+  {
+    "fullname": "Зиёдахон Эргашева",
+    "nickname": "cookie_jks"
+  },
+  {
+    "fullname": "Кирилл Костенок",
+    "nickname": "tochno_kirill"
+  },
+  {
+    "fullname": "Дмитрий Лютов",
+    "nickname": "tip_ikt"
+  },
+  {
+    "fullname": "Иван Добросовестнов",
+    "nickname": "ivankot13"
+  },
+  {
+    "fullname": "Константин Моксин",
+    "nickname": "kamoksin"
+  },
+  {
+    "fullname": "Денис Гуменюк",
+    "nickname": "gden7s"
+  },
+  {
+    "fullname": "Дарья Виноградова",
+    "nickname": "orange_to_the_wall"
+  },
+  {
+    "fullname": "Дмитрий Рычагов",
+    "nickname": "Ivan_Wasilievich"
+  },
+  {
+    "fullname": "Дмитрий Евсеев",
+    "nickname": "evseev_dmitry"
+  },
+  {
+    "fullname": "Илья Завадский",
+    "nickname": "RoyalWithChees"
+  },
+  {
+    "fullname": "Илья Батог",
+    "nickname": "BatogIlya"
+  },
+  {
+    "fullname": "Дмитрий Долидзе",
+    "nickname": "DimiDoli"
+  },
+  {
+    "fullname": "Игорь Трушкин",
+    "nickname": "iamigortrushkin"
+  },
+  {
+    "fullname": "Дэмбэрэл Доржиев",
+    "nickname": "foafaer"
+  },
+  {
+    "fullname": "Владимир Бондаревский",
+    "nickname": "vbondarevsky"
+  },
+  {
+    "fullname": "Андрей Черненко",
+    "nickname": "andy_ch"
+  },
+  {
+    "fullname": "Аваз Шокири",
+    "nickname": "wupidi"
+  },
+  {
+    "fullname": "Виктория Мягкова",
+    "nickname": "victoria_myagkova"
+  },
+  {
+    "fullname": "Андрей Бежин",
+    "nickname": "abezhin_yandex"
+  },
+  {
+    "fullname": "Валерий Новицкий",
+    "nickname": "novvalerij"
+  },
+  {
+    "fullname": "Андрей Бубенщиков",
+    "nickname": "serd0c"
+  },
+  {
+    "fullname": "Анна Шерешкова",
+    "nickname": "shereshkova_aa"
+  },
+  {
+    "fullname": "Андрей Ишутин",
+    "nickname": "aishutin"
+  },
+  {
+    "fullname": "Алла Евтух",
+    "nickname": "alla_yevtukh"
+  },
+  {
+    "fullname": "Андрей Кириленко",
+    "nickname": "hotckisss"
+  },
+  {
+    "fullname": "Борис Кудрявцев",
+    "nickname": "borisgeo"
+  },
+  {
+    "fullname": "Александр Семченко",
+    "nickname": "andreevich86"
+  },
+  {
+    "fullname": "Александр Букин",
+    "nickname": "gebetix"
+  },
+  {
+    "fullname": "Антон Коваленко",
+    "nickname": "kovalad"
+  },
+  {
+    "fullname": "Иван Брагин",
+    "nickname": "aywan_ya"
+  },
+  {
+    "fullname": "Георгий Зуйков",
+    "nickname": "gzuykov"
+  },
+  {
+    "fullname": "Людмила Геворкян",
+    "nickname": "milagrvorkyann"
+  },
+  {
+    "fullname": "Наталья Кислякова",
+    "nickname": "montanana"
+  },
+  {
+    "fullname": "Ольга Зайкова",
+    "nickname": "Oolechka"
+  },
+  {
+    "fullname": "Роман Бойкий",
+    "nickname": "rboikii"
+  },
+  {
+    "fullname": "Лилия Милютина",
+    "nickname": "lilia_milyutina"
+  },
+  {
+    "fullname": "Леонид Ральников",
+    "nickname": "flattened_duck"
+  },
+  {
+    "fullname": "Сергей Ярмоленко",
+    "nickname": "iserja"
+  },
+  {
+    "fullname": "Роман Гасымов",
+    "nickname": "rrgasymov"
+  },
+  {
+    "fullname": "Сынг Хо(Лео) Ким",
+    "nickname": "Matrix1iko"
+  },
+  {
+    "fullname": "Роман Гибадулин",
+    "nickname": "romarioGI"
+  },
+  {
+    "fullname": "Наталья Струльникова",
+    "nickname": "adsnat"
+  },
+  {
+    "fullname": "Никита Рябков",
+    "nickname": "vokbair"
+  },
+  {
+    "fullname": "Павел Секирин",
+    "nickname": "sekirin42"
+  },
+  {
+    "fullname": "Марат Винокуров",
+    "nickname": "mvinokurov"
+  },
+  {
+    "fullname": "Музаффар Файзуллин",
+    "nickname": "zafa_crazy"
+  },
+  {
+    "fullname": "Левон Давтян",
+    "nickname": "leeevooon"
+  },
+  {
+    "fullname": "Ольга Андреева (Никитенко)",
+    "nickname": "helga1405"
+  },
+  {
+    "fullname": "Никита Ковалев",
+    "nickname": "nikita1kovalev"
+  },
+  {
+    "fullname": "Ольга Недильченко",
+    "nickname": "nediola"
+  },
+  {
+    "fullname": "Роман Кулага",
+    "nickname": "roman_kulaga"
+  },
+  {
+    "fullname": "Татьяна Иоффе",
+    "nickname": "tioffe"
+  },
+  {
+    "fullname": "Михаил Дымсков",
+    "nickname": ""
+  },
+  {
+    "fullname": "Тимур Исхаков",
+    "nickname": ""
+  },
+  {
+    "fullname": "Роман Цыбулин",
+    "nickname": "beregmira"
+  },
+  {
+    "fullname": "Ярослав Лосев",
+    "nickname": "losyear"
+  },
+  {
+    "fullname": "Михаил Казаков",
+    "nickname": "ya_kazmih"
+  },
+  {
+    "fullname": "Никита Вторушин",
+    "nickname": "vtornikita"
+  },
+  {
+    "fullname": "Рудольф Дабагян",
+    "nickname": "rudolf_d"
+  },
+  {
+    "fullname": "Максим Радышевский",
+    "nickname": "maxjetstar"
+  },
+  {
+    "fullname": "Руслан Ахтариев",
+    "nickname": "akhruslan"
+  },
+  {
+    "fullname": "Олег Савинов",
+    "nickname": ""
+  },
+  {
+    "fullname": "Никита Кодосов",
+    "nickname": "nkodosov"
+  },
+  {
+    "fullname": "Муслим Бабаев",
+    "nickname": "Logixqt"
+  },
+  {
+    "fullname": "Руслан Елисеев",
+    "nickname": "eliseev_ruslan"
+  },
+  {
+    "fullname": "Олеся Гординская",
+    "nickname": "goo_olesya"
+  },
+  {
+    "fullname": "Руслан Ерофеев",
+    "nickname": "rusik_pusichka"
+  },
+  {
+    "fullname": "Надежда Шинкаревская",
+    "nickname": "Nadya_Shinkarevskaya"
+  },
+  {
+    "fullname": "Никита Федин",
+    "nickname": ""
+  },
+  {
+    "fullname": "Степан Галаган",
+    "nickname": "cvgalagan"
+  },
+  {
+    "fullname": "Руслан Мусаев",
+    "nickname": "rusamus19"
+  },
+  {
+    "fullname": "Ольга Рудая",
+    "nickname": "OlgaRudaya"
+  },
+  {
+    "fullname": "Михаил Ковалев",
+    "nickname": "mikhailq"
+  },
+  {
+    "fullname": "Орина Осипова",
+    "nickname": "arinaapricot"
+  },
+  {
+    "fullname": "Михаил Копылов",
+    "nickname": "Meshok227"
+  },
+  {
+    "fullname": "Тёма Сенюков",
+    "nickname": "ngArchie"
+  },
+  {
+    "fullname": "Руслан Суракотов",
+    "nickname": "Surakotov"
+  },
+  {
+    "fullname": "Тимур Власов",
+    "nickname": "zasalamel1234"
+  },
+  {
+    "fullname": "Рустам Эргашев",
+    "nickname": "RustamPetrovich"
+  },
+  {
+    "fullname": "Тимур Торубаров",
+    "nickname": "netort"
+  },
+  {
+    "fullname": "Леонид Лебидько",
+    "nickname": "lebidko"
+  },
+  {
+    "fullname": "Павел Нейман",
+    "nickname": "pneiman"
+  },
+  {
+    "fullname": "Савелий Арляпов",
+    "nickname": "sava_arl"
+  },
+  {
+    "fullname": "Регина Белугина",
+    "nickname": "belugina_regina"
+  },
+  {
+    "fullname": "Саша Жукова",
+    "nickname": "ssushkina"
+  },
+  {
+    "fullname": "Эльчин Гафаров",
+    "nickname": "elchiiiin"
+  },
+  {
+    "fullname": "Николай Изюмов",
+    "nickname": "niikkio"
+  },
+  {
+    "fullname": "Никита Глебов",
+    "nickname": "glebovn"
+  },
+  {
+    "fullname": "Светлана Долгоаршинных",
+    "nickname": "SvetlanaVali"
+  },
+  {
+    "fullname": "Регина Коропат",
+    "nickname": "reginakoropat"
+  },
+  {
+    "fullname": "Михаил Кошкин",
+    "nickname": "mkoshkin"
+  },
+  {
+    "fullname": "Лусине Мирзоян",
+    "nickname": "lusinyan"
+  },
+  {
+    "fullname": "Светлана Мартынюк",
+    "nickname": "golovina_sveta"
+  },
+  {
+    "fullname": "Петр Калинин",
+    "nickname": "pakalinin"
+  },
+  {
+    "fullname": "Светлана Матуз",
+    "nickname": "fludaw"
+  },
+  {
+    "fullname": "Мария Меркулова",
+    "nickname": "merkulovaa"
+  },
+  {
+    "fullname": "Светлана Поспелова",
+    "nickname": "lanium"
+  },
+  {
+    "fullname": "Сергей Судаков",
+    "nickname": "xxs_s1erge"
+  },
+  {
+    "fullname": "Светлана Чистякова",
+    "nickname": "Svetlana_chistiakova"
+  },
+  {
+    "fullname": "Сергей Черебедов",
+    "nickname": "sonic16x"
+  },
+  {
+    "fullname": "Семен Ермаков",
+    "nickname": "SemenErmakov10"
+  },
+  {
+    "fullname": "Надежда Александрович",
+    "nickname": "npaleks"
+  },
+  {
+    "fullname": "Михаил Кузнецов",
+    "nickname": "kuznetsov1024"
+  },
+  {
+    "fullname": "Надежда Грищенкова",
+    "nickname": "grnady"
+  },
+  {
+    "fullname": "Семён Мироненко",
+    "nickname": "m21r0n"
+  },
+  {
+    "fullname": "Софья Хрущева (Бондарь)",
+    "nickname": "sonya_raduga"
+  },
+  {
+    "fullname": "Николай Лавринович",
+    "nickname": "nickname_of_the_year"
+  },
+  {
+    "fullname": "Станислав Заботин",
+    "nickname": "Zabotins"
+  },
+  {
+    "fullname": "Полина Гончарова",
+    "nickname": "pogopoo"
+  },
+  {
+    "fullname": "Ольга Лукьянова",
+    "nickname": "olkalukianova"
+  },
+  {
+    "fullname": "Сергей Богомолов",
+    "nickname": "sasovo81"
+  },
+  {
+    "fullname": "Ольга Манаенкова",
+    "nickname": "OlgaManaenkova"
+  },
+  {
+    "fullname": "Полина Потапочкина",
+    "nickname": "polino4"
+  },
+  {
+    "fullname": "Никита Лохматов",
+    "nickname": "separatrix"
+  },
+  {
+    "fullname": "Николай Поливанов",
+    "nickname": "p_kolya"
+  },
+  {
+    "fullname": "Настя Лисицкая",
+    "nickname": "nstik"
+  },
+  {
+    "fullname": "Мария Серова",
+    "nickname": "MiAneko"
+  },
+  {
+    "fullname": "Михаил Макаров",
+    "nickname": "mmike16"
+  },
+  {
+    "fullname": "Тамим Аттафи",
+    "nickname": "attafitamim"
+  },
+  {
+    "fullname": "Максим Милкин",
+    "nickname": "milkinm"
+  },
+  {
+    "fullname": "Татьяна Савичева",
+    "nickname": "tanyasav"
+  },
+  {
+    "fullname": "Сергей Дормидонтов",
+    "nickname": "sdormidontov"
+  },
+  {
+    "fullname": "Наталья Жирлицына",
+    "nickname": "Nata_Zhuzha"
+  },
+  {
+    "fullname": "Николай Фролов",
+    "nickname": "nikolaifrolov_work"
+  },
+  {
+    "fullname": "Максим Пономарев",
+    "nickname": "maxvipon"
+  },
+  {
+    "fullname": "Никита Ломакин",
+    "nickname": "atakin21"
+  },
+  {
+    "fullname": "Тимур Зиятдинов",
+    "nickname": "timkukk"
+  },
+  {
+    "fullname": "Сергей Ковач",
+    "nickname": "buhter"
+  },
+  {
+    "fullname": "Тимур Садыков",
+    "nickname": "sochuvstvie"
+  },
+  {
+    "fullname": "Сергей Кольцов",
+    "nickname": "ringov"
+  },
+  {
+    "fullname": "Павел Иванцов",
+    "nickname": "p_ivantsov"
+  },
+  {
+    "fullname": "Николай Шевченко",
+    "nickname": "shevnv"
+  },
+  {
+    "fullname": "Никита Алексейчук",
+    "nickname": "Nikita270"
+  },
+  {
+    "fullname": "Максим Петров",
+    "nickname": "maxpetrovs"
+  },
+  {
+    "fullname": "Матвей Брагин",
+    "nickname": "brmatvey"
+  },
+  {
+    "fullname": "Мария Анцупова",
+    "nickname": "mantsu_work"
+  },
+  {
+    "fullname": "Эдгар Атабекян",
+    "nickname": "eatabekyan"
+  },
+  {
+    "fullname": "Олег Гладышев",
+    "nickname": "Ogladov"
+  },
+  {
+    "fullname": "Эльвира Калинина",
+    "nickname": "Elvira_YTeam"
+  },
+  {
+    "fullname": "Радослав Нейчев",
+    "nickname": "nexes"
+  },
+  {
+    "fullname": "Эльдар Заитов",
+    "nickname": "kyprizel"
+  },
+  {
+    "fullname": "Олег Гнедков",
+    "nickname": "tylerdream"
+  },
+  {
+    "fullname": "Энвер Бекиров",
+    "nickname": "eshbekirov"
+  },
+  {
+    "fullname": "Сергей Ненашев",
+    "nickname": "evil_garlic"
+  },
+  {
+    "fullname": "Юлиана Челоненко",
+    "nickname": "Afelica"
+  },
+  {
+    "fullname": "Сергей Нестерук",
+    "nickname": "NesterukS"
+  },
+  {
+    "fullname": "Юлия Зарецкая",
+    "nickname": "zaretskaia_j"
+  },
+  {
+    "fullname": "Юрий Сайфутдинов",
+    "nickname": "syura9"
+  },
+  {
+    "fullname": "Юлия Моисеева",
+    "nickname": "Julia_zl"
+  },
+  {
+    "fullname": "Яна Арестова",
+    "nickname": "yanarooar"
+  },
+  {
+    "fullname": "Михаил Бондаревский",
+    "nickname": "mibon2022"
+  },
+  {
+    "fullname": "Яна Хлгатян",
+    "nickname": ""
+  },
+  {
+    "fullname": "Юлия Шипило",
+    "nickname": "shipilo"
+  },
+  {
+    "fullname": "Михаил Билибин",
+    "nickname": "KolyanPie"
+  },
+  {
+    "fullname": "Павел Таланов",
+    "nickname": "ptalanov"
+  },
+  {
+    "fullname": "Сергей Петренко",
+    "nickname": "p_Sergei"
+  },
+  {
+    "fullname": "Юрий Пузыня",
+    "nickname": "k03y3"
+  },
+  {
+    "fullname": "Сергей Прудников",
+    "nickname": "sprudnikov"
+  },
+  {
+    "fullname": "Олег Пяйве",
+    "nickname": "opyayve"
+  },
+  {
+    "fullname": "Михаил Цветков",
+    "nickname": "person_name"
+  },
+  {
+    "fullname": "Яна Сагадеева",
+    "nickname": "yanasagadeeva"
+  },
+  {
+    "fullname": "Сергей Павлов",
+    "nickname": "Kr1nge3000"
+  },
+  {
+    "fullname": "Максим Лукин",
+    "nickname": "getstraight2thepoint"
+  },
+  {
+    "fullname": "Олег Межов",
+    "nickname": ""
+  },
+  {
+    "fullname": "Максим Плахута",
+    "nickname": "plakhutaonwork"
+  },
+  {
+    "fullname": "Павел Пономарев",
+    "nickname": "pperm86"
+  },
+  {
+    "fullname": "Павел Попов",
+    "nickname": "lightmor_yandex"
+  },
+  {
+    "fullname": "Денис Попов",
+    "nickname": "nedenvr"
+  },
+  {
+    "fullname": "Катя Преображенская",
+    "nickname": "amenamy"
+  },
+  {
+    "fullname": "Евгений Есингильдинов",
+    "nickname": "EvgenyEsingildinov"
+  },
+  {
+    "fullname": "Екатерина Тиматкова",
+    "nickname": "timatkova"
+  },
+  {
+    "fullname": "Кирилл Шнырев",
+    "nickname": "k_shnyrev_ya"
+  },
+  {
+    "fullname": "Екатерина Торопова",
+    "nickname": "TESToropova"
+  },
+  {
+    "fullname": "Далер Сайидов",
+    "nickname": "d_sayidov"
+  },
+  {
+    "fullname": "Данила Благинин",
+    "nickname": "iFisic"
+  },
+  {
+    "fullname": "Даниил Гапонов",
+    "nickname": "dgaponov"
+  },
+  {
+    "fullname": "Дарья Андреева",
+    "nickname": "teadrunkage"
+  },
+  {
+    "fullname": "Евгений Таранов",
+    "nickname": "etaranov"
+  },
+  {
+    "fullname": "Елена Дюдеева",
+    "nickname": "dyudeeva"
+  },
+  {
+    "fullname": "Екатерина Гончаренко",
+    "nickname": "Kate_DenOwl"
+  },
+  {
+    "fullname": "Елена Карлова",
+    "nickname": "karlovae"
+  },
+  {
+    "fullname": "Григорий Шовкопляс",
+    "nickname": "yagrshov"
+  },
+  {
+    "fullname": "Дарья Вересова",
+    "nickname": "agerria"
+  },
+  {
+    "fullname": "Илья Пупатенко",
+    "nickname": "pupatenko"
+  },
+  {
+    "fullname": "Елена Костюченко",
+    "nickname": "el_kostyuchenko"
+  },
+  {
+    "fullname": "Илья Шишов",
+    "nickname": "ilyshi"
+  },
+  {
+    "fullname": "Елена Николаева",
+    "nickname": "ponedelnitsa"
+  },
+  {
+    "fullname": "Дмитрий Агафонов",
+    "nickname": "dmagafonov"
+  },
+  {
+    "fullname": "Елена Соколовская",
+    "nickname": "avebeatrix"
+  },
+  {
+    "fullname": "Кирилл Беркут",
+    "nickname": "berkiu"
+  },
+  {
+    "fullname": "Елизавета Белокрылова",
+    "nickname": "Elizaveta_Belokrylova"
+  },
+  {
+    "fullname": "Даниил Тимижев",
+    "nickname": "dahbka_lis"
+  },
+  {
+    "fullname": "Елизавета Бояркина",
+    "nickname": "liz_e_tta"
+  },
+  {
+    "fullname": "Константин Гордеев",
+    "nickname": "kon_gor"
+  },
+  {
+    "fullname": "Владимир Никитин",
+    "nickname": "acmilan_09"
+  },
+  {
+    "fullname": "Дмитрий Дудкевич",
+    "nickname": "dudagod"
+  },
+  {
+    "fullname": "Елизавета Махнева",
+    "nickname": "yemakhneva"
+  },
+  {
+    "fullname": "Дмитрий Федин",
+    "nickname": "dmfedin"
+  },
+  {
+    "fullname": "Елизавета Устинова",
+    "nickname": "e_ustinowa"
+  },
+  {
+    "fullname": "Дмитрий Юрченко",
+    "nickname": "du_yurchenko"
+  },
+  {
+    "fullname": "Дмитрий Исаев",
+    "nickname": "simspot"
+  },
+  {
+    "fullname": "Диана Шарафутдинова",
+    "nickname": "fcbambi"
+  },
+  {
+    "fullname": "Жавохир Тожиев",
+    "nickname": "tjavokhir"
+  },
+  {
+    "fullname": "Илья Рудаков",
+    "nickname": "rudkw"
+  },
+  {
+    "fullname": "Женя Зарубкин",
+    "nickname": "ezarubkin"
+  },
+  {
+    "fullname": "Евгений Каляда",
+    "nickname": "kalyada"
+  },
+  {
+    "fullname": "Зарина Савенок",
+    "nickname": "zsavenok"
+  },
+  {
+    "fullname": "Ирина Андреева",
+    "nickname": "reverserun"
+  },
+  {
+    "fullname": "Дмитрий Калиш",
+    "nickname": "DmKalish"
+  },
+  {
+    "fullname": "Ирэн Козлова",
+    "nickname": "norwaydeer"
+  },
+  {
+    "fullname": "Владислав Архипов",
+    "nickname": "potamus"
+  },
+  {
+    "fullname": "Даниил Грибанов",
+    "nickname": "gda_tg"
+  },
+  {
+    "fullname": "Георгий Пустовой",
+    "nickname": "id1234576"
+  },
+  {
+    "fullname": "Евгений Музыченко",
+    "nickname": "muzichen"
+  },
+  {
+    "fullname": "Герман Михайлов",
+    "nickname": "germandilio"
+  },
+  {
+    "fullname": "Евгений Новиков",
+    "nickname": "evgeny_novikov1001"
+  },
+  {
+    "fullname": "Дмитрий Кузнецов",
+    "nickname": "dskuznetsov"
+  },
+  {
+    "fullname": "Евгений Шквиря",
+    "nickname": "zhshkvir"
+  },
+  {
+    "fullname": "Георгий Климов",
+    "nickname": "gaklimov"
+  },
+  {
+    "fullname": "Кирилл Ситников",
+    "nickname": "simulacrumf"
+  },
+  {
+    "fullname": "Дмитрий Кузьмин",
+    "nickname": "kuzmindv"
+  },
+  {
+    "fullname": "Константин Астахов",
+    "nickname": "astyco"
+  },
+  {
+    "fullname": "Дмитрий Лазарев",
+    "nickname": "drastry"
+  },
+  {
+    "fullname": "Егор Омельченко",
+    "nickname": "yegor_o8o_work"
+  },
+  {
+    "fullname": "Денис Алексеенко",
+    "nickname": "bellatrixdev"
+  },
+  {
+    "fullname": "Константин Павлов",
+    "nickname": "kc_pavlov"
+  },
+  {
+    "fullname": "Екатерина Куковякина",
+    "nickname": "ekukoviakina"
+  },
+  {
+    "fullname": "Гарник Амбарян",
+    "nickname": "metro18g"
+  },
+  {
+    "fullname": "Глеб Колобаев",
+    "nickname": "glebkolobaev"
+  },
+  {
+    "fullname": "Денис Малиночкин",
+    "nickname": "mrmlnc"
+  },
+  {
+    "fullname": "Иван Емельянов",
+    "nickname": "designerivan"
+  },
+  {
+    "fullname": "Дмитрий Утюжников",
+    "nickname": "DimaUtyuz"
+  },
+  {
+    "fullname": "Иван Земляной",
+    "nickname": "ya_ze_ivan"
+  },
+  {
+    "fullname": "Илья Абрамов",
+    "nickname": "ilyaaabramov"
+  },
+  {
+    "fullname": "Дмитрий Лянге",
+    "nickname": "dlyange"
+  },
+  {
+    "fullname": "Владислав Фетисов",
+    "nickname": "vladf21"
+  },
+  {
+    "fullname": "Глеб Луговцов",
+    "nickname": "hardgleb"
+  },
+  {
+    "fullname": "Владимир Демидов",
+    "nickname": "imvovademidov"
+  },
+  {
+    "fullname": "Дмитрий Михальцов",
+    "nickname": "dmikhaltsovd"
+  },
+  {
+    "fullname": "Дамир Камильянов",
+    "nickname": "damirrr_k"
+  },
+  {
+    "fullname": "Денис Горлов",
+    "nickname": "gorlovden"
+  },
+  {
+    "fullname": "Евгений Грязнов",
+    "nickname": "evgraznov"
+  },
+  {
+    "fullname": "Иван Лебедьков",
+    "nickname": "vnldkv"
+  },
+  {
+    "fullname": "Евгений Елкин",
+    "nickname": "dejohn"
+  },
+  {
+    "fullname": "Владислав Долбилов",
+    "nickname": "darlx"
+  },
+  {
+    "fullname": "Ксения Колесник",
+    "nickname": "xkolesnik"
+  },
+  {
+    "fullname": "Иван Лыжин",
+    "nickname": "ilyzhin"
+  },
+  {
+    "fullname": "Дима Куприк",
+    "nickname": "dima_kuprik_tech"
+  },
+  {
+    "fullname": "Иван Мазикин",
+    "nickname": ""
+  },
+  {
+    "fullname": "Илья Шаров",
+    "nickname": "IliaSharov"
+  },
+  {
+    "fullname": "Глеб Федоров",
+    "nickname": "NikCarlson"
+  },
+  {
+    "fullname": "Евгений Канев",
+    "nickname": "egmen"
+  },
+  {
+    "fullname": "Иван Меркурьев",
+    "nickname": "i_merkurev"
+  },
+  {
+    "fullname": "Ирина Ляликова",
+    "nickname": "ilialikova"
+  },
+  {
+    "fullname": "Владислав Бидзиля",
+    "nickname": "bidzilya"
+  },
+  {
+    "fullname": "Ирина Туманова",
+    "nickname": "Irkatyman"
+  },
+  {
+    "fullname": "Дмитрий Онищук",
+    "nickname": "penobulyator"
+  },
+  {
+    "fullname": "Дина Абдрахимова",
+    "nickname": "dinadina1907"
+  },
+  {
+    "fullname": "Денис Золотарев",
+    "nickname": "zoden"
+  },
+  {
+    "fullname": "Евгений Корытов",
+    "nickname": "korytoff"
+  },
+  {
+    "fullname": "Иван Рогов",
+    "nickname": "irogov2"
+  },
+  {
+    "fullname": "Евгений Магдин",
+    "nickname": "emagdin"
+  },
+  {
+    "fullname": "Денис Исаев",
+    "nickname": "d_isaev"
+  },
+  {
+    "fullname": "Даниил Казанцев",
+    "nickname": "workbuybuy"
+  },
+  {
+    "fullname": "Иван Сапожков",
+    "nickname": "isapozhkov_yt"
+  },
+  {
+    "fullname": "Кирилл Беляевский",
+    "nickname": "kirill_beliaevskii"
+  },
+  {
+    "fullname": "Вячеслав Цыкин",
+    "nickname": "nektodev"
+  },
+  {
+    "fullname": "Дмитрий Андриянов",
+    "nickname": "dima117a"
+  },
+  {
+    "fullname": "Дмитрий Распопов",
+    "nickname": "Mordeth"
+  },
+  {
+    "fullname": "Владислав Верминский",
+    "nickname": "Artglorin"
+  },
+  {
+    "fullname": "Иван Стефу",
+    "nickname": "istefu"
+  },
+  {
+    "fullname": "Евгений Телегин",
+    "nickname": "zhenyatelegin"
+  },
+  {
+    "fullname": "Дмитрий Ревоненко",
+    "nickname": "revonenkod"
+  },
+  {
+    "fullname": "Евгения Мордашова",
+    "nickname": "egrit"
+  },
+  {
+    "fullname": "Дмитрий Резяпкин",
+    "nickname": "rezyapkind"
+  },
+  {
+    "fullname": "Даниил Чайчиц",
+    "nickname": "chaychits"
+  },
+  {
+    "fullname": "Игорь Бирюлин",
+    "nickname": "b04ur_wrk"
+  },
+  {
+    "fullname": "Егор Гордовский",
+    "nickname": "Egordovsky"
+  },
+  {
+    "fullname": "Денис Крживокольский",
+    "nickname": "freeman5354"
+  },
+  {
+    "fullname": "Егор Гридасов",
+    "nickname": "RealityWanderer"
+  },
+  {
+    "fullname": "Игорь Каргин",
+    "nickname": "iiggy"
+  },
+  {
+    "fullname": "Георгий Алоян",
+    "nickname": "CorsacVulpes"
+  },
+  {
+    "fullname": "Игорь Кошкарев",
+    "nickname": "flown_4qqqq"
+  },
+  {
+    "fullname": "Дмитрий Винокуров",
+    "nickname": "dimaoq"
+  },
+  {
+    "fullname": "Игорь Обручев",
+    "nickname": "groovik"
+  },
+  {
+    "fullname": "Екатерина Бровикова",
+    "nickname": "katushiz"
+  },
+  {
+    "fullname": "Владислав Тюльбашев",
+    "nickname": "vtyulb"
+  },
+  {
+    "fullname": "Екатерина Золотова",
+    "nickname": "SpointzM"
+  },
+  {
+    "fullname": "Игорь Потапов",
+    "nickname": "m1nd_b0nds"
+  },
+  {
+    "fullname": "Кристина Бедненко",
+    "nickname": "BednenkoKristina"
+  },
+  {
+    "fullname": "Дмитрий Ситниченко",
+    "nickname": ""
+  },
+  {
+    "fullname": "Ксения Гурова",
+    "nickname": "ainexgo"
+  },
+  {
+    "fullname": "Игорь Стариков",
+    "nickname": "idlesignum"
+  },
+  {
+    "fullname": "Дмитрий Соломонов",
+    "nickname": "Dsolomonov"
+  },
+  {
+    "fullname": "Евгений Ерошин",
+    "nickname": "eeroshin"
+  },
+  {
+    "fullname": "Виктор Федосеев",
+    "nickname": "vikfedoseev"
+  },
+  {
+    "fullname": "Борис Рютин",
+    "nickname": "arch_dukebarman"
+  },
+  {
+    "fullname": "Александр Долгов",
+    "nickname": "alex_dogin"
+  },
+  {
+    "fullname": "Jasur Normurodov",
+    "nickname": "jasur_yndx"
+  },
+  {
+    "fullname": "Валерия Панова",
+    "nickname": "panova_valeriya"
+  },
+  {
+    "fullname": "Алексей Чернышев",
+    "nickname": "ChaoticCube"
+  },
+  {
+    "fullname": "Арам Мхитарян",
+    "nickname": "aram_mkhitaryan"
+  },
+  {
+    "fullname": "Андрей Гусев",
+    "nickname": "AndreiGusevOfficial"
+  },
+  {
+    "fullname": "Алексей Васильев",
+    "nickname": "alexey_vasiliev"
+  },
+  {
+    "fullname": "Александр Лукьянов",
+    "nickname": "lukyanov"
+  },
+  {
+    "fullname": "Алексей Дмитриев",
+    "nickname": "slonn"
+  },
+  {
+    "fullname": "Алексей Широков",
+    "nickname": "L3xus"
+  },
+  {
+    "fullname": "Александр Садовников",
+    "nickname": "sad0vnikov"
+  },
+  {
+    "fullname": "Александра Орлова",
+    "nickname": "isolnyshko"
+  },
+  {
+    "fullname": "Александр Артёменко",
+    "nickname": "svetlyak40wt"
+  },
+  {
+    "fullname": "Tigran Gasparyan",
+    "nickname": "TMGasparyan"
+  },
+  {
+    "fullname": "Александр Осадчий",
+    "nickname": "alexander_osadchiy"
+  },
+  {
+    "fullname": "Алексей Боголюбский",
+    "nickname": "BogolyubskiyAlexey"
+  },
+  {
+    "fullname": "Irina Kataeva",
+    "nickname": "IrinaKataeva"
+  },
+  {
+    "fullname": "Анатолий Чепасов и ИИ",
+    "nickname": "drakedoin"
+  },
+  {
+    "fullname": "Вадим Мартынов",
+    "nickname": "Vadimyan"
+  },
+  {
+    "fullname": "Андрей Колов",
+    "nickname": "emptylips"
+  },
+  {
+    "fullname": "Алексей Ковалев",
+    "nickname": "wajs_err"
+  },
+  {
+    "fullname": "Алексей Лапенок",
+    "nickname": "live_penguin"
+  },
+  {
+    "fullname": "Анастасия Максимова",
+    "nickname": "Nastyamaximowa"
+  },
+  {
+    "fullname": "Алексей Юдаков",
+    "nickname": "yudakov1814"
+  },
+  {
+    "fullname": "Александр Ловцов",
+    "nickname": "alovtsov"
+  },
+  {
+    "fullname": "Агата Шишигина",
+    "nickname": "Laneesra"
+  },
+  {
+    "fullname": "Алина Зубкова",
+    "nickname": "lina_zubkova"
+  },
+  {
+    "fullname": "Андрей Ларионов",
+    "nickname": "larioandr"
+  },
+  {
+    "fullname": "Антонина Листопадова",
+    "nickname": "ainzhevatkina"
+  },
+  {
+    "fullname": "Александр Мальцев",
+    "nickname": "asmalcev"
+  },
+  {
+    "fullname": "Арина Платунова",
+    "nickname": "arrrrinas"
+  },
+  {
+    "fullname": "Александр Борисов",
+    "nickname": "smart_roger"
+  },
+  {
+    "fullname": "Алиса Боровская",
+    "nickname": "alice_brvsk"
+  },
+  {
+    "fullname": "Андрей Мартьянов",
+    "nickname": "martree"
+  },
+  {
+    "fullname": "Артём Житников",
+    "nickname": "a_zhitnikov"
+  },
+  {
+    "fullname": "Андрей Масленников",
+    "nickname": "asidstorm"
+  },
+  {
+    "fullname": "Алексей Бойков",
+    "nickname": "mathalex"
+  },
+  {
+    "fullname": "Александр Сычиков",
+    "nickname": "Ducktective"
+  },
+  {
+    "fullname": "Аюка Эрднеев",
+    "nickname": "norchine"
+  },
+  {
+    "fullname": "Андрей Минин",
+    "nickname": "muhuh"
+  },
+  {
+    "fullname": "Абдикожа Абдикалыков",
+    "nickname": "A_Abdikalykov"
+  },
+  {
+    "fullname": "Александр Медведев",
+    "nickname": "somefatcat"
+  },
+  {
+    "fullname": "Александр Михеев",
+    "nickname": "dancingQueue"
+  },
+  {
+    "fullname": "Алена Никитина",
+    "nickname": "allen2k24"
+  },
+  {
+    "fullname": "Алексей Гусев",
+    "nickname": "alexey_gusev"
+  },
+  {
+    "fullname": "Андрей Морозов",
+    "nickname": "amje08"
+  },
+  {
+    "fullname": "Александр Игнатьев",
+    "nickname": "aleksign_ya"
+  },
+  {
+    "fullname": "Андрей Нарцев",
+    "nickname": "andreynar"
+  },
+  {
+    "fullname": "Алексей Рубашный",
+    "nickname": "alexrubashny"
+  },
+  {
+    "fullname": "Алексей Тройников",
+    "nickname": "atroynikov"
+  },
+  {
+    "fullname": "Анастасия Лобкина",
+    "nickname": "tokelau_nz"
+  },
+  {
+    "fullname": "Василий Жечев",
+    "nickname": "yan_well"
+  },
+  {
+    "fullname": "Андрей Сазиков",
+    "nickname": "sazikov_a"
+  },
+  {
+    "fullname": "Виктор Азаубаев (Коровин)",
+    "nickname": "vazaubaev_work"
+  },
+  {
+    "fullname": "Айказ Мурадян",
+    "nickname": "alspaladin"
+  },
+  {
+    "fullname": "Виктор Медведев",
+    "nickname": "VictorMed"
+  },
+  {
+    "fullname": "Александр Кайгородов",
+    "nickname": "Alexkay28"
+  },
+  {
+    "fullname": "Виктория Коханская",
+    "nickname": "kokhanskaya_job"
+  },
+  {
+    "fullname": "Александр Воронцов",
+    "nickname": "avorontsov"
+  },
+  {
+    "fullname": "Ma'ruf Zokirov",
+    "nickname": "marufzak04"
+  },
+  {
+    "fullname": "David Ivanyan",
+    "nickname": "aerodavo"
+  },
+  {
+    "fullname": "Алина Поротикова",
+    "nickname": "porotikova_alina"
+  },
+  {
+    "fullname": "Алексей Крутилин",
+    "nickname": "alextheone7"
+  },
+  {
+    "fullname": "Антонина Паршина",
+    "nickname": "tonyaparshina"
+  },
+  {
+    "fullname": "Алексей Кузьмин",
+    "nickname": "jaipx"
+  },
+  {
+    "fullname": "Арина Быкова",
+    "nickname": "omgitsarina27"
+  },
+  {
+    "fullname": "Алёна Полубояринова",
+    "nickname": "alena_kotiy"
+  },
+  {
+    "fullname": "Алексей Панченко",
+    "nickname": "ya_punchman"
+  },
+  {
+    "fullname": "Александр Халаим",
+    "nickname": "alexanderkhalaim"
+  },
+  {
+    "fullname": "Александр Кормушкин",
+    "nickname": "iGhost698"
+  },
+  {
+    "fullname": "Анис Хамуш",
+    "nickname": "alkhamush"
+  },
+  {
+    "fullname": "Алексей Куликов",
+    "nickname": "incubus370"
+  },
+  {
+    "fullname": "Анна Александрова",
+    "nickname": "AnnaSAleksandrova"
+  },
+  {
+    "fullname": "Артем Горшков",
+    "nickname": "temaGorshkov"
+  },
+  {
+    "fullname": "Александр Гайдай",
+    "nickname": "agaidai"
+  },
+  {
+    "fullname": "Артем Кувалдин",
+    "nickname": "Trixartem"
+  },
+  {
+    "fullname": "Александр Чаплин",
+    "nickname": "a_chaplin"
+  },
+  {
+    "fullname": "Артем Ненашев",
+    "nickname": "aa_nenashev"
+  },
+  {
+    "fullname": "Анна Красова",
+    "nickname": "annkras"
+  },
+  {
+    "fullname": "Tigran Solian",
+    "nickname": "envorshorespatvirumuqouzacovchi"
+  },
+  {
+    "fullname": "Александр Чистяков",
+    "nickname": "aldrchist"
+  },
+  {
+    "fullname": "Асхат Нуриддинов",
+    "nickname": "askmyhat"
+  },
+  {
+    "fullname": "Анна Кубанова (Котова)",
+    "nickname": "Strawfresh"
+  },
+  {
+    "fullname": "Алексей Пузанок",
+    "nickname": "ustasware"
+  },
+  {
+    "fullname": "Анна Матвеенкова",
+    "nickname": "anna_matveenkova"
+  },
+  {
+    "fullname": "Александр Полилов",
+    "nickname": "polilov_alex"
+  },
+  {
+    "fullname": "Анна Моргун",
+    "nickname": "aney_m"
+  },
+  {
+    "fullname": "Алексей Голубь",
+    "nickname": "GolubAleksey"
+  },
+  {
+    "fullname": "Анна Плотникова",
+    "nickname": "Vitaminovna"
+  },
+  {
+    "fullname": "Анастасия Алексашина",
+    "nickname": "knastasias"
+  },
+  {
+    "fullname": "Вадим Клеба",
+    "nickname": "klebadev"
+  },
+  {
+    "fullname": "Анна Русакова",
+    "nickname": "TheFoxyAnn"
+  },
+  {
+    "fullname": "Александр Ерошин",
+    "nickname": "aeroshin"
+  },
+  {
+    "fullname": "Анна Сафарова",
+    "nickname": "AnnaSafarova"
+  },
+  {
+    "fullname": "Анастасия Ветковская",
+    "nickname": "A_Vetkovskaia"
+  },
+  {
+    "fullname": "Анна Сулейманова",
+    "nickname": "ansuleymanova"
+  },
+  {
+    "fullname": "Валерий Вохмин",
+    "nickname": "valservox"
+  },
+  {
+    "fullname": "Александр Платонов",
+    "nickname": "alexanderplat"
+  },
+  {
+    "fullname": "Анастасия Каримова",
+    "nickname": ""
+  },
+  {
+    "fullname": "Антон Блинцов",
+    "nickname": "hpotter93"
+  },
+  {
+    "fullname": "Евгения Косенко",
+    "nickname": "Dazzling_jane"
+  },
+  {
+    "fullname": "Илья Шаров",
+    "nickname": "IliaSharov"
+  },
+  {
+    "fullname": "Анастасия Шарикова",
+    "nickname": "shharikova"
+  },
+  {
+    "fullname": "Александр Митрофанов",
+    "nickname": "alecmit"
+  },
+  {
+    "fullname": "Алексей Семин",
+    "nickname": "alexeysemin"
+  },
+  {
+    "fullname": "Антон Диденко",
+    "nickname": "antondiden"
+  },
+  {
+    "fullname": "Валерия Пуглаченко",
+    "nickname": "xlebobulka"
+  },
+  {
+    "fullname": "Антон Клочков",
+    "nickname": "toshiksvg"
+  },
+  {
+    "fullname": "Варвара Стегнина",
+    "nickname": "icant_ihavepaws"
+  },
+  {
+    "fullname": "Александр Шевчук",
+    "nickname": "p00mba"
+  },
+  {
+    "fullname": "Василий Бут",
+    "nickname": "vasiliy_bout"
+  },
+  {
+    "fullname": "Виктория Латыш",
+    "nickname": "cryyystalline"
+  },
+  {
+    "fullname": "Elena Markova",
+    "nickname": "work_4c4d"
+  },
+  {
+    "fullname": "Андрей Арсеев",
+    "nickname": "a_andrew"
+  },
+  {
+    "fullname": "Вероника Хацаюк",
+    "nickname": "veronika_nikkikh"
+  },
+  {
+    "fullname": "Анастасия Пастухова",
+    "nickname": "nastia_pliushka"
+  },
+  {
+    "fullname": "Виктор Данилов",
+    "nickname": "RjabchikovZhuj"
+  },
+  {
+    "fullname": "Виктория Тимофеева",
+    "nickname": "victoriassst"
+  },
+  {
+    "fullname": "Виктор Макаров",
+    "nickname": "vitjamakarov"
+  },
+  {
+    "fullname": "Анастасия Пашкевич",
+    "nickname": "tori_neamos"
+  },
+  {
+    "fullname": "Виктор Мироненко",
+    "nickname": "zooldoo"
+  },
+  {
+    "fullname": "Анастасия Ратушная",
+    "nickname": "NastyaRatushnaya"
+  },
+  {
+    "fullname": "Анастасия Павлова",
+    "nickname": "anapavlov"
+  },
+  {
+    "fullname": "Александр Щекалёв",
+    "nickname": ""
+  },
+  {
+    "fullname": "Алексей Наволоцкий",
+    "nickname": "TipTopSX_work"
+  },
+  {
+    "fullname": "Александра Васильева",
+    "nickname": "alalvasilyeva"
+  },
+  {
+    "fullname": "Виктория Овсюкова",
+    "nickname": "vik0ovka"
+  },
+  {
+    "fullname": "Александр Готманов",
+    "nickname": "gotmanov"
+  },
+  {
+    "fullname": "Виктория Смагарева",
+    "nickname": "VikaGaar"
+  },
+  {
+    "fullname": "Антон Лаврентьев",
+    "nickname": "Homyakin"
+  },
+  {
+    "fullname": "Виктория Фролова",
+    "nickname": "acaaaai"
+  },
+  {
+    "fullname": "Антон Левада",
+    "nickname": "avlevada"
+  },
+  {
+    "fullname": "Виталий Суворов",
+    "nickname": "vitaly_suvorov"
+  },
+  {
+    "fullname": "Антон Леонтьев",
+    "nickname": "avleontiev"
+  },
+  {
+    "fullname": "Анастасия Стронова",
+    "nickname": "stronova"
+  },
+  {
+    "fullname": "Антон Нехаев",
+    "nickname": "junkie_style"
+  },
+  {
+    "fullname": "Анастасия Молочкова",
+    "nickname": "anastasia_mlv"
+  }
 ]

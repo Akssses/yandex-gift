@@ -5,6 +5,8 @@ from django.utils import timezone
 import json
 import logging
 from .models import TelegramUser, CalendarSettings, GiftOpening
+from telegram import Bot
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -188,6 +190,21 @@ def open_gift(request):
     
     # Открываем подарок
     GiftOpening.objects.create(user=user, day=day)
+
+    # Если открыт подарок за 8 декабря — отправляем сообщение в Telegram
+    if day == 8:
+        try:
+            bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
+            bot.send_message(
+                chat_id=user.telegram_id,
+                text=(
+                    "Твой первый подарок — пак аватарок на все случаи жизни: "
+                    "https://disk.360.yandex.ru/d/M5vqMdNsudNk6Q\n\n"
+                    "Возвращайся завтра за следующим призом!"
+                )
+            )
+        except Exception as e:
+            logger.error(f"Failed to send day 8 gift message to {user.telegram_id}: {e}")
     
     return JsonResponse({
         'success': True,

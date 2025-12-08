@@ -26,8 +26,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Состояния диалога
-WAITING_FOR_POSITION = 'waiting_for_position'
-WAITING_FOR_RF = 'waiting_for_rf'
+WAITING_FOR_STACK = 'waiting_for_stack'
+WAITING_FOR_COUNTRY = 'waiting_for_country'
+WAITING_FOR_CITY = 'waiting_for_city'
 
 
 # Асинхронные обертки для работы с БД
@@ -105,19 +106,50 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             return
         
-        # Пользователь найден - начинаем диалог
-        logger.info(f"User {telegram_user.id} found, starting dialog")
-        await update.message.reply_text(
-            "Привет! Это новогодний адвент-календарь для амбассадоров Яндекса."
+        # Пользователь найден - начинаем новый сценарий приветствия
+        logger.info(f"User {telegram_user.id} found, starting new onboarding")
+
+        welcome_text = (
+            "Привет!\n\n"
+            "Добро пожаловать в DevRel Thanks Advent — адвент-календарь для tech-амбассадоров 🎄\n\n"
+            "Мы сделали этот календарь, чтобы сказать тебе большое спасибо! Спасибо, что делишься экспертизой, "
+            "драйвишь инженерную культуру и поддерживаешь наши инициативы.\n\n"
+            "Каждый день на протяжении 2 недель тебя ждут сюрпризы от нашей команды: от подборок и полезных материалов "
+            "до классных подарков!\n\n"
+            "Мы очень рады, что ты часть сообщества.\n\n"
+            "DevRel-команда ❤️"
         )
-        
-        # Запрашиваем должность
+
+        await update.message.reply_text(welcome_text)
+
+        # ВТОРОЕ СООБЩЕНИЕ — вопрос про стек
+        stack_keyboard = [
+            [
+                InlineKeyboardButton("backend", callback_data="stack_backend"),
+                InlineKeyboardButton("frontend", callback_data="stack_frontend"),
+                InlineKeyboardButton("mobile", callback_data="stack_mobile"),
+            ],
+            [
+                InlineKeyboardButton("AI", callback_data="stack_ai"),
+                InlineKeyboardButton("ML", callback_data="stack_ml"),
+                InlineKeyboardButton("analytics", callback_data="stack_analytics"),
+            ],
+            [
+                InlineKeyboardButton("product", callback_data="stack_product"),
+                InlineKeyboardButton("teamlead", callback_data="stack_teamlead"),
+                InlineKeyboardButton("security", callback_data="stack_security"),
+            ],
+            [
+                InlineKeyboardButton("другое", callback_data="stack_other"),
+            ],
+        ]
         await update.message.reply_text(
-            "Пожалуйста, введите вашу текущую должность (senior backend developer – в таком формате):"
+            "1) С каким стеком ты работаешь?",
+            reply_markup=InlineKeyboardMarkup(stack_keyboard),
         )
-        
-        # Устанавливаем состояние ожидания должности
-        context.user_data['state'] = WAITING_FOR_POSITION
+
+        # Устанавливаем состояние ожидания выбора стека
+        context.user_data['state'] = WAITING_FOR_STACK
         context.user_data['user_id'] = telegram_user.id
         
     except Exception as e:
@@ -132,45 +164,42 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     state = context.user_data.get('state')
     user_id = context.user_data.get('user_id')
     
-    if state == WAITING_FOR_POSITION:
-        # Сохраняем должность
-        position = update.message.text
-        
+    if state == WAITING_FOR_CITY:
+        city = update.message.text.strip()
         try:
             telegram_user = await get_user_by_id(user_id)
             if not telegram_user:
                 raise TelegramUser.DoesNotExist()
-            telegram_user.position = position
-            await save_user(telegram_user)
-            
-            # Создаем клавиатуру с кнопками для выбора территории
+
+            # Логируем город (отдельного поля нет)
+            logger.info(f"User {telegram_user.id} provided city: {city}")
+
+            # Финальное сообщение с кнопкой открытия мини-аппы
             keyboard = [
                 [
-                    InlineKeyboardButton("Из РФ", callback_data='rf_yes'),
-                    InlineKeyboardButton("Не из РФ", callback_data='rf_no')
+                    InlineKeyboardButton(
+                        "Открыть", web_app=WebAppInfo(url=settings.MINI_APP_URL)
+                    )
                 ]
             ]
-            reply_markup = InlineKeyboardMarkup(keyboard)
-            
             await update.message.reply_text(
-                "Спасибо! Скажите, вы сейчас работаете с территории РФ?",
-                reply_markup=reply_markup
+                "Настало время открыть первый подарок!\n\n"
+                "Загляни и посмотри, что мы приготовили специально для тебя.",
+                reply_markup=InlineKeyboardMarkup(keyboard)
             )
-            
-            # Меняем состояние на ожидание выбора территории
-            context.user_data['state'] = WAITING_FOR_RF
-            
+
+            context.user_data.clear()
+
         except TelegramUser.DoesNotExist:
             await update.message.reply_text(
                 "Произошла ошибка. Попробуйте начать заново с команды /start"
             )
             context.user_data.clear()
         except Exception as e:
-            logger.error(f"Error saving position: {e}")
+            logger.error(f"Error saving city: {e}")
             await update.message.reply_text(
                 "Произошла ошибка при сохранении данных. Попробуйте позже."
             )
-    
     else:
         # Если состояние не определено, отправляем приветствие
         await start(update, context)
@@ -245,57 +274,91 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
     
     user_id = context.user_data.get('user_id')
-    
-    if query.data in ['rf_yes', 'rf_no']:
+    state = context.user_data.get('state')
+
+    # Шаг 1: выбор стека
+    if state == WAITING_FOR_STACK and query.data.startswith("stack_"):
+        stack = query.data.replace("stack_", "")
         try:
             telegram_user = await get_user_by_id(user_id)
             if not telegram_user:
                 raise TelegramUser.DoesNotExist()
-            
-            if query.data == 'rf_yes':
-                telegram_user.is_from_rf = True
-                await save_user(telegram_user)
-                
-                # Создаем кнопку для открытия мини-аппки
-                keyboard = [
-                    [
-                        InlineKeyboardButton(
-                            "Открыть",
-                            web_app=WebAppInfo(url=settings.MINI_APP_URL)
-                        )
-                    ]
-                ]
-                reply_markup = InlineKeyboardMarkup(keyboard)
-                
-                await query.edit_message_text(
-                    "Спасибо! Нажмите кнопку ниже, чтобы открыть адвент-календарь. "
-                    "Заходите в него каждый день с 8 по 19 декабря и получайте подарки от Яндекса. "
-                    "В случае пропуска дня забрать подарок за этот день не получится :(",
-                    reply_markup=reply_markup
-                )
-                
-            else:  # rf_no
-                telegram_user.is_from_rf = False
-                await save_user(telegram_user)
-                
-                await query.edit_message_text(
-                    "Спасибо за информацию! К сожалению, доступ к адвент-календарю "
-                    "доступен только для пользователей, работающих с территории РФ."
-                )
-            
-            # Очищаем состояние
-            context.user_data.clear()
-            
+
+            # Сохраняем стек в поле position (как ближайшее по смыслу)
+            telegram_user.position = stack
+            await save_user(telegram_user)
+
+            # Переходим к вопросу о стране
+            country_keyboard = [
+                [
+                    InlineKeyboardButton("Россия", callback_data="country_russia"),
+                    InlineKeyboardButton("Сербия", callback_data="country_serbia"),
+                ],
+                [
+                    InlineKeyboardButton("Беларусь", callback_data="country_belarus"),
+                    InlineKeyboardButton("Казахстан", callback_data="country_kazakhstan"),
+                ],
+                [
+                    InlineKeyboardButton("Узбекистан", callback_data="country_uzbekistan"),
+                    InlineKeyboardButton("Другая страна", callback_data="country_other"),
+                ],
+            ]
+            await query.edit_message_text(
+                "2) В какой стране ты находишься?",
+                reply_markup=InlineKeyboardMarkup(country_keyboard),
+            )
+
+            context.user_data['state'] = WAITING_FOR_COUNTRY
+            context.user_data['stack'] = stack
+
         except TelegramUser.DoesNotExist:
             await query.edit_message_text(
                 "Произошла ошибка. Попробуйте начать заново с команды /start"
             )
             context.user_data.clear()
         except Exception as e:
-            logger.error(f"Error handling callback: {e}")
+            logger.error(f"Error handling stack selection: {e}", exc_info=True)
             await query.edit_message_text(
                 "Произошла ошибка. Попробуйте позже."
             )
+        return
+
+    # Шаг 2: выбор страны
+    if state == WAITING_FOR_COUNTRY and query.data.startswith("country_"):
+        country = query.data.replace("country_", "")
+        try:
+            telegram_user = await get_user_by_id(user_id)
+            if not telegram_user:
+                raise TelegramUser.DoesNotExist()
+
+            # Сохраняем страну как is_from_rf (True только если Россия)
+            telegram_user.is_from_rf = country.lower() == "russia"
+            await save_user(telegram_user)
+
+            # Переходим к вопросу о городе
+            await query.edit_message_text(
+                "3) Укажи город, в котором ты живёшь."
+            )
+            context.user_data['state'] = WAITING_FOR_CITY
+            context.user_data['country'] = country
+
+        except TelegramUser.DoesNotExist:
+            await query.edit_message_text(
+                "Произошла ошибка. Попробуйте начать заново с команды /start"
+            )
+            context.user_data.clear()
+        except Exception as e:
+            logger.error(f"Error handling country selection: {e}", exc_info=True)
+            await query.edit_message_text(
+                "Произошла ошибка. Попробуйте позже."
+            )
+        return
+
+    # Если состояние не совпадает, запускаем заново
+    await query.edit_message_text(
+        "Давайте начнем заново. Наберите /start"
+    )
+    context.user_data.clear()
 
 
 def setup_bot():
