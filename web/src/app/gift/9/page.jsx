@@ -6,8 +6,7 @@ import Link from "next/link";
 import styles from "../gift.module.scss";
 
 const GiftContent9 = () => {
-  const downloadLink =
-    "https://disk.360.yandex.ru/d/M5vqMdNsudNk6Q%2526sa%253DD%2526source%253Deditors%2526ust%253D1764960613889551%2526usg%253DAOvVaw0Dg9yjqGUO53LYC2FGsQH9";
+  const downloadLink = "https://disk.360.yandex.ru/i/B9KXT8byngsCig";
 
   return (
     <div className={styles.giftPage}>
