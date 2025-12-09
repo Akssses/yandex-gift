@@ -304,42 +304,42 @@ const AdventCalendar = () => {
     );
   }
 
-  if (accessDenied) {
-    return (
-      <div className={styles.adventCalendar}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "100vh",
-            padding: "20px",
-            textAlign: "center",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "24px",
-              marginBottom: "20px",
-              color: "#333",
-            }}
-          >
-            Доступ закрыт
-          </h1>
-          <p
-            style={{
-              fontSize: "18px",
-              color: "#666",
-              lineHeight: "1.6",
-            }}
-          >
-            Зарегистрируйся в боте
-          </p>
-        </div>
-      </div>
-    );
-  }
+  // if (accessDenied) {
+  //   return (
+  //     <div className={styles.adventCalendar}>
+  //       <div
+  //         style={{
+  //           display: "flex",
+  //           flexDirection: "column",
+  //           justifyContent: "center",
+  //           alignItems: "center",
+  //           minHeight: "100vh",
+  //           padding: "20px",
+  //           textAlign: "center",
+  //         }}
+  //       >
+  //         <h1
+  //           style={{
+  //             fontSize: "24px",
+  //             marginBottom: "20px",
+  //             color: "#333",
+  //           }}
+  //         >
+  //           Доступ закрыт
+  //         </h1>
+  //         <p
+  //           style={{
+  //             fontSize: "18px",
+  //             color: "#666",
+  //             lineHeight: "1.6",
+  //           }}
+  //         >
+  //           Зарегистрируйся в боте
+  //         </p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   if (error && days.length === 0) {
     return (
@@ -368,8 +368,9 @@ const AdventCalendar = () => {
           src="/assets/images/mainbg.svg"
           alt="DevRel Thanks Advent Calendar"
           fill
-          priority
           className={styles.heroImage}
+          loading="lazy"
+          quality={85}
         />
       </div>
 
