@@ -1,55 +1,32 @@
 .giftPage {
-  background: #ececec;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
+  gap: 24px;
   min-height: 100vh;
 }
 
-.giftPageHeader {
+.giftPageBanner {
   position: relative;
   width: 100%;
-  height: 230px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ececec;
+  max-width: 248px;
+  margin-top: 50px;
 }
 
-.garlandBackground {
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
+.giftPageBanner img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.xyi {
-  background: #ffffff;
-  border-radius: 20px 20px 0 0;
-  padding-top: 20px;
-}
-
-.dateBlock {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.dateNumber {
-  font-size: 80px;
+.giftPageBannerText {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  font-size: 24px;
   font-weight: 400;
-  color: #ff3b21;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.dateMonth {
-  font-size: 18px;
-  font-weight: 400;
-  color: #ff3b21;
-  letter-spacing: 0.02em;
+  color: #ffffff;
+  white-space: nowrap;
 }
 
 .giftPageContent {
@@ -75,9 +52,8 @@
 }
 
 .giftPageSubtitle {
-  font-size: 16px;
+  font-size: 18px;
   color: #333333;
-  line-height: 1.2;
 }
 
 .giftPageSubtitle span {

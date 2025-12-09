@@ -129,13 +129,23 @@ const AdventCalendar = () => {
             status: dayData.status,
             isOpened: dayData.is_opened,
             giftImage: dayData.is_opened
-              ? "/assets/images/gift.png"
-              : "/assets/images/gift2.png",
+              ? "/assets/images/gift.svg"
+              : "/assets/images/gift2.svg",
           };
         });
 
         console.log("Formatted days:", formattedDays);
         setDays(formattedDays);
+
+        // Переключаем активную карточку на текущий день с сервера (если есть)
+        if (data.current_day) {
+          const idx = formattedDays.findIndex(
+            (d) => d.dayNumber === data.current_day
+          );
+          if (idx >= 0) {
+            setCurrentDay(idx);
+          }
+        }
         setError(null);
       } catch (err) {
         console.error("Failed to load calendar status:", err);
@@ -239,7 +249,7 @@ const AdventCalendar = () => {
             ...updatedDays[currentDay],
             status: "opened",
             isOpened: true,
-            giftImage: "/assets/images/gift.png",
+            giftImage: "/assets/images/gift.svg",
           };
           setDays(updatedDays);
 
@@ -304,42 +314,42 @@ const AdventCalendar = () => {
     );
   }
 
-  // if (accessDenied) {
-  //   return (
-  //     <div className={styles.adventCalendar}>
-  //       <div
-  //         style={{
-  //           display: "flex",
-  //           flexDirection: "column",
-  //           justifyContent: "center",
-  //           alignItems: "center",
-  //           minHeight: "100vh",
-  //           padding: "20px",
-  //           textAlign: "center",
-  //         }}
-  //       >
-  //         <h1
-  //           style={{
-  //             fontSize: "24px",
-  //             marginBottom: "20px",
-  //             color: "#333",
-  //           }}
-  //         >
-  //           Доступ закрыт
-  //         </h1>
-  //         <p
-  //           style={{
-  //             fontSize: "18px",
-  //             color: "#666",
-  //             lineHeight: "1.6",
-  //           }}
-  //         >
-  //           Зарегистрируйся в боте
-  //         </p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (accessDenied) {
+    return (
+      <div className={styles.adventCalendar}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            padding: "20px",
+            textAlign: "center",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "24px",
+              marginBottom: "20px",
+              color: "#333",
+            }}
+          >
+            Доступ закрыт
+          </h1>
+          <p
+            style={{
+              fontSize: "18px",
+              color: "#666",
+              lineHeight: "1.6",
+            }}
+          >
+            Зарегистрируйся в боте
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (error && days.length === 0) {
     return (
@@ -368,9 +378,8 @@ const AdventCalendar = () => {
           src="/assets/images/mainbg.svg"
           alt="DevRel Thanks Advent Calendar"
           fill
+          priority
           className={styles.heroImage}
-          loading="lazy"
-          quality={85}
         />
       </div>
 
