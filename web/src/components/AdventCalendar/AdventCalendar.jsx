@@ -129,8 +129,8 @@ const AdventCalendar = () => {
             status: dayData.status,
             isOpened: dayData.is_opened,
             giftImage: dayData.is_opened
-              ? "/assets/images/gift.svg"
-              : "/assets/images/gift2.svg",
+              ? "/assets/images/gift.png"
+              : "/assets/images/gift2.png",
           };
         });
 
@@ -239,7 +239,7 @@ const AdventCalendar = () => {
             ...updatedDays[currentDay],
             status: "opened",
             isOpened: true,
-            giftImage: "/assets/images/gift.svg",
+            giftImage: "/assets/images/gift.png",
           };
           setDays(updatedDays);
 
@@ -365,7 +365,7 @@ const AdventCalendar = () => {
       {/* Hero Section with Background Image */}
       <div className={styles.hero}>
         <Image
-          src="/assets/images/mainbg.svg"
+          src="/assets/images/mainbg.png"
           alt="DevRel Thanks Advent Calendar"
           fill
           priority
