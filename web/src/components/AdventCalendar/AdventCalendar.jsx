@@ -129,8 +129,8 @@ const AdventCalendar = () => {
             status: dayData.status,
             isOpened: dayData.is_opened,
             giftImage: dayData.is_opened
-              ? "/assets/images/gift.svg"
-              : "/assets/images/gift2.svg",
+              ? "/assets/images/gift.png"
+              : "/assets/images/gift2.png",
           };
         });
 
