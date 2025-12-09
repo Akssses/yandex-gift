@@ -7,7 +7,7 @@
 Опционально:
     python manage.py broadcast_gifts --delay 0.1  # задержка между сообщениями (сек.)
 """
-import time
+import asyncio
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -47,25 +47,28 @@ class Command(BaseCommand):
             self.stderr.write("TELEGRAM_BOT_TOKEN не задан в настройках.")
             return
 
-        bot = Bot(token=token)
-        users = (
-            TelegramUser.objects.filter(telegram_id__isnull=False)
-            .exclude(telegram_id__exact="")
+        users = list(
+            TelegramUser.objects.filter(telegram_id__isnull=False, telegram_id__gt=0)
         )
-        total = users.count()
+        total = len(users)
         self.stdout.write(f"Пользователей для рассылки: {total}")
 
         sent = 0
         errors = 0
 
-        for user in users.iterator():
-            try:
-                bot.send_message(chat_id=user.telegram_id, text=MESSAGE_TEXT)
-                sent += 1
-                if delay:
-                    time.sleep(delay)
-            except Exception as e:
-                errors += 1
-                self.stderr.write(f"Ошибка для {user.telegram_id}: {e}")
+        async def send_all():
+            nonlocal sent, errors
+            bot = Bot(token=token)
+            for user in users:
+                try:
+                    await bot.send_message(chat_id=user.telegram_id, text=MESSAGE_TEXT)
+                    sent += 1
+                    if delay:
+                        await asyncio.sleep(delay)
+                except Exception as e:
+                    errors += 1
+                    self.stderr.write(f"Ошибка для {user.telegram_id}: {e}")
 
+        asyncio.run(send_all())
         self.stdout.write(f"Готово. Отправлено: {sent}, ошибок: {errors}")
+
