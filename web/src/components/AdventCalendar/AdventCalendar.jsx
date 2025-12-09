@@ -365,7 +365,7 @@ const AdventCalendar = () => {
       {/* Hero Section with Background Image */}
       <div className={styles.hero}>
         <Image
-          src="/assets/images/mainbg.png"
+          src="/assets/images/mainbg.svg"
           alt="DevRel Thanks Advent Calendar"
           fill
           priority
