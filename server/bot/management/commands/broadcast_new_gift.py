@@ -11,14 +11,12 @@ import asyncio
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
 from bot.models import TelegramUser
 
 
-MESSAGE_TEXT = (
-    "Новый подарок уже доступен — не забудь его забрать до конца дня 🌟"
-)
+MESSAGE_TEXT = "Новый подарок уже доступен — не забудь его забрать до конца дня 🌟"
 
 
 class Command(BaseCommand):
@@ -40,9 +38,10 @@ class Command(BaseCommand):
             self.stderr.write("TELEGRAM_BOT_TOKEN не задан в настройках.")
             return
 
-        app_url = getattr(settings, "MINI_APP_URL", None) or ""
+        # URL мини-аппы (web_app кнопка) — берем из настроек
+        app_url = getattr(settings, "MINI_APP_URL", "").strip()
         if not app_url:
-            self.stderr.write("MINI_APP_URL не задан в настройках.")
+            self.stderr.write("MINI_APP_URL не задан в settings.py.")
             return
 
         users = list(
@@ -61,7 +60,14 @@ class Command(BaseCommand):
             nonlocal sent, errors
             bot = Bot(token=token)
             markup = InlineKeyboardMarkup(
-                [[InlineKeyboardButton("Открыть календарь", url=app_url)]]
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="Открыть календарь",
+                            web_app=WebAppInfo(url=app_url),
+                        )
+                    ]
+                ]
             )
             for user in users:
                 try:
