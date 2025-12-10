@@ -16,7 +16,7 @@ from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from bot.models import TelegramUser
 
 
-MESSAGE_TEXT = "Новый подарок уже доступен — не забудь его забрать до конца дня 🌟"
+MESSAGE_TEXT = "В предыдущем сообщении закралась некорректная ссылка на календарь – держите правильную ✨"
 
 
 class Command(BaseCommand):
