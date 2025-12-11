@@ -1,11 +1,11 @@
 """
-Рассылка: короткое уведомление о новом подарке + кнопка открытия мини-аппа.
+Ежедневное напоминание о новом подарке с кнопкой открытия мини-аппа.
 
-Запуск:
-    python manage.py broadcast_new_gift
+Запуск вручную:
+    python manage.py send_daily_reminder
 
-Опции:
-    --delay 0.1   # задержка между сообщениями (сек.)
+Рекомендуемый cron (11:00 по Москве, если системный TZ=Europe/Moscow):
+    0 11 * * * /path/to/venv/bin/python /path/to/manage.py send_daily_reminder >> /var/log/send_daily_reminder.log 2>&1
 """
 import asyncio
 
@@ -16,14 +16,11 @@ from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from bot.models import TelegramUser
 
 
-MESSAGE_TEXT = ("Продолжаем?\n\n"
-                "Подарок четвёртого дня уже ждёт, чтобы ты его открыл 🌟"
-                )
-
+MESSAGE_TEXT = "Новый подарок уже доступен — не забудь его забрать до конца дня 🌟"
 
 
 class Command(BaseCommand):
-    help = "Рассылка уведомления о новом подарке с кнопкой открытия мини-аппа"
+    help = "Ежедневное напоминание о новом подарке с кнопкой мини-аппа"
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -41,7 +38,6 @@ class Command(BaseCommand):
             self.stderr.write("TELEGRAM_BOT_TOKEN не задан в настройках.")
             return
 
-        # URL мини-аппы (web_app кнопка) — берем из настроек
         app_url = getattr(settings, "MINI_APP_URL", "").strip()
         if not app_url:
             self.stderr.write("MINI_APP_URL не задан в settings.py.")
@@ -88,4 +84,3 @@ class Command(BaseCommand):
 
         asyncio.run(send_all())
         self.stdout.write(f"Готово. Отправлено: {sent}, ошибок: {errors}")
-

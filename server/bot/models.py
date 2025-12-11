@@ -80,11 +80,23 @@ class CalendarSettings(models.Model):
 
     @classmethod
     def get_current_date(cls):
-        """Получить текущую дату из настроек или сегодняшнюю дату"""
+        """
+        Получить текущую дату из настроек или сегодняшнюю дату.
+        Автоматически обновляет значение на сегодняшнюю дату (по Москве),
+        чтобы админке не приходилось править дату вручную каждый день.
+        """
+        today_moscow = timezone.localdate()  # учитывает TIME_ZONE = Europe/Moscow
         settings = cls.objects.first()
+
         if settings:
+            if settings.current_date != today_moscow:
+                settings.current_date = today_moscow
+                settings.save(update_fields=['current_date', 'updated_at'])
             return settings.current_date
-        return timezone.now().date()
+
+        # Если записи нет, создаём её со значением сегодняшней даты
+        settings = cls.objects.create(current_date=today_moscow)
+        return settings.current_date
 
 
 class GiftOpening(models.Model):
