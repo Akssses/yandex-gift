@@ -16,7 +16,7 @@ from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from bot.models import TelegramUser
 
 
-MESSAGE_TEXT = "В предыдущем сообщении закралась некорректная ссылка на календарь – держите правильную ✨"
+MESSAGE_TEXT = "Новый подарок уже доступен — не забудь его забрать до конца дня 🌟"
 
 
 class Command(BaseCommand):
@@ -85,3 +85,4 @@ class Command(BaseCommand):
 
         asyncio.run(send_all())
         self.stdout.write(f"Готово. Отправлено: {sent}, ошибок: {errors}")
+
