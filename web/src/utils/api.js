@@ -361,3 +361,88 @@ export const openGift = async (telegramId, day) => {
     throw error;
   }
 };
+
+/**
+ * Получить промокод для дня 12 декабря
+ */
+export const claimPromoCode = async (telegramId, day) => {
+  if (!telegramId) {
+    console.error(
+      "claimPromoCode: telegram_id is required, received:",
+      telegramId
+    );
+    throw new Error("telegram_id is required to claim promo code");
+  }
+
+  const baseUrl = API_BASE_URL || "";
+  const url = `${baseUrl}/api/promo/claim`; // БЕЗ trailing slash
+  console.log("API Request URL (claimPromoCode):", url);
+  console.log(
+    "claimPromoCode - telegramId:",
+    telegramId,
+    "type:",
+    typeof telegramId
+  );
+  console.log("claimPromoCode - day:", day, "type:", typeof day);
+
+  const requestBody = {
+    telegram_id: Number(telegramId), // Убеждаемся, что это число
+    day: Number(day), // Убеждаемся, что это число
+  };
+
+  console.log("claimPromoCode - request body:", requestBody);
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      mode: "cors", // Явно указываем режим CORS
+      cache: "no-cache",
+      credentials: "omit",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    console.log("API Response status (claimPromoCode):", response.status);
+    console.log("API Response ok (claimPromoCode):", response.ok);
+
+    // Получаем текст ответа для проверки
+    const responseText = await response.text();
+    console.log("API Response text (claimPromoCode):", responseText);
+
+    if (!response.ok) {
+      console.error("API Error response (claimPromoCode):", responseText);
+      // Пытаемся распарсить как JSON, если не получается - используем текст
+      let errorMessage = responseText;
+      try {
+        const errorData = JSON.parse(responseText);
+        errorMessage = errorData.error || errorData.message || responseText;
+      } catch (e) {
+        // Если не JSON, используем текст как есть
+      }
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorMessage}`
+      );
+    }
+
+    // Пытаемся распарсить JSON
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (e) {
+      console.error("Failed to parse JSON (claimPromoCode):", e);
+      console.error("Response text:", responseText);
+      throw new Error(
+        `Invalid JSON response: ${responseText.substring(0, 100)}`
+      );
+    }
+
+    console.log("API Response data (claimPromoCode):", data);
+    return data;
+  } catch (error) {
+    console.error("Error claiming promo code:", error);
+    throw error;
+  }
+};

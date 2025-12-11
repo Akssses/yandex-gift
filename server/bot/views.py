@@ -4,7 +4,10 @@ from django.views.decorators.http import require_http_methods
 from django.utils import timezone
 import json
 import logging
-from .models import TelegramUser, CalendarSettings, GiftOpening
+import os
+import asyncio
+from pathlib import Path
+from .models import TelegramUser, CalendarSettings, GiftOpening, PromoCodeUsage
 from telegram import Bot
 from django.conf import settings
 
@@ -217,5 +220,186 @@ def open_gift(request):
         'success': True,
         'day': day,
         'opened_at': timezone.now().isoformat()
+    })
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def claim_promo_code(request):
+    """Получить промокод для дня 12 декабря"""
+    try:
+        data = json.loads(request.body)
+        telegram_id_raw = data.get('telegram_id')
+        day_raw = data.get('day')
+    except (json.JSONDecodeError, KeyError):
+        return JsonResponse({'error': 'Invalid request data'}, status=400)
+    
+    if telegram_id_raw is None or day_raw is None:
+        return JsonResponse({'error': 'telegram_id and day are required'}, status=400)
+
+    try:
+        telegram_id = int(telegram_id_raw)
+        day = int(day_raw)
+    except (ValueError, TypeError):
+        return JsonResponse({'error': 'telegram_id and day must be integers'}, status=400)
+    
+    # Проверяем, что это день 12
+    if day != 12:
+        return JsonResponse({'error': 'This endpoint is only for day 12'}, status=400)
+    
+    try:
+        user = TelegramUser.objects.get(telegram_id=telegram_id)
+    except TelegramUser.DoesNotExist:
+        return JsonResponse({'error': 'User not found'}, status=404)
+    
+    # Проверяем, получал ли пользователь уже промокод для дня 12
+    # Проверяем через GiftOpening для дня 12 (единообразно для всех пользователей)
+    if GiftOpening.objects.filter(user=user, day=12).exists():
+        logger.info(f"User {user.telegram_id} already claimed promo code for day 12")
+        return JsonResponse({
+            'success': True,
+            'already_claimed': True,
+            'message': 'Promo code already sent'
+        })
+    
+    # Загружаем promo-users.json
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+    promo_users_path = BASE_DIR / 'promo-users.json'
+    promo_reserve_path = BASE_DIR / 'promo-reserve.json'
+    
+    try:
+        with open(promo_users_path, 'r', encoding='utf-8') as f:
+            promo_users = json.load(f)
+    except FileNotFoundError:
+        logger.error(f"promo-users.json not found at {promo_users_path}")
+        return JsonResponse({'error': 'Promo users file not found'}, status=500)
+    except json.JSONDecodeError as e:
+        logger.error(f"Failed to parse promo-users.json: {e}")
+        return JsonResponse({'error': 'Invalid promo users file'}, status=500)
+    
+    # Ищем пользователя в promo-users.json по username (nickname)
+    user_promo = None
+    if user.username:
+        # Убираем @ если есть
+        username_clean = user.username.lstrip('@')
+        for promo_user in promo_users:
+            if promo_user.get('nickname', '').lower() == username_clean.lower():
+                user_promo = promo_user
+                break
+    
+    # Определяем сообщение и промокод
+    message_text = ""
+    promocode = ""
+    
+    if user_promo:
+        # Пользователь найден в promo-users.json
+        promocode = user_promo.get('promocode', '')
+        role = user_promo.get('role', '').lower()
+        
+        if role == 'афиша':
+            message_text = (
+                "Твой персональный промокод на Яндекс Афишу\n\n"
+                "Выбирайте кино, концерты, спектакли или стендап, чтобы вытащить себя из потока задач и провести классный вечер.\n\n"
+                "Если вы сейчас вне РФ и в течение года у вас не будет возможности воспользоваться промокодом, вы всё равно можете порадовать им близких в России — пусть подарок достанется тем, кому он сейчас будет особенно полезен\n\n"
+                f"Промокод: {promocode}"
+            )
+        elif role == 'маркет':
+            message_text = (
+                "Твой персональный промокод на Яндекс Маркет\n\n"
+                "Иногда идеальный подарок — это выбрать что-то для себя. Полезное, уютное или просто приятное.\n\n"
+                "Если вы сейчас вне РФ и в течение года у вас не будет возможности воспользоваться промокодом, вы всё равно можете порадовать им близких в России — пусть подарок достанется тем, кому он сейчас будет особенно полезен\n\n"
+                f"Промокод: {promocode}"
+            )
+        else:
+            # Если роль не определена, используем сообщение про маркет
+            message_text = (
+                "Твой персональный промокод на Яндекс Маркет\n\n"
+                "Иногда идеальный подарок — это выбрать что-то для себя. Полезное, уютное или просто приятное.\n\n"
+                "Если вы сейчас вне РФ и в течение года у вас не будет возможности воспользоваться промокодом, вы всё равно можете порадовать им близких в России — пусть подарок достанется тем, кому он сейчас будет особенно полезен\n\n"
+                f"Промокод: {promocode}"
+            )
+    else:
+        # Пользователь не найден в promo-users.json - берем из резерва
+        try:
+            with open(promo_reserve_path, 'r', encoding='utf-8') as f:
+                promo_reserve = json.load(f)
+        except FileNotFoundError:
+            logger.error(f"promo-reserve.json not found at {promo_reserve_path}")
+            return JsonResponse({'error': 'Promo reserve file not found'}, status=500)
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to parse promo-reserve.json: {e}")
+            return JsonResponse({'error': 'Invalid promo reserve file'}, status=500)
+        
+        # Проверяем, какие промокоды уже использованы
+        used_promocodes = set(
+            PromoCodeUsage.objects.values_list('promocode', flat=True)
+        )
+        
+        # Находим первый неиспользованный промокод
+        available_promocode = None
+        for promo in promo_reserve:
+            if promo not in used_promocodes:
+                available_promocode = promo
+                break
+        
+        if not available_promocode:
+            logger.error("No available promocodes in reserve")
+            return JsonResponse({'error': 'No available promocodes'}, status=500)
+        
+        promocode = available_promocode
+        
+        # Сохраняем использование промокода
+        PromoCodeUsage.objects.create(
+            promocode=promocode,
+            user=user
+        )
+        
+        message_text = (
+            "Твой персональный промокод на Яндекс Маркет\n\n"
+            "Иногда идеальный подарок — это выбрать что-то для себя. Полезное, уютное или просто приятное.\n\n"
+            "Если вы сейчас вне РФ и в течение года у вас не будет возможности воспользоваться промокодом, вы всё равно можете порадовать им близких в России — пусть подарок достанется тем, кому он сейчас будет особенно полезен\n\n"
+            f"Промокод: {promocode}"
+        )
+    
+    # Отправляем сообщение в Telegram (асинхронно)
+    try:
+        async def send_message():
+            bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
+            await bot.send_message(
+                chat_id=user.telegram_id,
+                text=message_text
+            )
+        
+        asyncio.run(send_message())
+        logger.info(f"Promo code sent to user {user.telegram_id}: {promocode}")
+    except Exception as e:
+        logger.error(f"Failed to send promo code message to {user.telegram_id}: {e}")
+        return JsonResponse({'error': f'Failed to send message: {str(e)}'}, status=500)
+    
+    # Сохраняем запись о получении промокода (для пользователей из promo-users.json тоже)
+    # Это предотвратит повторную выдачу
+    if not user_promo:
+        # Для пользователей из резерва уже создали PromoCodeUsage выше
+        pass
+    else:
+        # Для пользователей из promo-users.json создаем запись в PromoCodeUsage
+        # чтобы отслеживать, что они получили промокод
+        PromoCodeUsage.objects.get_or_create(
+            promocode=promocode,
+            user=user,
+            defaults={'promocode': promocode, 'user': user}
+        )
+    
+    # Также создаем запись в GiftOpening для дня 12, чтобы это было единообразно
+    GiftOpening.objects.get_or_create(
+        user=user,
+        day=12,
+        defaults={'user': user, 'day': 12}
+    )
+    
+    return JsonResponse({
+        'success': True,
+        'promocode': promocode,
+        'sent_at': timezone.now().isoformat()
     })
 

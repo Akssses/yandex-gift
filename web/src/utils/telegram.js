@@ -1,4 +1,3 @@
-pm2;
 /**
  * Утилиты для работы с Telegram WebApp API
  */

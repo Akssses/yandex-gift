@@ -3,7 +3,7 @@ URL configuration for config project.
 """
 from django.contrib import admin
 from django.urls import path
-from bot.views import get_calendar_status, open_gift, health_check, check_user
+from bot.views import get_calendar_status, open_gift, health_check, check_user, claim_promo_code
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,4 +16,6 @@ urlpatterns = [
     path('api/calendar/status/', get_calendar_status, name='calendar_status_slash'),
     path('api/calendar/open', open_gift, name='open_gift'),
     path('api/calendar/open/', open_gift, name='open_gift_slash'),
+    path('api/promo/claim', claim_promo_code, name='claim_promo_code'),
+    path('api/promo/claim/', claim_promo_code, name='claim_promo_code_slash'),
 ]

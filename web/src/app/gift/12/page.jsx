@@ -1,13 +1,70 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../gift.module.scss";
+import { claimPromoCode, getCalendarStatus } from "@/utils/api";
+import { getTelegramUserId } from "@/utils/telegram";
 
 const GiftContent12 = () => {
-  const downloadLink =
-    "https://music.yandex.ru/playlists/17b6ac6a-86b5-42ee-a96b-aafcb8669d36?utm_source=web&utm_medium=copy_link";
+  const [isClaimed, setIsClaimed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [telegramId, setTelegramId] = useState(null);
+
+  useEffect(() => {
+    // Получаем telegram_id из Telegram WebApp
+    const tgId = getTelegramUserId();
+    setTelegramId(tgId);
+  }, []);
+
+  useEffect(() => {
+    // Проверяем, получил ли пользователь уже промокод при загрузке страницы
+    const checkPromoCodeStatus = async () => {
+      if (!telegramId) {
+        return;
+      }
+
+      try {
+        const calendarStatus = await getCalendarStatus(telegramId);
+        // Проверяем, открыт ли день 12
+        const day12Status = calendarStatus.days?.find((day) => day.day === 12);
+        if (day12Status?.is_opened || day12Status?.status === "opened") {
+          setIsClaimed(true);
+        }
+      } catch (err) {
+        // Игнорируем ошибки при проверке статуса, чтобы не показывать ошибку пользователю
+        console.error("Error checking promo code status:", err);
+      }
+    };
+
+    checkPromoCodeStatus();
+  }, [telegramId]);
+
+  const handleClaimClick = async (e) => {
+    e.preventDefault();
+
+    if (!telegramId) {
+      setError(
+        "Не удалось определить ваш Telegram ID. Откройте страницу через бот."
+      );
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      await claimPromoCode(telegramId, 12);
+      setIsClaimed(true);
+    } catch (err) {
+      console.error("Error claiming promo code:", err);
+      setError(err.message || "Произошла ошибка при получении промокода");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className={styles.giftPage}>
@@ -27,22 +84,50 @@ const GiftContent12 = () => {
 
       <div className={styles.xyi}>
         <div className={styles.giftPageContent}>
-          <div className={styles.giftPageTitle}>
-            Иногда самое лучшее, что можно сделать для себя{" "}
-          </div>
-          <div className={styles.giftPageSubtitle}>
-            — выбрать то, что подарит тебе отдых, вдохновение или просто немного
-            тепла. Этот подарок предназначен именно для этого!
-          </div>
+          {isClaimed ? (
+            <>
+              <div className={styles.giftPageTitle}>
+                Подарок пришел вам в бот!
+              </div>
+              <div className={styles.giftPageSubtitle}>
+                Проверьте сообщения.
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.giftPageTitle}>
+                Иногда самое лучшее, что можно сделать для себя{" "}
+              </div>
+              <div className={styles.giftPageSubtitle}>
+                — выбрать то, что подарит тебе отдых, вдохновение или просто
+                немного тепла. Этот подарок предназначен именно для этого!
+              </div>
+            </>
+          )}
 
-          <a
-            href={downloadLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.promoCodeButton}
-          >
-            <span className={styles.promoCodeText}>Забрать</span>
-          </a>
+          {error && (
+            <div
+              style={{
+                color: "red",
+                marginBottom: "1rem",
+                textAlign: "center",
+              }}
+            >
+              {error}
+            </div>
+          )}
+
+          {!isClaimed && (
+            <button
+              onClick={handleClaimClick}
+              disabled={isLoading || !telegramId}
+              className={styles.promoCodeButton}
+            >
+              <span className={styles.promoCodeText}>
+                {isLoading ? "Загрузка..." : "Забрать"}
+              </span>
+            </button>
+          )}
 
           <Link href="/" className={styles.homeButton}>
             На главную

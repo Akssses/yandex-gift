@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TelegramUser, CalendarSettings, GiftOpening
+from .models import TelegramUser, CalendarSettings, GiftOpening, PromoCodeUsage
 
 
 class GiftOpeningInline(admin.TabularInline):
@@ -97,3 +97,12 @@ class GiftOpeningAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'user__first_name', 'user__last_name', 'user__telegram_id')
     readonly_fields = ('opened_at',)
     date_hierarchy = 'opened_at'
+
+
+@admin.register(PromoCodeUsage)
+class PromoCodeUsageAdmin(admin.ModelAdmin):
+    list_display = ('promocode', 'user', 'used_at')
+    list_filter = ('used_at',)
+    search_fields = ('promocode', 'user__username', 'user__first_name', 'user__last_name', 'user__telegram_id')
+    readonly_fields = ('used_at',)
+    date_hierarchy = 'used_at'

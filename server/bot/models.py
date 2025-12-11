@@ -124,3 +124,33 @@ class GiftOpening(models.Model):
 
     def __str__(self):
         return f"{self.user} - день {self.day} ({self.opened_at.date()})"
+
+
+class PromoCodeUsage(models.Model):
+    """Отслеживание использованных промокодов из резерва"""
+    promocode = models.CharField(
+        max_length=50,
+        unique=True,
+        verbose_name='Промокод',
+        help_text='Использованный промокод из резерва'
+    )
+    user = models.ForeignKey(
+        TelegramUser,
+        on_delete=models.CASCADE,
+        related_name='promo_code_usages',
+        verbose_name='Пользователь',
+        null=True,
+        blank=True
+    )
+    used_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата использования'
+    )
+
+    class Meta:
+        verbose_name = 'Использованный промокод'
+        verbose_name_plural = 'Использованные промокоды'
+        ordering = ['-used_at']
+
+    def __str__(self):
+        return f"{self.promocode} - {self.user if self.user else 'Unknown'} ({self.used_at.date()})"

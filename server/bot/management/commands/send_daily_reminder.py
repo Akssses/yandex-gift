@@ -84,3 +84,4 @@ class Command(BaseCommand):
 
         asyncio.run(send_all())
         self.stdout.write(f"Готово. Отправлено: {sent}, ошибок: {errors}")
+
