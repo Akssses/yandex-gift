@@ -263,15 +263,22 @@ def claim_promo_code(request):
         })
     
     # Загружаем promo-users.json
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
-    promo_users_path = BASE_DIR / 'promo-users.json'
-    promo_reserve_path = BASE_DIR / 'promo-reserve.json'
+    # Используем BASE_DIR из settings, который указывает на директорию server/
+    promo_users_path = settings.BASE_DIR / 'promo-users.json'
+    promo_reserve_path = settings.BASE_DIR / 'promo-reserve.json'
+    
+    logger.info(f"Looking for promo-users.json at: {promo_users_path}")
+    logger.info(f"BASE_DIR: {settings.BASE_DIR}")
+    logger.info(f"File exists: {promo_users_path.exists()}")
     
     try:
         with open(promo_users_path, 'r', encoding='utf-8') as f:
             promo_users = json.load(f)
+        logger.info(f"Successfully loaded {len(promo_users)} promo users")
     except FileNotFoundError:
         logger.error(f"promo-users.json not found at {promo_users_path}")
+        logger.error(f"BASE_DIR: {settings.BASE_DIR}")
+        logger.error(f"Absolute path: {promo_users_path.resolve()}")
         return JsonResponse({'error': 'Promo users file not found'}, status=500)
     except json.JSONDecodeError as e:
         logger.error(f"Failed to parse promo-users.json: {e}")
@@ -321,10 +328,14 @@ def claim_promo_code(request):
     else:
         # Пользователь не найден в promo-users.json - берем из резерва
         try:
+            logger.info(f"Looking for promo-reserve.json at: {promo_reserve_path}")
+            logger.info(f"File exists: {promo_reserve_path.exists()}")
             with open(promo_reserve_path, 'r', encoding='utf-8') as f:
                 promo_reserve = json.load(f)
+            logger.info(f"Successfully loaded {len(promo_reserve)} reserve promocodes")
         except FileNotFoundError:
             logger.error(f"promo-reserve.json not found at {promo_reserve_path}")
+            logger.error(f"Absolute path: {promo_reserve_path.resolve()}")
             return JsonResponse({'error': 'Promo reserve file not found'}, status=500)
         except json.JSONDecodeError as e:
             logger.error(f"Failed to parse promo-reserve.json: {e}")
