@@ -234,7 +234,15 @@ const AdventCalendar = () => {
         return;
       }
 
-      // Если есть telegram_id, открываем через API
+      // Для дня 12 не открываем подарок здесь - переходим на страницу,
+      // где пользователь нажмет кнопку "Забрать" для получения промокода
+      if (dayNumber === 12) {
+        console.log("Day 12: navigating to page without opening gift");
+        router.push(`/gift/${dayNumber}`);
+        return;
+      }
+
+      // Для остальных дней открываем через API
       if (currentTelegramId) {
         try {
           console.log("Opening gift via API", {

@@ -365,16 +365,20 @@ def claim_promo_code(request):
     try:
         async def send_message():
             bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
-            await bot.send_message(
+            result = await bot.send_message(
                 chat_id=user.telegram_id,
                 text=message_text
             )
+            logger.info(f"Message sent successfully to {user.telegram_id}, message_id: {result.message_id}")
+            return result
         
         asyncio.run(send_message())
         logger.info(f"Promo code sent to user {user.telegram_id}: {promocode}")
     except Exception as e:
-        logger.error(f"Failed to send promo code message to {user.telegram_id}: {e}")
-        return JsonResponse({'error': f'Failed to send message: {str(e)}'}, status=500)
+        logger.error(f"Failed to send promo code message to {user.telegram_id}: {e}", exc_info=True)
+        # Не возвращаем ошибку, чтобы пользователь все равно получил ответ об успехе
+        # Но логируем для диагностики
+        logger.warning(f"Promo code was processed but message sending failed: {promocode}")
     
     # Сохраняем запись о получении промокода (для пользователей из promo-users.json тоже)
     # Это предотвратит повторную выдачу
