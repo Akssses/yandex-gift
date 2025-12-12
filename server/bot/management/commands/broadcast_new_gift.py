@@ -16,9 +16,7 @@ from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from bot.models import TelegramUser
 
 
-MESSAGE_TEXT = ("Продолжаем?\n\n"
-                "Подарок четвёртого дня уже ждёт, чтобы ты его открыл 🌟"
-                )
+MESSAGE_TEXT = ("Сегодня — идеальный день для маленького побега.  Дедлайны догоняют, но переключаться очень важно, поэтому сегодня в адвент-календаре подарок, который поможет выдохнуть!")
 
 
 
