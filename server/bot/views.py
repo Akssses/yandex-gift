@@ -169,6 +169,8 @@ def open_gift(request):
     except (ValueError, TypeError):
         return JsonResponse({'error': 'telegram_id and day must be integers'}, status=400)
     
+    logger.info(f"open_gift called: telegram_id={telegram_id}, day={day}")
+    
     # Проверяем, что день в допустимом диапазоне
     if day < 8 or day > 19:
         return JsonResponse({'error': 'Day must be between 8 and 19'}, status=400)
@@ -200,21 +202,55 @@ def open_gift(request):
     
     # Открываем подарок
     GiftOpening.objects.create(user=user, day=day)
+    
+    logger.info(f"Gift opened for user {user.telegram_id}, day {day}")
+    logger.info(f"Checking if message should be sent for day {day}")
 
-    # Если открыт подарок за 8 декабря — отправляем сообщение в Telegram
+    # Отправляем сообщения в Telegram в зависимости от дня
     if day == 8:
+        logger.info(f"Day 8 detected, sending message")
         try:
-            bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
-            bot.send_message(
-                chat_id=user.telegram_id,
-                text=(
-                    "Твой первый подарок — пак аватарок на все случаи жизни: "
-                    "https://disk.360.yandex.ru/d/M5vqMdNsudNk6Q\n\n"
-                    "Возвращайся завтра за следующим призом!"
+            async def send_day8_message():
+                bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
+                await bot.send_message(
+                    chat_id=user.telegram_id,
+                    text=(
+                        "Твой первый подарок — пак аватарок на все случаи жизни: "
+                        "https://disk.360.yandex.ru/d/M5vqMdNsudNk6Q\n\n"
+                        "Возвращайся завтра за следующим призом!"
+                    )
                 )
-            )
+            
+            asyncio.run(send_day8_message())
+            logger.info(f"Day 8 gift message sent to user {user.telegram_id}")
         except Exception as e:
-            logger.error(f"Failed to send day 8 gift message to {user.telegram_id}: {e}")
+            logger.error(f"Failed to send day 8 gift message to {user.telegram_id}: {e}", exc_info=True)
+    
+    elif day == 13:
+        logger.info(f"Day 13 detected, sending message to user {user.telegram_id}")
+        try:
+            async def send_day13_message():
+                bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
+                message_text = (
+                    "Если вы готовитесь к выступлению любого уровня, загляните по ссылке — там собраны полезные слайды, универсальный шаблон для конференций и занятия, которые помогают расти: от базовой подготовки до выходов на международную сцену, работы с питчем и преодоления барьеров\n\n"
+                    "Забрать: https://disk.360.yandex.ru/i/OjdruO9xMko_Nw"
+                )
+                logger.info(f"Attempting to send day 13 message to chat_id: {user.telegram_id}")
+                logger.info(f"Bot token present: {bool(settings.TELEGRAM_BOT_TOKEN)}")
+                result = await bot.send_message(
+                    chat_id=user.telegram_id,
+                    text=message_text
+                )
+                logger.info(f"Day 13 message sent successfully, message_id: {result.message_id}")
+                return result
+            
+            logger.info(f"Running asyncio.run for day 13 message")
+            asyncio.run(send_day13_message())
+            logger.info(f"Day 13 gift message sent successfully to user {user.telegram_id}")
+        except Exception as e:
+            logger.error(f"Failed to send day 13 gift message to {user.telegram_id}: {e}", exc_info=True)
+            logger.error(f"Exception type: {type(e).__name__}")
+            logger.error(f"Exception details: {str(e)}")
     
     return JsonResponse({
         'success': True,
