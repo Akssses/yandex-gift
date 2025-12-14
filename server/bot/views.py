@@ -33,6 +33,7 @@ def check_user(request):
             'user_id': user.id,
             'telegram_id': user.telegram_id,
             'is_from_rf': user.is_from_rf,
+            'position': user.position,  # Стек пользователя
         })
     except (ValueError, TypeError):
         return JsonResponse({'error': 'Invalid id parameter'}, status=400)

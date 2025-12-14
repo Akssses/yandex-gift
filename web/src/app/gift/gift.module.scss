@@ -16,6 +16,30 @@
   background: #ececec;
 }
 
+.giftPageHeader14 {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ececec;
+  padding: 40px 0;
+}
+
+.dateBlock14 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+
+  img {
+    max-width: 60%;
+    border-radius: 16px;
+    margin: 0 auto;
+  }
+}
+
 .garlandBackground {
   object-fit: cover;
   object-position: center;
