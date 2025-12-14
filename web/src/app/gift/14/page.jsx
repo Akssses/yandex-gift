@@ -63,9 +63,9 @@ const stackContentMap = {
 
 // Контент по умолчанию (если стек не определен)
 const defaultContent = {
-  image: "/assets/14/Pic_AI.png",
-  title: "Суд",
-  text: "Суд приносит прозрение и стратегическую внимательность. 2026-й подкинет ситуации, где нужно будет принимать решения быстро и точно — как хороший IDS. Ты увидишь угрозы до того, как они станут инцидентами, и заработаешь репутацию Стража Цифрового Порядка. Истинный хранитель инфраструктурного покоя.",
+  image: "/assets/14/Pic_Multistack.png",
+  title: "Шут",
+  text: "2026 — идеальный год для тех, кто не вписывается в рамки одной профессии. Шут зовёт в новые приключения: проекты, идеи, неожиданные повороты. Позволяй себе экспериментировать, ведь именно на стыке ннаправлений рождаются самые классные штуки.",
 };
 
 const GiftContent14 = () => {
@@ -80,7 +80,6 @@ const GiftContent14 = () => {
   }, []);
 
   useEffect(() => {
-    // Получаем информацию о пользователе и определяем контент
     const fetchUserContent = async () => {
       if (!telegramId) {
         setIsLoading(false);
@@ -89,15 +88,15 @@ const GiftContent14 = () => {
 
       try {
         const userData = await checkUser(telegramId);
+
         if (userData?.exists && userData?.position) {
-          const stack = userData.position.toLowerCase();
-          const stackContent = stackContentMap[stack];
-          if (stackContent) {
-            setContent(stackContent);
+          const stack = String(userData.position).toLowerCase().trim();
+
+          if (stack && stackContentMap[stack]) {
+            setContent(stackContentMap[stack]);
           }
         }
       } catch (err) {
-        console.error("Error fetching user data:", err);
         // Используем контент по умолчанию при ошибке
       } finally {
         setIsLoading(false);
