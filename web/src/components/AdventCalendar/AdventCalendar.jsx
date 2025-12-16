@@ -5,12 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./AdventCalendar.module.scss";
 import { getTelegramUserId } from "@/utils/telegram";
-import {
-  getCalendarStatus,
-  openGift,
-  checkServerHealth,
-  checkUser,
-} from "@/utils/api";
+import { getCalendarStatus, checkServerHealth, checkUser } from "@/utils/api";
 
 const AdventCalendar = () => {
   const [currentDay, setCurrentDay] = useState(0);
@@ -18,7 +13,6 @@ const AdventCalendar = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [accessDenied, setAccessDenied] = useState(false); // Доступ запрещен
-  const [serverCurrentDay, setServerCurrentDay] = useState(null); // Текущий день с сервера
   const [telegramId, setTelegramId] = useState(null); // Сохраняем telegram_id в state
   const router = useRouter();
 
@@ -110,9 +104,6 @@ const AdventCalendar = () => {
         console.log("Current day from API:", data.current_day);
         console.log("Days from API:", data.days);
 
-        // Сохраняем текущий день с сервера
-        setServerCurrentDay(data.current_day);
-
         // Преобразуем данные из API в формат компонента
         const formattedDays = data.days.map((dayData) => {
           const dayNumber = dayData.day;
@@ -178,130 +169,20 @@ const AdventCalendar = () => {
 
   const currentDayData = days[currentDay] || {};
 
-  const handleOpenGiftClick = async () => {
-    console.log("handleOpenGiftClick called");
-    console.log("currentDayData:", currentDayData);
-
+  const handleOpenGiftClick = () => {
     if (
       !currentDayData ||
       currentDayData.status === "locked" ||
       currentDayData.status === "missed"
     ) {
-      console.log("Blocked: locked or missed status");
       return;
-    }
-
-    // Используем сохраненный telegram_id из state, если нет - пытаемся получить заново
-    let currentTelegramId = telegramId || getTelegramUserId();
-
-    // Если все еще нет, проверяем localStorage
-    if (!currentTelegramId) {
-      const testTelegramId = localStorage.getItem("test_telegram_id");
-      if (testTelegramId) {
-        currentTelegramId = parseInt(testTelegramId, 10);
-      }
     }
 
     const dayNumber =
       currentDayData.dayNumber || parseInt(currentDayData.day, 10);
 
-    console.log("Day number:", dayNumber);
-    console.log("Status:", currentDayData.status);
-    console.log("Server current day:", serverCurrentDay);
-    console.log("Telegram ID from state:", telegramId);
-    console.log("Telegram ID current:", currentTelegramId);
-
-    // Если подарок уже открыт, просто переходим на страницу
-    if (currentDayData.status === "opened") {
-      console.log("Gift already opened, navigating to page");
-      router.push(`/gift/${dayNumber}`);
-      return;
-    }
-
-    // Если подарок доступен, открываем его
-    if (currentDayData.status === "available") {
-      console.log("Gift is available, attempting to open");
-
-      // Проверяем, что это текущий день с сервера (можно открыть только текущий день)
-      if (serverCurrentDay !== null && dayNumber !== serverCurrentDay) {
-        console.log("Blocked: not current day", {
-          dayNumber,
-          serverCurrentDay,
-        });
-        alert(
-          `Вы можете открыть подарок только за ${serverCurrentDay} декабря. Этот день недоступен.`
-        );
-        return;
-      }
-
-      // Для дня 12 не открываем подарок здесь - переходим на страницу,
-      // где пользователь нажмет кнопку "Забрать" для получения промокода
-      if (dayNumber === 12) {
-        console.log("Day 12: navigating to page without opening gift");
-        router.push(`/gift/${dayNumber}`);
-        return;
-      }
-
-      // Для остальных дней открываем через API
-      if (currentTelegramId) {
-        try {
-          console.log("Opening gift via API", {
-            telegramId: currentTelegramId,
-            dayNumber,
-          });
-          await openGift(currentTelegramId, dayNumber);
-
-          // Обновляем статус локально
-          const updatedDays = [...days];
-          updatedDays[currentDay] = {
-            ...updatedDays[currentDay],
-            status: "opened",
-            isOpened: true,
-            giftImage: "/assets/images/gift.svg",
-          };
-          setDays(updatedDays);
-
-          // Переходим на страницу подарка
-          console.log("Gift opened successfully, navigating");
-          router.push(`/gift/${dayNumber}`);
-        } catch (error) {
-          console.error("Failed to open gift:", error);
-          const errorMessage = error.message || "Не удалось открыть подарок";
-
-          // Показываем понятное сообщение об ошибке
-          if (
-            errorMessage.includes("missed") ||
-            errorMessage.includes("пропущен")
-          ) {
-            alert("Этот день был пропущен. Подарок недоступен.");
-          } else if (
-            errorMessage.includes("not available") ||
-            errorMessage.includes("недоступен")
-          ) {
-            alert("Этот день еще недоступен.");
-          } else if (
-            errorMessage.includes("current day") ||
-            errorMessage.includes("текущий день")
-          ) {
-            alert(
-              `Вы можете открыть подарок только за ${serverCurrentDay} декабря.`
-            );
-          } else {
-            alert(errorMessage);
-          }
-        }
-      } else {
-        // Если нет telegram_id, просто переходим на страницу (для разработки)
-        console.log("No telegram_id, navigating directly (dev mode)", {
-          currentTelegramId,
-        });
-        router.push(`/gift/${dayNumber}`);
-      }
-    } else {
-      // Если статус не available, не позволяем открывать
-      console.log("Blocked: status is not available", currentDayData.status);
-      alert("Этот подарок недоступен для открытия.");
-    }
+    // Здесь только навигация, само «открытие» происходит на страницах подарков
+    router.push(`/gift/${dayNumber}`);
   };
 
   if (loading) {

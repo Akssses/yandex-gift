@@ -7,7 +7,7 @@ import styles from "../gift.module.scss";
 import { claimPromoCode, getCalendarStatus } from "@/utils/api";
 import { getTelegramUserId } from "@/utils/telegram";
 
-const GiftContent16 = () => {
+const GiftContent12 = () => {
   const [isClaimed, setIsClaimed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -77,7 +77,7 @@ const GiftContent16 = () => {
           priority
         />
         <div className={styles.dateBlock}>
-          <div className={styles.dateNumber}>16</div>
+          <div className={styles.dateNumber}>12</div>
           <div className={styles.dateMonth}>декабря</div>
         </div>
       </div>
@@ -96,16 +96,11 @@ const GiftContent16 = () => {
           ) : (
             <>
               <div className={styles.giftPageTitle}>
-                Промокод на Яндекс Маркет
+                Иногда самое лучшее, что можно сделать для себя{" "}
               </div>
               <div className={styles.giftPageSubtitle}>
-                Самое время подумать о новогодней атмосфере: заказать гирлянду
-                или обновить украшения (или заказать ещё больше подарков на
-                Новый год)
-                <br />
-                <br />
-                Если воспользоваться промокодом в течение года не получится
-                лично, им можно порадовать друзей в России.
+                — выбрать то, что подарит тебе отдых, вдохновение или просто
+                немного тепла. Этот подарок предназначен именно для этого!
               </div>
             </>
           )}
@@ -152,7 +147,7 @@ const GiftContent16 = () => {
   );
 };
 
-const GiftPage16 = () => {
+const GiftPage12 = () => {
   return (
     <Suspense
       fallback={
@@ -163,9 +158,9 @@ const GiftPage16 = () => {
         </div>
       }
     >
-      <GiftContent16 />
+      <GiftContent12 />
     </Suspense>
   );
 };
 
-export default GiftPage16;
+export default GiftPage12;

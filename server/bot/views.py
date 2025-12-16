@@ -263,7 +263,7 @@ def open_gift(request):
 @csrf_exempt
 @require_http_methods(["POST"])
 def claim_promo_code(request):
-    """Получить промокод для дня 12 декабря"""
+    """Получить промокод для дня 16 декабря"""
     try:
         data = json.loads(request.body)
         telegram_id_raw = data.get('telegram_id')
@@ -281,8 +281,8 @@ def claim_promo_code(request):
         return JsonResponse({'error': 'telegram_id and day must be integers'}, status=400)
     
     # Проверяем, что это день 12
-    if day != 12:
-        return JsonResponse({'error': 'This endpoint is only for day 12'}, status=400)
+    if day != 16:
+        return JsonResponse({'error': 'This endpoint is only for day 16'}, status=400)
     
     try:
         user = TelegramUser.objects.get(telegram_id=telegram_id)
@@ -291,12 +291,12 @@ def claim_promo_code(request):
     
     # Проверяем, получал ли пользователь уже промокод для дня 12
     # Проверяем через GiftOpening для дня 12 (единообразно для всех пользователей)
-    if GiftOpening.objects.filter(user=user, day=12).exists():
-        logger.info(f"User {user.telegram_id} already claimed promo code for day 12")
+    if GiftOpening.objects.filter(user=user, day=16).exists():
+        logger.info(f"User {user.telegram_id} already claimed promo code for day 16")
         return JsonResponse({
             'success': True,
             'already_claimed': True,
-            'message': 'Promo code already sent'
+            'message': 'Promo code already sent for day 16'
         })
     
     # Загружаем promo-users.json
@@ -439,8 +439,8 @@ def claim_promo_code(request):
     # Также создаем запись в GiftOpening для дня 12, чтобы это было единообразно
     GiftOpening.objects.get_or_create(
         user=user,
-        day=12,
-        defaults={'user': user, 'day': 12}
+        day=16,
+        defaults={'user': user, 'day': 16}
     )
     
     return JsonResponse({

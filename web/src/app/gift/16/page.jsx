@@ -7,7 +7,7 @@ import styles from "../gift.module.scss";
 import { claimPromoCode, getCalendarStatus } from "@/utils/api";
 import { getTelegramUserId } from "@/utils/telegram";
 
-const GiftContent12 = () => {
+const GiftContent16 = () => {
   const [isClaimed, setIsClaimed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -28,9 +28,9 @@ const GiftContent12 = () => {
 
       try {
         const calendarStatus = await getCalendarStatus(telegramId);
-        // Проверяем, открыт ли день 12
-        const day12Status = calendarStatus.days?.find((day) => day.day === 12);
-        if (day12Status?.is_opened || day12Status?.status === "opened") {
+        // Проверяем, открыт ли день 16
+        const day16Status = calendarStatus.days?.find((day) => day.day === 16);
+        if (day16Status?.is_opened || day16Status?.status === "opened") {
           setIsClaimed(true);
         }
       } catch (err) {
@@ -56,7 +56,7 @@ const GiftContent12 = () => {
     setError(null);
 
     try {
-      await claimPromoCode(telegramId, 12);
+      await claimPromoCode(telegramId, 16);
       setIsClaimed(true);
     } catch (err) {
       console.error("Error claiming promo code:", err);
@@ -77,7 +77,7 @@ const GiftContent12 = () => {
           priority
         />
         <div className={styles.dateBlock}>
-          <div className={styles.dateNumber}>12</div>
+          <div className={styles.dateNumber}>16</div>
           <div className={styles.dateMonth}>декабря</div>
         </div>
       </div>
@@ -96,11 +96,16 @@ const GiftContent12 = () => {
           ) : (
             <>
               <div className={styles.giftPageTitle}>
-                Иногда самое лучшее, что можно сделать для себя{" "}
+                Промокод на Яндекс Маркет
               </div>
               <div className={styles.giftPageSubtitle}>
-                — выбрать то, что подарит тебе отдых, вдохновение или просто
-                немного тепла. Этот подарок предназначен именно для этого!
+                Самое время подумать о новогодней атмосфере: заказать гирлянду
+                или обновить украшения (или заказать ещё больше подарков на
+                Новый год)
+                <br />
+                <br />
+                Если воспользоваться промокодом в течение года не получится
+                лично, им можно порадовать друзей в России.
               </div>
             </>
           )}
@@ -147,7 +152,7 @@ const GiftContent12 = () => {
   );
 };
 
-const GiftPage12 = () => {
+const GiftPage16 = () => {
   return (
     <Suspense
       fallback={
@@ -158,9 +163,9 @@ const GiftPage12 = () => {
         </div>
       }
     >
-      <GiftContent12 />
+      <GiftContent16 />
     </Suspense>
   );
 };
 
-export default GiftPage12;
+export default GiftPage16;
