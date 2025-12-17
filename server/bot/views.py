@@ -227,8 +227,33 @@ def open_gift(request):
         except Exception as e:
             logger.error(f"Failed to send day 8 gift message to {user.telegram_id}: {e}", exc_info=True)
     
-    elif day == 13:
-        logger.info(f"Day 13 detected, sending message to user {user.telegram_id}")
+    elif day == 17:
+        logger.info(f"Day 17 detected, sending message to user {user.telegram_id}")
+        try:
+            async def send_day17_message():
+                bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
+                message_text = (
+                    "Ссылка на стикерпак: https://t.me/addstickers/devrelthanks"
+                )
+                logger.info(f"Attempting to send day 17 message to chat_id: {user.telegram_id}")
+                logger.info(f"Bot token present: {bool(settings.TELEGRAM_BOT_TOKEN)}")
+                result = await bot.send_message(
+                    chat_id=user.telegram_id,
+                    text=message_text
+                )
+                logger.info(f"Day 17 message sent successfully, message_id: {result.message_id}")
+                return result
+            
+            logger.info(f"Running asyncio.run for day 17 message")
+            asyncio.run(send_day13_message())
+            logger.info(f"Day 17 gift message sent successfully to user {user.telegram_id}")
+        except Exception as e:
+            logger.error(f"Failed to send day 17 gift message to {user.telegram_id}: {e}", exc_info=True)
+            logger.error(f"Exception type: {type(e).__name__}")
+            logger.error(f"Exception details: {str(e)}")
+    
+        elif day == 17:
+        logger.info(f"Day 17 detected, sending message to user {user.telegram_id}")
         try:
             async def send_day13_message():
                 bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
@@ -249,10 +274,11 @@ def open_gift(request):
             asyncio.run(send_day13_message())
             logger.info(f"Day 13 gift message sent successfully to user {user.telegram_id}")
         except Exception as e:
-            logger.error(f"Failed to send day 13 gift message to {user.telegram_id}: {e}", exc_info=True)
+            logger.error(f"Failed to send day 17 gift message to {user.telegram_id}: {e}", exc_info=True)
             logger.error(f"Exception type: {type(e).__name__}")
             logger.error(f"Exception details: {str(e)}")
     
+
     return JsonResponse({
         'success': True,
         'day': day,
