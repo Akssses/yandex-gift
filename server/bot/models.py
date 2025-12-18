@@ -50,6 +50,23 @@ class TelegramUser(models.Model):
         verbose_name='Дата обновления'
     )
 
+    # ---- Письмо себе в будущее ----
+    is_waiting_future_letter = models.BooleanField(
+        default=False,
+        verbose_name='Ожидается письмо в будущее',
+        help_text='Если True — следующее сообщение пользователя будет сохранено как письмо в будущее'
+    )
+    future_letter_requested_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name='Когда попросили написать письмо',
+    )
+    future_letter_received_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name='Когда получили письмо',
+    )
+
     class Meta:
         verbose_name = 'Пользователь Telegram'
         verbose_name_plural = 'Пользователи Telegram'
@@ -154,3 +171,36 @@ class PromoCodeUsage(models.Model):
 
     def __str__(self):
         return f"{self.promocode} - {self.user if self.user else 'Unknown'} ({self.used_at.date()})"
+
+
+class FutureLetter(models.Model):
+    """Письмо пользователя себе в будущее (отправим через год)"""
+    user = models.ForeignKey(
+        TelegramUser,
+        on_delete=models.CASCADE,
+        related_name='future_letters',
+        verbose_name='Пользователь'
+    )
+    text = models.TextField(
+        verbose_name='Текст письма'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата создания'
+    )
+    send_at = models.DateTimeField(
+        verbose_name='Когда отправить'
+    )
+    sent_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name='Когда отправили'
+    )
+
+    class Meta:
+        verbose_name = 'Письмо в будущее'
+        verbose_name_plural = 'Письма в будущее'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user} — письмо от {self.created_at.date()}"

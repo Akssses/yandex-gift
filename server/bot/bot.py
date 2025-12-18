@@ -1,8 +1,10 @@
 import logging
 import os
 import django
+from datetime import timedelta
 from asgiref.sync import sync_to_async
 from django.conf import settings
+from django.utils import timezone
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import (
     Application,
@@ -17,7 +19,7 @@ from telegram.ext import (
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
-from bot.models import TelegramUser
+from bot.models import TelegramUser, FutureLetter
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -61,6 +63,20 @@ def get_user_by_id(user_id):
 @sync_to_async
 def save_user(telegram_user):
     telegram_user.save()
+
+
+@sync_to_async
+def save_future_letter(user: TelegramUser, text: str):
+    now = timezone.now()
+    letter = FutureLetter.objects.create(
+        user=user,
+        text=text,
+        send_at=now + timedelta(days=365),
+    )
+    user.is_waiting_future_letter = False
+    user.future_letter_received_at = now
+    user.save(update_fields=["is_waiting_future_letter", "future_letter_received_at", "updated_at"])
+    return letter
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -166,6 +182,25 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Обработчик текстовых сообщений"""
+    # 0) Письмо себе в будущее (не завязано на context.user_data, чтобы переживать рестарт бота)
+    try:
+        tg_user = update.effective_user
+        if tg_user and tg_user.id and update.message and update.message.text:
+            telegram_user = await get_user_by_telegram_id(tg_user.id)
+            if telegram_user and telegram_user.is_waiting_future_letter:
+                letter_text = update.message.text.strip()
+                if letter_text:
+                    await save_future_letter(telegram_user, letter_text)
+                    await update.message.reply_text(
+                        "Мы сохранили это письмо и отправим его тебе ровно через год 💛."
+                    )
+                    # очищаем возможное состояние онбординга — чтобы не мешало
+                    context.user_data.clear()
+                    return
+    except Exception as e:
+        logger.error(f"Error saving future letter: {e}", exc_info=True)
+        # не прерываем остальные сценарии
+
     state = context.user_data.get('state')
     user_id = context.user_data.get('user_id')
     

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TelegramUser, CalendarSettings, GiftOpening, PromoCodeUsage
+from .models import TelegramUser, CalendarSettings, GiftOpening, PromoCodeUsage, FutureLetter
 
 
 class GiftOpeningInline(admin.TabularInline):
@@ -7,6 +7,14 @@ class GiftOpeningInline(admin.TabularInline):
     extra = 0
     readonly_fields = ('day', 'opened_at')
     can_delete = False
+
+
+class FutureLetterInline(admin.StackedInline):
+    model = FutureLetter
+    extra = 0
+    can_delete = False
+    readonly_fields = ("text", "created_at", "send_at", "sent_at")
+    fields = ("text", "created_at", "send_at", "sent_at")
 
 
 @admin.register(TelegramUser)
@@ -20,9 +28,12 @@ class TelegramUserAdmin(admin.ModelAdmin):
         'country_display',
         'city_display',
         'opened_days_display',
+        'is_waiting_future_letter',
+        'future_letter_requested_at',
+        'future_letter_received_at',
         'created_at',
     )
-    list_filter = ('is_from_rf', 'created_at')
+    list_filter = ('is_from_rf', 'is_waiting_future_letter', 'created_at')
     search_fields = ('username', 'first_name', 'last_name', 'telegram_id')
     readonly_fields = (
         'telegram_id',
@@ -32,8 +43,10 @@ class TelegramUserAdmin(admin.ModelAdmin):
         'stack_display',
         'country_display',
         'city_display',
+        'future_letter_requested_at',
+        'future_letter_received_at',
     )
-    inlines = [GiftOpeningInline]
+    inlines = [GiftOpeningInline, FutureLetterInline]
     
     fieldsets = (
         ('Основная информация', {
@@ -49,6 +62,14 @@ class TelegramUserAdmin(admin.ModelAdmin):
                 'city_display',
                 'opened_days_display',
             )
+        }),
+        ('Письмо в будущее', {
+            'fields': (
+                'is_waiting_future_letter',
+                'future_letter_requested_at',
+                'future_letter_received_at',
+            ),
+            'classes': ('collapse',)
         }),
         ('Даты', {
             'fields': ('created_at', 'updated_at'),
@@ -106,3 +127,12 @@ class PromoCodeUsageAdmin(admin.ModelAdmin):
     search_fields = ('promocode', 'user__username', 'user__first_name', 'user__last_name', 'user__telegram_id')
     readonly_fields = ('used_at',)
     date_hierarchy = 'used_at'
+
+
+@admin.register(FutureLetter)
+class FutureLetterAdmin(admin.ModelAdmin):
+    list_display = ("user", "created_at", "send_at", "sent_at")
+    list_filter = ("sent_at", "created_at", "send_at")
+    search_fields = ("user__username", "user__first_name", "user__last_name", "user__telegram_id", "text")
+    readonly_fields = ("created_at", "sent_at")
+    date_hierarchy = "created_at"
